@@ -1,0 +1,73 @@
+﻿@using WorkoutGenerator.Data
+@using WorkoutGenerator.Extensions
+@model IndexViewModel
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+@section Head{ 
+    <style>
+     .submit-hover:hover {
+         background: white;
+         color: #8187ff !important;
+     }
+
+     .index-form label {
+         color: white;
+     }
+    </style>
+}
+
+<div class="container mb-5">
+    
+    <div class="d-flex vertical-align justify-content-center flex-column">
+
+        <div class="row d-flex vertical-align justify-content-center">
+            <div class="d-flex vertical-align justify-content-center flex-column">
+                <img src="~/images/white-logo.png"/>
+
+            </div>
+        </div>
+
+        <div class="row d-flex vertical-align justify-content-center">
+            <h1 class="text-white text-center" style="font-size: 46px; letter-spacing: 1px; font-weight: 300;">Professional Body Building Program Designer</h1>
+            <p class="text-white mb-0 text-center" style="font-size: 24px;letter-spacing: 1px; font-weight: 300;">Generate professional and effective workouts for yourself or your clients.</p>
+        </div>
+        <div class="row d-flex  justify-content-center mt-5 index-form">
+            <div class="col-12 col-lg-5 d-flex justify-content-center flex-column">
+                <form method="post" asp-controller="Home" asp-action="Index">
+
+                    <label>Rate your level as a bodybuilder</label>
+                    <div class="2 form-group">
+                        <select asp-for="@Model.TrainerLevelType" class="form-control" asp-items="Enum.GetValues(typeof(TrainerLevelType)).Cast<TrainerLevelType>().ToSelectListItems(Model.TrainerLevelType)"></select>
+                        <span asp-validation-for="@Model.TrainerLevelType" class="text-danger"></span>
+
+                    </div>
+                    <label>How many days per week you wish to workout</label>
+
+                    <div class="2 form-group">
+                        <select asp-for="@Model.DaysType" class="form-control" asp-items="Enum.GetValues(typeof(DaysType)).Cast<DaysType>().ToSelectListItems(Model.DaysType)"></select>
+                        <span asp-validation-for="@Model.DaysType" class="text-danger"></span>
+                    </div>
+                    <label>Pick a template to generate workout</label>
+                    <div class="2 form-group">
+                        <select asp-for="@Model.TemplateType" class="form-control" asp-items="Enum.GetValues(typeof(TemplateType)).Cast<TemplateType>().ToSelectListItems(null)">
+                            <option value="DecideForMe">Decide For Me</option>
+
+                        </select>
+                        <span asp-validation-for="@Model.TemplateType" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex justify-content-center mt-5">
+                        <button type="submit" class="submit-hover bg-main btn p-4 px-5 shadow" style="color: white; border: solid 1px white;">Create Program</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
