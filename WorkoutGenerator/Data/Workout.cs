@@ -8,9 +8,15 @@ namespace WorkoutGenerator.Data
     {
         [Key] public int Id { get; set; }
 
+        public string Name { get; set; }
         public int TemplateId { get; set; }
         [ForeignKey("TemplateId")] public virtual Template Template { get; set; }
 
         public virtual ICollection<MuscleExercises> MuscleExercises { get; set; }
+
+        public Workout(string name)
+        {
+            Name = name;
+        }
     }
 }

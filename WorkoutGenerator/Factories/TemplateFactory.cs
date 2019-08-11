@@ -26,7 +26,7 @@ namespace WorkoutGenerator.Factories
                     smallMuscle = TrainerLevelType == TrainerLevelType.Novice ? 1 : 2;
                     list = new List<Workout>()
                     {
-                        new Workout()
+                        new Workout("A")
                         {
                             MuscleExercises = new List<MuscleExercises>()
                             {
@@ -45,16 +45,16 @@ namespace WorkoutGenerator.Factories
                     smallMuscle = TrainerLevelType == TrainerLevelType.Novice ? 1 : 2;
                     list = new List<Workout>()
                     {
-                        new Workout()
+                        new Workout("A")
                         {
                             MuscleExercises = new List<MuscleExercises>()
                             {
                                 new MuscleExercises() {MuscleType = MuscleType.Chest, Exercises = GetExercises(bigMuscle)},
-                                new MuscleExercises() {MuscleType = MuscleType.Shoulders, Exercises = GetExercises(bigMuscle)},
+                                new MuscleExercises() {MuscleType = MuscleType.Shoulders, Exercises = GetExercises(smallMuscle)},
                                 new MuscleExercises() {MuscleType = MuscleType.Triceps, Exercises = GetExercises(smallMuscle)}
                             }
                         },
-                        new Workout()
+                        new Workout("B")
                         {
                             MuscleExercises = new List<MuscleExercises>()
                             {
@@ -85,16 +85,16 @@ namespace WorkoutGenerator.Factories
                     }
                     list = new List<Workout>()
                     {
-                        new Workout()
+                        new Workout("A")
                         {
                             MuscleExercises = new List<MuscleExercises>()
                             {
                                 new MuscleExercises() {MuscleType = MuscleType.Chest, Exercises = GetExercises(bigMuscle)},
-                                new MuscleExercises() {MuscleType = MuscleType.Shoulders, Exercises = GetExercises(bigMuscle)},
+                                new MuscleExercises() {MuscleType = MuscleType.Shoulders, Exercises = GetExercises(smallMuscle)},
                                 new MuscleExercises() {MuscleType = MuscleType.Triceps, Exercises = GetExercises(smallMuscle)}
                             }
                         },
-                        new Workout()
+                        new Workout("B")
                         {
                             MuscleExercises = new List<MuscleExercises>()
                             {
@@ -103,7 +103,7 @@ namespace WorkoutGenerator.Factories
                             }
                         },
 
-                        new Workout()
+                        new Workout("C")
                         {
                             MuscleExercises = new List<MuscleExercises>()
                             {
@@ -133,7 +133,7 @@ namespace WorkoutGenerator.Factories
                     }
                     list = new List<Workout>()
                     {
-                        new Workout()
+                        new Workout("A")
                         {
                             MuscleExercises = new List<MuscleExercises>()
                             {
@@ -141,7 +141,7 @@ namespace WorkoutGenerator.Factories
                                 new MuscleExercises() {MuscleType = MuscleType.Triceps, Exercises = GetExercises(smallMuscle)}
                             }
                         },
-                        new Workout()
+                        new Workout("B")
                         {
                             MuscleExercises = new List<MuscleExercises>()
                             {
@@ -150,14 +150,14 @@ namespace WorkoutGenerator.Factories
                             }
                         },
 
-                        new Workout()
+                        new Workout("C")
                         {
                             MuscleExercises = new List<MuscleExercises>()
                             {
                                 new MuscleExercises() {MuscleType = MuscleType.Shoulders, Exercises = GetExercises(bigMuscle)}
                             }
                         },
-                        new Workout()
+                        new Workout("D")
                         {
                             MuscleExercises = new List<MuscleExercises>()
                             {

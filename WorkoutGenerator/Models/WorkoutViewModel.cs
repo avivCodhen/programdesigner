@@ -12,9 +12,11 @@ namespace WorkoutGenerator.Models
         {
             Id = workout.Id;
             MuscleExerciseViewModels = workout.MuscleExercises.Select(x => new MuscleExerciseViewModel(x)).ToList();
+            Name = workout.Name;
         }
 
         public int Id { get; set; }
+        public string Name { get; set; }
         
         public  List<MuscleExerciseViewModel> MuscleExerciseViewModels { get; set; }
     }

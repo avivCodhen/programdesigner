@@ -143,7 +143,7 @@ namespace WorkoutGenerator.Controllers
                         ExerciseTypes = new[] {Compound},
                         Reps = new[] {"3", "4", "5"},
                         Sets = new[] {"3,4,5"},
-                        Rest = new[] {"1", "1.5", "2", "2.5"}
+                        Rest = new[] {"1 minute", "1.5 minute", "2 minute", "2.5 minute" }
                     }
                 },
                 {
@@ -154,7 +154,7 @@ namespace WorkoutGenerator.Controllers
                         ExerciseTypes = new[] {Compound, Isolate},
                         Reps = new[] {"6", "8"},
                         Sets = new[] {"3","4"},
-                        Rest = new[] {"1", "45", "1.5", "2"}
+                        Rest = new[] {"1 minute", "45 seconds", "1.5 minute", "2 minute"}
                     }
                 },
                 {
@@ -167,7 +167,7 @@ namespace WorkoutGenerator.Controllers
                         ExerciseTypes = new[] {Compound, Isolate},
                         Reps = new[] {"10", "12", "15"},
                         Sets = new[] {"3"},
-                        Rest = new[] {"30", "45", "1", "1.5"}
+                        Rest = new[] { "30 seconds", "45 seconds", "1 minute", "1.5 minute"}
                     }
                 }
             };
