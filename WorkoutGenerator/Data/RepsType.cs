@@ -7,6 +7,6 @@ namespace WorkoutGenerator.Data
 {
     public enum RepsType
     {
-        Low,Med,High
+        Low,Med, MedNovice, High, HighNovice
     }
 }

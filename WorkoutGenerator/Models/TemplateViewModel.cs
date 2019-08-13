@@ -12,6 +12,7 @@ namespace WorkoutGenerator.Models
             Workouts = t.Workouts.Select(x => new WorkoutViewModel(x)).ToList();
             DaysType = t.DaysType;
             TrainerLevelType = t.TrainerLevelType;
+            TemplateType = t.TemplateType;
         }
 
       public int Id { get; set; }
@@ -20,5 +21,7 @@ namespace WorkoutGenerator.Models
         public DaysType DaysType { get; set; }
 
         public TrainerLevelType TrainerLevelType { get; set; }
+
+        public TemplateType TemplateType { get; set; }
     }
 }

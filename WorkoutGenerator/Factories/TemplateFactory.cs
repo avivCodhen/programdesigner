@@ -266,7 +266,7 @@ namespace WorkoutGenerator.Factories
                     throw new ArgumentOutOfRangeException(nameof(templateType), templateType, null);
             }
 
-            return new Template(list);
+            return new Template(){Workouts = list,TemplateType = templateType};
         }
 
         private List<WorkoutExercise> GetExercises(int length)

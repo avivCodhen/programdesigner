@@ -8,12 +8,12 @@ namespace WorkoutGenerator.Data
 {
     public enum DaysType
     {
-        [Description("1 Day Per Week")] OneDay,
-        [Description("2 Days Per Week")] TwoDays,
-        [Description("3 Days Per Week")] ThreeDays,
-        [Description("4 Days Per Week")] FourDays,
-        [Description("5 Days Per Week")] FiveDays,
-        [Description("6 Days Per Week")] SixDays,
-        [Description("7 Days Per Week")] SevenDays
+        [Description("1 Day per week")] OneDay,
+        [Description("2 Days per week")] TwoDays,
+        [Description("3 Days per week")] ThreeDays,
+        [Description("4 Days per week")] FourDays,
+        [Description("5 Days per week")] FiveDays,
+        [Description("6 Days per week")] SixDays,
+        [Description("7 Days per week")] SevenDays
     }
 }

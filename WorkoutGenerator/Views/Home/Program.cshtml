@@ -4,18 +4,26 @@
 <div class="container my-5">
     <div class="row d-flex justify-content-center">
         <div class="col-12 col-lg-6  d-flex flex-column">
+            <div class=pb-4 "">
+                <div class="d-flex">
+                    <p class="font-weight-bold">
+                        Program Type:
+                        <span class="color-second font-weight-bold ml-2">@Model.TemplateViewModel.TemplateType.Description()</span>
+                    </p>
+                </div>
+                <label  class="font-weight-bold">Instructions:</label>
+                <p>Workout should be done @Model.TemplateViewModel.DaysType.Description(). This program's difficulty is <span class="color-second font-weight-bold">@Model.TemplateViewModel.TrainerLevelType</span> </p>
 
+            </div>
             @{
-
-
                 @foreach (var workoutViewModel in Model.TemplateViewModel.Workouts)
                  {
-                     <div class="card p-3 text-white bg-main ">Workout @workoutViewModel.Name</div>
+                     <div class="card p-3 text-white bg-main mt-3">Workout @workoutViewModel.Name</div>
 
                      @foreach (var muscle in workoutViewModel.MuscleExerciseViewModels)
                       {
                           <div class="py-3">
-                              <h3 style="letter-spacing: 1px;font-weight: 300;" class="mb-0 ">@muscle.MuscleType.ToString()</h3>
+                              <h3 style="letter-spacing: 1px; font-weight: 300;" class="mb-0 ">@muscle.MuscleType.ToString()</h3>
                               <hr class="my-2"/>
                           </div>
                           @foreach (var exercise in muscle.Exercises)

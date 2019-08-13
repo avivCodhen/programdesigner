@@ -14,6 +14,14 @@ a.navbar-brand {
 .bg-main {
     background: #8781FF;
 }
+
+.bg-second {
+    background: #75bdcd;
+}
+
+.color-second {
+    color: #75bdcd;
+}
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

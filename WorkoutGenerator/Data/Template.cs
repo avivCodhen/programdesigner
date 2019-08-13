@@ -15,11 +15,7 @@ namespace WorkoutGenerator.Data
         public DaysType DaysType { get; set; }
 
         public TrainerLevelType TrainerLevelType { get; set; }
-
-        public Template(ICollection<Workout> workouts)
-        {
-            Workouts = workouts;
-        }
+        public TemplateType TemplateType { get; set; }
 
         public Template()
         {
