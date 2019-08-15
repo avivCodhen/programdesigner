@@ -18,7 +18,7 @@ namespace WorkoutGenerator
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
-            WebHost.CreateDefaultBuilder(args).UseUrls("http://0.0.0.0:80")
+            WebHost.CreateDefaultBuilder(args).UseUrls("http://0.0.0.0:5002")
                 .UseStartup<Startup>();
     }
 }
