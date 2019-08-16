@@ -107,7 +107,7 @@ namespace WorkoutGenerator.Factories
                         {
                             MuscleExercises = new List<MuscleExercises>()
                             {
-                                new MuscleExercises() {MuscleType = MuscleType.Legs, Exercises = GetExercises(bigMuscle+1 /*add a little more to legs*/)}
+                                new MuscleExercises() {MuscleType = MuscleType.Legs, Exercises = GetExercises(bigMuscle)}
                             }
                         }
                     };
