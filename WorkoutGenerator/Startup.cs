@@ -16,9 +16,13 @@ namespace WorkoutGenerator
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IHostingEnvironment env)
         {
-            Configuration = configuration;
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+            Configuration = builder.Build();
         }
 
         public IConfiguration Configuration { get; }
@@ -63,6 +67,8 @@ namespace WorkoutGenerator
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+           
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
