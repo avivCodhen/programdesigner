@@ -143,7 +143,7 @@ namespace WorkoutGenerator.Controllers
                         ExerciseTypes = new[] {Compound},
                         Reps = new[] {"3", "4", "5"},
                         Sets = new[] {"3", "4", "5"},
-                        Rest = new[] {"1 minute", "1.5 minute", "2 minute", "2.5 minute"}
+                        Rest = new[] {"1.5 minute", "2 minute", "2.5 minute"}
                     }
                 },
                 {
@@ -157,6 +157,8 @@ namespace WorkoutGenerator.Controllers
                         Rest = new[] {"1 minute", "45 seconds", "1.5 minute", "2 minute"}
                     }
                 },
+
+
                 {
                     RepsType.MedNovice, new ExerciseSettings()
                     {
@@ -182,18 +184,18 @@ namespace WorkoutGenerator.Controllers
                     }
                 },
                 {
-                RepsType.HighNovice, new ExerciseSettings()
-                {
-                    AllowedTrainerLevel = new[]
-                        {TrainerLevelType.Advanced, TrainerLevelType.Intermediate, TrainerLevelType.Novice},
-                    ExerciseEquipments = new[]
-                        {Dumbbell.ToString(), Cable.ToString(), Machine.ToString()},
-                    ExerciseTypes = new[] {Compound, Isolate},
-                    Reps = new[] {"10", "12", "15"},
-                    Sets = new[] {"3"},
-                    Rest = new[] {"30 seconds", "45 seconds", "1 minute", "1.5 minute"}
+                    RepsType.HighNovice, new ExerciseSettings()
+                    {
+                        AllowedTrainerLevel = new[]
+                            {TrainerLevelType.Advanced, TrainerLevelType.Intermediate, TrainerLevelType.Novice},
+                        ExerciseEquipments = new[]
+                            {Dumbbell.ToString(), Cable.ToString(), Machine.ToString()},
+                        ExerciseTypes = new[] {Compound, Isolate},
+                        Reps = new[] {"10", "12", "15"},
+                        Sets = new[] {"3"},
+                        Rest = new[] {"45 seconds", "1 minute", "1.5 minute"}
+                    }
                 }
-            }
             };
 
 
@@ -229,23 +231,25 @@ namespace WorkoutGenerator.Controllers
 
                             exerciseSetting = ExerciseSettings(exerciseSettings, repTypes);
                         }
+
                         else
                         {
-
                             switch (level)
                             {
                                 case TrainerLevelType.Novice:
-                                    repTypes = new[] { RepsType.HighNovice, RepsType.MedNovice };
+                                    repTypes = new[] {RepsType.HighNovice, RepsType.MedNovice};
                                     break;
                                 case TrainerLevelType.Intermediate:
                                 case TrainerLevelType.Advanced:
-                                    repTypes = new[] { RepsType.Med, RepsType.High };
+                                    repTypes = new[] {RepsType.Med, RepsType.High};
                                     break;
                                 default:
                                     throw new ArgumentOutOfRangeException();
                             }
+
                             exerciseSetting = ExerciseSettings(exerciseSettings, repTypes);
                         }
+
                         var exercisesToChoose = exercisesOfMuscle.Where(x =>
                             x.Name.ContainsAny(exerciseSetting.ExerciseEquipments)
                             &&
@@ -270,7 +274,8 @@ namespace WorkoutGenerator.Controllers
             return RedirectToAction("Program", new {id = program.Id});
         }
 
-        private static ExerciseSettings ExerciseSettings(Dictionary<RepsType, ExerciseSettings> exerciseSettings, RepsType[] repTypes)
+        private static ExerciseSettings ExerciseSettings(Dictionary<RepsType, ExerciseSettings> exerciseSettings,
+            RepsType[] repTypes)
         {
             Random r;
             ExerciseSettings exerciseSetting;
