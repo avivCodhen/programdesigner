@@ -6,21 +6,43 @@
 }
 
 @section Head{
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css"/>
     <style>
         .submit-hover:hover {
             background: white;
             color: #8187ff !important;
         }
 
-        .index-form label {
-            color: white;
+        .index-form label { color: white; }
+
+        nav { display: none !important; }
+
+        .lds-dual-ring {
+            display: inline-block;
+            width: 64px;
+            height: 64px;
         }
 
-        nav {
-            display: none !important;
+        .lds-dual-ring:after {
+            content: " ";
+            display: block;
+            width: 46px;
+            height: 46px;
+            margin: 1px;
+            border-radius: 50%;
+            border: 5px solid #fff;
+            border-color: #fff transparent #fff transparent;
+            animation: lds-dual-ring 1.2s linear infinite;
+        }
+
+        @@keyframes lds-dual-ring {
+            0% { transform: rotate(0deg); }
+
+            100% { transform: rotate(360deg); }
         }
     </style>
 }
+
 <div class="bg-main">
 
 
@@ -28,20 +50,35 @@
 
         <div class="d-flex vertical-align justify-content-center flex-column">
 
-            <div class="row d-flex vertical-align justify-content-center py-4">
-                <div class="d-flex vertical-align justify-content-center flex-column">
-                    <img src="~/images/white-text-logo.png" />
+            <div class="row d-flex justify-content-center py-4">
+                <div class="d-flex justify-content-center flex-column">
+                    <img src="~/images/white-text-logo.png"/>
 
                 </div>
             </div>
 
-            <div class="row d-flex vertical-align justify-content-center">
+            <div class="row d-flex  justify-content-center">
                 <h1 class="text-white text-center" style="font-size: 46px; letter-spacing: 1px; font-weight: 300;">Professional Body Building Program Designer</h1>
-                <p class="text-white mb-0 text-center" style="font-size: 24px;letter-spacing: 1px; font-weight: 300;">Generate professional and effective workouts for yourself or your clients.</p>
+                <p class="text-white mb-0 text-center" style="font-size: 24px; letter-spacing: 1px; font-weight: 300;">Generate professional and effective workouts for yourself or your clients.</p>
             </div>
+
+
             <div class="row d-flex  justify-content-center mt-5 index-form">
+
+
                 <div class="col-12 col-lg-5 d-flex justify-content-center flex-column">
-                    <form method="post" asp-controller="Home" asp-action="Index">
+                    <div style="display: none;" id="loadingDiv">
+                        <div class="d-flex justify-content-center" style="display: none">
+                            <div class="d-block text-center">
+                                <p class="text-white w-100">Generating program</p>
+                                <div class="lds-dual-ring"></div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <form method="post" asp-controller="Home" asp-action="Index" id="generateForm">
 
                         <label>Choose workout difficulty</label>
                         <div class="2 form-group">
@@ -79,3 +116,56 @@
     </div>
 
 </div>
+
+<div class="container mt-5">
+    <div class="d-flex vertical-align justify-content-center flex-column mb-5">
+
+        <h1 style="letter-spacing: 1px; font-weight: 300;" class="text-center color-main">The Most Precise Program Generator Ever.</h1>
+        <h3 class="text-center color-main" style="letter-spacing: 1px; font-weight: 300">The fitness industry's technology is accelerating, and we're leading it.</h3>
+    </div>
+
+    <div class="row">
+
+        <div class="col-12 col-lg-4 text-center">
+            <i class=" mb-3 text-center color-main fas fa-rocket fa-3x"></i>
+            <p class="mb-3 color-main text-center">Lightning Fast</p>
+            <p class="text-center">In less than 10 seconds, you'll have a professional program for your specification.</p>
+        </div>
+
+        <div class="col-12 col-lg-4 text-center">
+            <i class=" mb-3 text-center color-main fab fa-magento fa-3x"></i>
+            <p class="mb-3 color-main text-center">Tailor-Made</p>
+            <p class="text-center">Our algorithm can receive data and generated accordingly. Else, he'll use his brains and created a tailor-made program just for you, with little data.</p>
+        </div>
+
+        <div class="col-12 col-lg-4 text-center">
+            <i class=" mb-3 text-center color-main fas fa-dollar-sign fa-3x"></i>
+            <p class="mb-3 color-main text-center">Absolutely Free</p>
+            <p class="text-center">We're charging nothing for our algorithm. So Enjoy and happy generating!</p>
+        </div>
+
+
+    </div>
+    <div class="d-flex justify-content-center">
+        <button id="scrollToTopBtn" class="btn bg-main text-white my-5">Scroll To Top</button>
+    </div>
+</div>
+</div>
+
+@section Scripts
+{
+    <script>
+        $(function() {
+            $("#generateForm").on("submit",
+                function() {
+                    $("#generateForm").hide(200);
+                    $("#loadingDiv").show(200);
+                });
+        });
+
+        $("#scrollToTopBtn").on('click',
+            function() {
+                $('html,body').animate({ scrollTop: 0 }, 'slow');
+            });
+    </script>
+}

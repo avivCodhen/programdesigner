@@ -14,5 +14,6 @@ namespace WorkoutGenerator.Models
         public ExerciseType[] ExerciseTypes { get; set; }
         public string[] ExerciseEquipments { get; set; }
         public TrainerLevelType[] AllowedTrainerLevel { get; set; }
+        public string[] ExcludeExercises { get; set; }
     }
 }

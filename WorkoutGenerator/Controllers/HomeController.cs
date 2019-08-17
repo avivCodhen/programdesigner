@@ -132,7 +132,7 @@ namespace WorkoutGenerator.Controllers
 
             template.DaysType = days;
             template.TrainerLevelType = level;
-
+            var baseExercises = new[] { "Press", "Row", "Pull","Squat","Lunge"};
             var exerciseSettings = new Dictionary<RepsType, ExerciseSettings>()
             {
                 {
@@ -162,6 +162,7 @@ namespace WorkoutGenerator.Controllers
                 {
                     RepsType.MedNovice, new ExerciseSettings()
                     {
+                        ExcludeExercises = new []{"Front", "Decline"},
                         AllowedTrainerLevel = new[] {TrainerLevelType.Advanced, TrainerLevelType.Intermediate},
                         ExerciseEquipments = new[] {Dumbbell.ToString(), Cable.ToString(), Machine.ToString()},
                         ExerciseTypes = new[] {Compound},
@@ -186,6 +187,7 @@ namespace WorkoutGenerator.Controllers
                 {
                     RepsType.HighNovice, new ExerciseSettings()
                     {
+                        ExcludeExercises = new []{"Front", "Decline", "Incline", "Deadlift"},
                         AllowedTrainerLevel = new[]
                             {TrainerLevelType.Advanced, TrainerLevelType.Intermediate, TrainerLevelType.Novice},
                         ExerciseEquipments = new[]
@@ -254,7 +256,14 @@ namespace WorkoutGenerator.Controllers
                             x.Name.ContainsAny(exerciseSetting.ExerciseEquipments)
                             &&
                             exerciseSetting.ExerciseTypes.Any(m => m == x.ExerciseType)
+                            &&
+                            (exerciseSetting.ExcludeExercises != null && !x.Name.ContainsAny(exerciseSetting.ExcludeExercises))
                         ).ToList();
+
+                        if (i == 0)
+                        {
+                            exercisesToChoose = exercisesToChoose.Where(x => x.Name.ContainsAny(baseExercises)).ToList();
+                        }
 
                         var rExercise = new Random();
                         int num = rExercise.Next(exercisesToChoose.Count);
