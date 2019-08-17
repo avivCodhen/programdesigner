@@ -2,7 +2,6 @@ C:\Users\Cohen\source\repos\WorkoutGenerator\WorkoutGenerator\bin\Debug\netcorea
 C:\Users\Cohen\source\repos\WorkoutGenerator\WorkoutGenerator\bin\Debug\netcoreapp2.2\WorkoutGenerator.runtimeconfig.json
 C:\Users\Cohen\source\repos\WorkoutGenerator\WorkoutGenerator\bin\Debug\netcoreapp2.2\WorkoutGenerator.runtimeconfig.dev.json
 C:\Users\Cohen\source\repos\WorkoutGenerator\WorkoutGenerator\bin\Debug\netcoreapp2.2\WorkoutGenerator.dll
-C:\Users\Cohen\source\repos\WorkoutGenerator\WorkoutGenerator\obj\Debug\netcoreapp2.2\WorkoutGenerator.csprojAssemblyReference.cache
 C:\Users\Cohen\source\repos\WorkoutGenerator\WorkoutGenerator\obj\Debug\netcoreapp2.2\WorkoutGenerator.csproj.CoreCompileInputs.cache
 C:\Users\Cohen\source\repos\WorkoutGenerator\WorkoutGenerator\obj\Debug\netcoreapp2.2\WorkoutGenerator.RazorAssemblyInfo.cache
 C:\Users\Cohen\source\repos\WorkoutGenerator\WorkoutGenerator\obj\Debug\netcoreapp2.2\WorkoutGenerator.RazorAssemblyInfo.cs

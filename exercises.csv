@@ -1,129 +1,129 @@
-"Id";"Name";"MuscleType";"level";"ExerciseType"
-0;"Barbell Flat Bench Press";0;"1";0
-1;"Barbell Incline Bench Press";0;"2";0
-2;"Barbell Decline Bench Press";0;"2";0
-3;"Dumbell Decline Bench Press";0;"2";0
-4;"Pushups";0;"1";0
-5;"Dips";0;"2";0
-6;"Dumbbell Flat Bench Press";0;"0";0
-7;"Dumbbell Incline Bench Press";0;"0";0
-8;"Dumbbell Flat Flies";0;"0";1
-9;"Dumbbell Incline Flies";0;"1";1
-10;"Dumbbell Decline Flies";0;"1";1
-11;"Cable Standing Flies";0;"0";1
-12;"Machine Bench Press";0;"0";0
-13;"Machine Incline Bench Press";0;"1";0
-14;"Machine Decline Bench Press";0;"0";0
-15;"Machine Flies";0;"0";1
-16;"Smith Machine Bench Press";0;"0";0
-17;"Barbell Deadlift";1;"2";0
-18;"Barbell Bent Over Row";1;"2";0
-19;"Barbell Rack Pulse";1;"2";0
-20;"Dumbell Chainsaw Row";1;"1";0
-21;"Pullups";1;"1";0
-22;"Chinups";1;"1";0
-23;"Dumbell Pullover";1;"1";1
-24;"Cable Sitted Row";1;"1";0
-25;"Cable Wide-Grip Seated Row";1;"1";0
-26;"Cable Pulldown";1;"0";1
-27;"Cable Close-Grip Pulldown";1;"0";1
-28;"Cable Pullover";1;"0";1
-29;"Machine Row";1;"0";0
-30;"Machine Pullover";1;"0";1
-31;"Barbell Standing Overhead Press";2;"2";0
-32;"Barbell Sited Overhead Press";2;"2";0
-33;"Barbell Upright Row";2;"1";0
-34;"Dumbbell Shoulder Press";2;"0";0
-35;"Dumbbell Front Raise";2;"0";1
-36;"Dumbbell Lateral Raise";2;"0";1
-37;"Dumbbell Arnold Press";2;"1";0
-38;"Dumbbell Upright Row";2;"0";0
-39;"Dumbbell Rear Delt Row";2;"0";1
-40;"Dumbbell Rear Delt Lateral Raise";2;"0";1
-41;"Cable Lateral Raise";2;"1";1
-42;"Cable Upright Row";2;"1";0
-43;"Cable Rear Delt Lateral Raise";2;"0";1
-44;"Smith Machine Sited Overhead Press";2;"1";0
-45;"Machine Shoulder Press";2;"1";0
-46;"Machine Front Raise";2;"1";1
-47;"Machine Lateral Raise";2;"1";1
-48;"Machine Rear Delt Lateral Raise";2;"0";1
-49;"Barbell Squat";3;"2";0
-50;"Barbell Front Squat";3;"2";0
-51;"Barbell Romanian Deadlift";3;"2";0
-52;"Barbbell Lunge";3;"1";0
-53;"Dumbbell Lunge";3;"1";0
-54;"Machine Leg Press";3;"1";0
-55;"Dumbbell Squat";3;"0";0
-56;"Dumbbell Romanian Deadlift";3;"0";0
-57;"Machine Knee Extension";3;"0";1
-58;"Machine Knee Flexion";3;"0";1
-59;"Machine Hack Squat";3;"1";0
-60;"Smith Machine Squat";3;"1";0
-61;"Smith Machine Front Squat";3;"1";0
-62;"Smith Machine Lunge";3;"1";0
-63;"Smith Machine Calves";3;"0";1
-64;"Barbell Close-Grip Bench Press";5;"2";0
-65;"EZ Bar Skull Crusher";5;"NULL";0
-66;"EZ Bar Close-Grip Bench Press";5;"NULL";0
-67;"Dumbbell Close-Grip Bench Press";5;"NULL";0
-68;"Dumbbell Overhead Extension";5;"NULL";0
-69;"Dumbbell Skull Crusher";5;"NULL";0
-70;"Dumbbell Kickback";5;"NULL";0
-71;"Cable Kickback";5;"NULL";0
-72;"Cable Triceps Extension";5;"NULL";0
-73;"Machine Triceps Extension";5;"NULL";0
-74;"Narrow Pushups";5;"NULL";0
-75;"Narrow Dips";5;"NULL";0
-76;"Jacksons";5;"NULL";0
-77;"Reverse Grip Cable Sitted Row";6;"NULL";0
-78;"Barbell Standing Curls";6;"NULL";0
-79;"EZ Bar Standing Curls";6;"NULL";0
-80;"Dumbbell Standing Curls";6;"NULL";0
-81;"Dumbbell Incline Curls";6;"NULL";0
-82;"Dumbbell Standing Hammer Curls";6;"NULL";0
-83;"Dumbbell Incline Hammer Curls";6;"NULL";0
-84;"Cable Standing Curls";6;"NULL";0
-85;"Cable Standing Hammer Curls";6;"NULL";0
-86;"Machine Bicep Curls";6;"NULL";0
-87;"Barbell Push Crunch";7;"NULL";0
-88;"Barbell Push Sit-up";7;"NULL";0
-89;"Crunch";7;"NULL";0
-90;"Cable Lying Crunch";7;"NULL";0
-91;"Cable Seated Crunch";7;"NULL";0
-92;"Cable Kneeling Crunch";7;"NULL";0
-93;"Cable Lying Leg-Hip Raise";7;"NULL";0
-95;"Dumbbell Push Crunch";7;"NULL";0
-96;"Lever Seated Leg Raise Crunch";7;"NULL";0
-97;"Lever Vertical Leg-Hip Raise";7;"NULL";0
-98;"Weighted Incline Sit-up";7;"NULL";0
-99;"Weighted Crunch";7;"NULL";0
-100;"Dumbbell Push Sit-up";7;"NULL";0
-101;"Cable Standing Overhead Crunch";7;"NULL";0
-102;"Weighted Incline Crunch";7;"NULL";0
-103;"Lever Seated Crunch";7;"NULL";0
-104;"Weighted Sit-up";7;"NULL";0
-105;"Weighted Hanging Leg-Hip Raise";7;"NULL";0
-106;"Hanging Straight Leg-Hip Raise";7;"NULL";0
-107;"Weighted Vertical Leg-Hip Raise";7;"NULL";0
-108;"V-up";7;"NULL";0
-109;"Plank";7;"NULL";0
-110;"Sit-up";7;"NULL";0
-112;"Jack-knife Sit-up";7;"NULL";0
-113;"Cable Kneeling Twisting Crunch";7;"NULL";0
-114;"Dumbbell 45° Side Bend";7;"NULL";0
-115;"Cable Side Bend";7;"NULL";0
-117;"Dumbbell Side Bend";7;"NULL";0
-118;"Lying Twist";7;"NULL";0
-119;"Side Bridge";7;"NULL";0
-120;"Side Crunch";7;"NULL";0
-121;"Incline Twisting Situp";7;"NULL";0
-122;"Twisting Crunch";7;"NULL";0
-123;"Twisting Situp";7;"NULL";0
-124;"Side Plank";7;"NULL";0
-125;"Superman";7;"NULL";0
-126;"Bird Dog";7;"NULL";0
-127;"Barbell Bent Knee Good-morning";7;"NULL";0
-128;"Back Extension";7;"NULL";0
-129;"Back Hyperextension";7;"NULL";0
-130;"Cable Twist";7;"NULL";0
+"Id";"Name";"MuscleType";"ExerciseType"
+0;"Barbell Flat Bench Press";0;0
+1;"Barbell Incline Bench Press";0;0
+2;"Barbell Decline Bench Press";0;0
+3;"Dumbell Decline Bench Press";0;0
+4;"Pushups";0;0
+5;"Dips";0;0
+6;"Dumbbell Flat Bench Press";0;0
+7;"Dumbbell Incline Bench Press";0;0
+8;"Dumbbell Flat Flies";0;1
+9;"Dumbbell Incline Flies";0;1
+10;"Dumbbell Decline Flies";0;1
+11;"Cable Standing Flies";0;1
+12;"Machine Bench Press";0;0
+13;"Machine Incline Bench Press";0;0
+14;"Machine Decline Bench Press";0;0
+15;"Machine Flies";0;1
+16;"Smith Machine Bench Press";0;0
+17;"Barbell Deadlift";1;0
+18;"Barbell Bent Over Row";1;0
+19;"Barbell Rack Pulse";1;0
+20;"Dumbell Chainsaw Row";1;0
+21;"Pullups";1;0
+22;"Chinups";1;0
+23;"Dumbell Pullover";1;1
+24;"Cable Sitted Row";1;0
+25;"Cable Wide-Grip Seated Row";1;0
+26;"Cable Pulldown";1;1
+27;"Cable Close-Grip Pulldown";1;1
+28;"Cable Pullover";1;1
+29;"Machine Row";1;0
+30;"Machine Pullover";1;1
+31;"Barbell Standing Overhead Press";2;0
+32;"Barbell Sited Overhead Press";2;0
+33;"Barbell Upright Row";2;0
+34;"Dumbbell Shoulder Press";2;0
+35;"Dumbbell Front Raise";2;1
+36;"Dumbbell Lateral Raise";2;1
+37;"Dumbbell Arnold Press";2;0
+38;"Dumbbell Upright Row";2;0
+39;"Dumbbell Rear Delt Row";2;1
+40;"Dumbbell Rear Delt Lateral Raise";2;1
+41;"Cable Lateral Raise";2;1
+42;"Cable Upright Row";2;0
+43;"Cable Rear Delt Lateral Raise";2;1
+44;"Smith Machine Sited Overhead Press";2;0
+45;"Machine Shoulder Press";2;0
+46;"Machine Front Raise";2;1
+47;"Machine Lateral Raise";2;1
+48;"Machine Rear Delt Lateral Raise";2;1
+49;"Barbell Squat";3;0
+50;"Barbell Front Squat";3;0
+51;"Barbell Romanian Deadlift";3;0
+52;"Barbbell Lunge";3;0
+53;"Dumbbell Lunge";3;0
+54;"Machine Leg Press";3;0
+55;"Dumbbell Squat";3;0
+56;"Dumbbell Romanian Deadlift";3;0
+57;"Machine Knee Extension";3;1
+58;"Machine Knee Flexion";3;1
+59;"Machine Hack Squat";3;0
+60;"Smith Machine Squat";3;0
+61;"Smith Machine Front Squat";3;0
+62;"Smith Machine Lunge";3;0
+63;"Smith Machine Calves";3;1
+64;"Barbell Close-Grip Bench Press";5;0
+65;"EZ Bar Skull Crusher";5;0
+66;"EZ Bar Close-Grip Bench Press";5;0
+67;"Dumbbell Close-Grip Bench Press";5;0
+68;"Dumbbell Overhead Extension";5;0
+69;"Dumbbell Skull Crusher";5;0
+70;"Dumbbell Kickback";5;0
+71;"Cable Kickback";5;0
+72;"Cable Triceps Extension";5;0
+73;"Machine Triceps Extension";5;0
+74;"Narrow Pushups";5;0
+75;"Narrow Dips";5;0
+76;"Jacksons";5;0
+77;"Reverse Grip Cable Sitted Row";6;0
+78;"Barbell Standing Curls";6;0
+79;"EZ Bar Standing Curls";6;0
+80;"Dumbbell Standing Curls";6;0
+81;"Dumbbell Incline Curls";6;0
+82;"Dumbbell Standing Hammer Curls";6;0
+83;"Dumbbell Incline Hammer Curls";6;0
+84;"Cable Standing Curls";6;0
+85;"Cable Standing Hammer Curls";6;0
+86;"Machine Bicep Curls";6;0
+87;"Barbell Push Crunch";7;0
+88;"Barbell Push Sit-up";7;0
+89;"Crunch";7;0
+90;"Cable Lying Crunch";7;0
+91;"Cable Seated Crunch";7;0
+92;"Cable Kneeling Crunch";7;0
+93;"Cable Lying Leg-Hip Raise";7;0
+95;"Dumbbell Push Crunch";7;0
+96;"Lever Seated Leg Raise Crunch";7;0
+97;"Lever Vertical Leg-Hip Raise";7;0
+98;"Weighted Incline Sit-up";7;0
+99;"Weighted Crunch";7;0
+100;"Dumbbell Push Sit-up";7;0
+101;"Cable Standing Overhead Crunch";7;0
+102;"Weighted Incline Crunch";7;0
+103;"Lever Seated Crunch";7;0
+104;"Weighted Sit-up";7;0
+105;"Weighted Hanging Leg-Hip Raise";7;0
+106;"Hanging Straight Leg-Hip Raise";7;0
+107;"Weighted Vertical Leg-Hip Raise";7;0
+108;"V-up";7;0
+109;"Plank";7;0
+110;"Sit-up";7;0
+112;"Jack-knife Sit-up";7;0
+113;"Cable Kneeling Twisting Crunch";7;0
+114;"Dumbbell 45° Side Bend";7;0
+115;"Cable Side Bend";7;0
+117;"Dumbbell Side Bend";7;0
+118;"Lying Twist";7;0
+119;"Side Bridge";7;0
+120;"Side Crunch";7;0
+121;"Incline Twisting Situp";7;0
+122;"Twisting Crunch";7;0
+123;"Twisting Situp";7;0
+124;"Side Plank";7;0
+125;"Superman";7;0
+126;"Bird Dog";7;0
+127;"Barbell Bent Knee Good-morning";7;0
+128;"Back Extension";7;0
+129;"Back Hyperextension";7;0
+130;"Cable Twist";7;0

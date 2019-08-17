@@ -187,7 +187,7 @@ namespace WorkoutGenerator.Controllers
                 {
                     RepsType.HighNovice, new ExerciseSettings()
                     {
-                        ExcludeExercises = new []{"Front", "Decline", "Incline", "Deadlift"},
+                        ExcludeExercises = new []{"Front", "Decline"},
                         AllowedTrainerLevel = new[]
                             {TrainerLevelType.Advanced, TrainerLevelType.Intermediate, TrainerLevelType.Novice},
                         ExerciseEquipments = new[]
@@ -261,9 +261,9 @@ namespace WorkoutGenerator.Controllers
                         if (exerciseSetting.ExcludeExercises != null)
                         {
                             exercisesToChoose = exercisesToChoose
-                                .Where(x => x.Name.ContainsAny(exerciseSetting.ExcludeExercises)).ToList();
+                                .Where(x => !x.Name.ContainsAny(exerciseSetting.ExcludeExercises)).ToList();
                         }
-                        if (i == 0)
+                        if (i == 0 && !(templateWorkoutMuscleExercise.MuscleType == MuscleType.Triceps || templateWorkoutMuscleExercise.MuscleType == MuscleType.Biceps) )
                         {
                             exercisesToChoose = exercisesToChoose.Where(x => x.Name.ContainsAny(baseExercises)).ToList();
                         }
