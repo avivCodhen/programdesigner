@@ -9,7 +9,6 @@ namespace WorkoutGenerator.Models
     public class ExerciseViewModel
     {
         public int Id { get; set; }
-
         public string Name { get; set; }
         public string Sets { get; set; }
         public string Reps { get; set; }
@@ -17,7 +16,7 @@ namespace WorkoutGenerator.Models
 
         public ExerciseViewModel(WorkoutExercise exercise)
         {
-            Name = exercise.Exercise.Name;
+            Name = exercise.Name;
             Sets = exercise.Sets;
             Reps = exercise.Reps;
             Rest = exercise.Rest;

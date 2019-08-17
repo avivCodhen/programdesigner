@@ -268,7 +268,7 @@ namespace WorkoutGenerator.Controllers
                         var rExercise = new Random();
                         int num = rExercise.Next(exercisesToChoose.Count);
                         var exerciseChose = exercisesToChoose[num];
-                        workoutExercise.Exercise = exerciseChose;
+                        workoutExercise.Name = exerciseChose.Name;
                         workoutExercise.Reps = exerciseSetting.Reps[r.Next(exerciseSetting.Reps.Length)];
                         workoutExercise.Rest = exerciseSetting.Rest[r.Next(exerciseSetting.Rest.Length)];
                         workoutExercise.Sets = exerciseSetting.Sets[r.Next(exerciseSetting.Sets.Length)];

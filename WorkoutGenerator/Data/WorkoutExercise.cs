@@ -9,12 +9,13 @@ namespace WorkoutGenerator.Data
 {
     public class WorkoutExercise
     {
+        public WorkoutExercise()
+        {
+        }
 
         [Key]
         public int Id { get; set; }
-        [ForeignKey("ExerciseId")]
-        public virtual Exercise Exercise { get; set; }
-        public int ExerciseId { get; set; }
+        public string Name { get; set; }
         public string Reps { get; set; }
         public string Sets { get; set; }
         public string Rest { get; set; }
