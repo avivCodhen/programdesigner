@@ -256,15 +256,18 @@ namespace WorkoutGenerator.Controllers
                             x.Name.ContainsAny(exerciseSetting.ExerciseEquipments)
                             &&
                             exerciseSetting.ExerciseTypes.Any(m => m == x.ExerciseType)
-                            &&
-                            (exerciseSetting.ExcludeExercises != null && !x.Name.ContainsAny(exerciseSetting.ExcludeExercises))
                         ).ToList();
 
+                        if (exerciseSetting.ExcludeExercises != null)
+                        {
+                            exercisesToChoose = exercisesToChoose
+                                .Where(x => x.Name.ContainsAny(exerciseSetting.ExcludeExercises)).ToList();
+                        }
                         if (i == 0)
                         {
                             exercisesToChoose = exercisesToChoose.Where(x => x.Name.ContainsAny(baseExercises)).ToList();
                         }
-
+                        
                         var rExercise = new Random();
                         int num = rExercise.Next(exercisesToChoose.Count);
                         var exerciseChose = exercisesToChoose[num];
