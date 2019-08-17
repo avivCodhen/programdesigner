@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace WorkoutGenerator.Migrations
 {
-    public partial class NewDataStructure : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,8 @@ namespace WorkoutGenerator.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     DaysType = table.Column<int>(nullable: false),
-                    TrainerLevelType = table.Column<int>(nullable: false)
+                    TrainerLevelType = table.Column<int>(nullable: false),
+                    TemplateType = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -46,6 +47,7 @@ namespace WorkoutGenerator.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
                     TemplateId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -85,7 +87,7 @@ namespace WorkoutGenerator.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ExerciseId = table.Column<int>(nullable: false),
+                    Name = table.Column<string>(nullable: true),
                     Reps = table.Column<string>(nullable: true),
                     Sets = table.Column<string>(nullable: true),
                     Rest = table.Column<string>(nullable: true),
@@ -94,12 +96,6 @@ namespace WorkoutGenerator.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_WorkoutExercise", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_WorkoutExercise_Exercises_ExerciseId",
-                        column: x => x.ExerciseId,
-                        principalTable: "Exercises",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_WorkoutExercise_MuscleExercises_MuscleExercisesId",
                         column: x => x.MuscleExercisesId,
@@ -124,11 +120,6 @@ namespace WorkoutGenerator.Migrations
                 column: "TemplateId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_WorkoutExercise_ExerciseId",
-                table: "WorkoutExercise",
-                column: "ExerciseId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_WorkoutExercise_MuscleExercisesId",
                 table: "WorkoutExercise",
                 column: "MuscleExercisesId");
@@ -136,6 +127,9 @@ namespace WorkoutGenerator.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Exercises");
+
             migrationBuilder.DropTable(
                 name: "Programs");
 
@@ -150,10 +144,6 @@ namespace WorkoutGenerator.Migrations
 
             migrationBuilder.DropTable(
                 name: "Template");
-
-            migrationBuilder.DropColumn(
-                name: "ExerciseType",
-                table: "Exercises");
         }
     }
 }

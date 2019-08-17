@@ -9,8 +9,8 @@ using WorkoutGenerator.Data;
 namespace WorkoutGenerator.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20190811183950_AddedTemplateTypeToTemplate")]
-    partial class AddedTemplateTypeToTemplate
+    [Migration("20190817110852_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -102,9 +102,9 @@ namespace WorkoutGenerator.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ExerciseId");
-
                     b.Property<int?>("MuscleExercisesId");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("Reps");
 
@@ -113,8 +113,6 @@ namespace WorkoutGenerator.Migrations
                     b.Property<string>("Sets");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ExerciseId");
 
                     b.HasIndex("MuscleExercisesId");
 
@@ -147,11 +145,6 @@ namespace WorkoutGenerator.Migrations
 
             modelBuilder.Entity("WorkoutGenerator.Data.WorkoutExercise", b =>
                 {
-                    b.HasOne("WorkoutGenerator.Data.Exercise", "Exercise")
-                        .WithMany()
-                        .HasForeignKey("ExerciseId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("WorkoutGenerator.Data.MuscleExercises")
                         .WithMany("Exercises")
                         .HasForeignKey("MuscleExercisesId");
