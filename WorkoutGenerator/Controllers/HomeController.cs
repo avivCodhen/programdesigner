@@ -162,7 +162,7 @@ namespace WorkoutGenerator.Controllers
                 {
                     RepsType.MedNovice, new ExerciseSettings()
                     {
-                        ExcludeExercises = new []{"Front", "Decline"},
+                        ExcludeExercises = new []{"Front", "Decline", "Incline"},
                         AllowedTrainerLevel = new[] {TrainerLevelType.Advanced, TrainerLevelType.Intermediate},
                         ExerciseEquipments = new[] {Dumbbell.ToString(), Cable.ToString(), Machine.ToString()},
                         ExerciseTypes = new[] {Compound},
