@@ -28,3 +28,4 @@ C:\Users\Cohen\source\repos\WorkoutGenerator\WorkoutGenerator\obj\Debug\netcorea
 C:\Users\Cohen\source\repos\WorkoutGenerator\WorkoutGenerator\obj\Debug\netcoreapp2.2\WorkoutGenerator.pdb
 C:\Users\Cohen\source\repos\WorkoutGenerator\WorkoutGenerator\obj\Debug\netcoreapp2.2\WorkoutGenerator.csproj.CopyComplete
 C:\Users\Cohen\source\repos\WorkoutGenerator\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Home\Program.g.cshtml.cs
+C:\Users\Cohen\source\repos\WorkoutGenerator\WorkoutGenerator\obj\Debug\netcoreapp2.2\WorkoutGenerator.csprojAssemblyReference.cache
