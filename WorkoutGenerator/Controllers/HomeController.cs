@@ -132,7 +132,6 @@ namespace WorkoutGenerator.Controllers
 
             template.DaysType = days;
             template.TrainerLevelType = level;
-            var baseExercises = new[] { "Press", "Row", "Pull","Squat","Lunge"};
             var exerciseSettings = new Dictionary<RepsType, ExerciseSettings>()
             {
                 {
@@ -214,7 +213,7 @@ namespace WorkoutGenerator.Controllers
                         var workoutExercise = templateWorkoutMuscleExercise.Exercises[i];
                         ExerciseSettings exerciseSetting;
                         RepsType[] repTypes;
-                        if (i == 0 && !IsSmallMuscle(templateWorkoutMuscleExercise))
+                        if (i == 0)
                         {
                             switch (level)
                             {
@@ -263,9 +262,9 @@ namespace WorkoutGenerator.Controllers
                             exercisesToChoose = exercisesToChoose
                                 .Where(x => !x.Name.ContainsAny(exerciseSetting.ExcludeExercises)).ToList();
                         }
-                        if (i == 0 && !IsSmallMuscle(templateWorkoutMuscleExercise) )
+                        if (i == 0  )
                         {
-                            exercisesToChoose = exercisesToChoose.Where(x => x.Name.ContainsAny(baseExercises)).ToList();
+                            exercisesToChoose = exercisesToChoose.Where(x => x.Utility == UtilityType.Basic).ToList();
                         }
                         
                         var rExercise = new Random();
@@ -284,11 +283,6 @@ namespace WorkoutGenerator.Controllers
             _db.Programs.Add(program);
             _db.SaveChanges();
             return RedirectToAction("Program", new {id = program.Id});
-        }
-
-        private static bool IsSmallMuscle(MuscleExercises templateWorkoutMuscleExercise)
-        {
-            return templateWorkoutMuscleExercise.MuscleType == MuscleType.Triceps || templateWorkoutMuscleExercise.MuscleType == MuscleType.Biceps;
         }
 
         private static ExerciseSettings ExerciseSettings(Dictionary<RepsType, ExerciseSettings> exerciseSettings,

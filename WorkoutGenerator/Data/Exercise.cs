@@ -14,6 +14,7 @@ namespace WorkoutGenerator.Data
         public string Name { get; set; }
         public MuscleType MuscleType { get; set; }
         public ExerciseType ExerciseType { get; set; }
+        public UtilityType Utility { get; set; }
 
     }
 }
