@@ -8,6 +8,7 @@ namespace WorkoutGenerator.Models
 {
     public class ExerciseViewModel
     {
+        public string YoutubeVideoId { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public string Sets { get; set; }

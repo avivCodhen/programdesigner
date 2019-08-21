@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Google.Apis.Services;
+using Google.Apis.YouTube.v3;
+using Google.Apis.YouTube.v3.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 using WorkoutGenerator.Data;
@@ -11,6 +13,7 @@ using WorkoutGenerator.Factories;
 using WorkoutGenerator.Models;
 using static WorkoutGenerator.Data.ExerciseEquipmentType;
 using static WorkoutGenerator.Data.ExerciseType;
+using Activity = System.Diagnostics.Activity;
 
 namespace WorkoutGenerator.Controllers
 {
@@ -306,6 +309,18 @@ namespace WorkoutGenerator.Controllers
             {
                 TemplateViewModel = new TemplateViewModel(program.Template)
             };
+
+            foreach (WorkoutViewModel workoutViewModel in vm.TemplateViewModel.Workouts)
+            {
+                foreach (MuscleExerciseViewModel muscleExerciseViewModel in workoutViewModel.MuscleExerciseViewModels)
+                {
+                    foreach (ExerciseViewModel exerciseViewModel in muscleExerciseViewModel.Exercises)
+                    {
+                        var linkId = _db.YoutubeVideoQueries.Single(x => x.Query == exerciseViewModel.Name).LinkId;
+                        exerciseViewModel.YoutubeVideoId = linkId;
+                    }
+                }
+            }
             return View(vm);
         }
 
@@ -319,5 +334,6 @@ namespace WorkoutGenerator.Controllers
         {
             return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
+
     }
 }

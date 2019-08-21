@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using WorkoutGenerator.Data;
+using WorkoutGenerator.Services;
 
 namespace WorkoutGenerator
 {
@@ -49,7 +50,7 @@ namespace WorkoutGenerator
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
 
             });
-
+            services.AddHostedService<YoutubeVideosService>();
 
         services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

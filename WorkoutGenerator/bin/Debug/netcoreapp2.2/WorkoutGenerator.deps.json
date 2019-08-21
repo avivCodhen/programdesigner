@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.2",
-    "signature": "f88a9fc9bf05008986536d2ec3c412a25e3b53ff"
+    "signature": "377f594cc0a2c6edc5f4beb614ab6a5b23bf0231"
   },
   "compilationOptions": {
     "defines": [
@@ -24,6 +24,7 @@
     ".NETCoreApp,Version=v2.2": {
       "WorkoutGenerator/1.0.0": {
         "dependencies": {
+          "Google.Apis.YouTube.v3": "1.40.3.1663",
           "Microsoft.AspNetCore.App": "2.2.0",
           "Microsoft.AspNetCore.Razor.Design": "2.2.0",
           "Microsoft.EntityFrameworkCore": "2.2.6",
@@ -60,6 +61,70 @@
         },
         "compile": {
           "lib/netstandard1.3/Castle.Core.dll": {}
+        }
+      },
+      "Google.Apis/1.40.3": {
+        "dependencies": {
+          "Google.Apis.Core": "1.40.3",
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.dll": {
+            "assemblyVersion": "1.40.3.0",
+            "fileVersion": "1.40.3.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.dll": {}
+        }
+      },
+      "Google.Apis.Auth/1.40.3": {
+        "dependencies": {
+          "Google.Apis": "1.40.3",
+          "Google.Apis.Core": "1.40.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {
+            "assemblyVersion": "1.40.3.0",
+            "fileVersion": "1.40.3.0"
+          },
+          "lib/netstandard2.0/Google.Apis.Auth.dll": {
+            "assemblyVersion": "1.40.3.0",
+            "fileVersion": "1.40.3.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Auth.PlatformServices.dll": {},
+          "lib/netstandard2.0/Google.Apis.Auth.dll": {}
+        }
+      },
+      "Google.Apis.Core/1.40.3": {
+        "dependencies": {
+          "Newtonsoft.Json": "11.0.2"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.Core.dll": {
+            "assemblyVersion": "1.40.3.0",
+            "fileVersion": "1.40.3.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.Core.dll": {}
+        }
+      },
+      "Google.Apis.YouTube.v3/1.40.3.1663": {
+        "dependencies": {
+          "Google.Apis": "1.40.3",
+          "Google.Apis.Auth": "1.40.3"
+        },
+        "runtime": {
+          "lib/netstandard2.0/Google.Apis.YouTube.v3.dll": {
+            "assemblyVersion": "1.40.3.1663",
+            "fileVersion": "1.40.3.1663"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Google.Apis.YouTube.v3.dll": {}
         }
       },
       "Microsoft.CodeAnalysis.CSharp.Workspaces/2.8.0": {
@@ -3702,6 +3767,34 @@
       "sha512": "sha512-XSNA0Gc1Zu33L+8+/3Tqt+aFu8QWS8UenVHZ7RenIP5wJfhoLrA4PnNscpxReeo5aBq8PDoGnV8rNaOzIOUo/w==",
       "path": "castle.core/4.2.1",
       "hashPath": "castle.core.4.2.1.nupkg.sha512"
+    },
+    "Google.Apis/1.40.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-c0mxhENGADXG7cqIjvdNxjKICwEg3q4moBPDKPElKl3TgAoA3+PdPEg129wFkBkQdvwYVYyWW0Z4cVs8411j9A==",
+      "path": "google.apis/1.40.3",
+      "hashPath": "google.apis.1.40.3.nupkg.sha512"
+    },
+    "Google.Apis.Auth/1.40.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-/5t6mKfhk/tiEe7ypjwtL5cuXtgtoyIKEsV+MEjCeNelgM1KBnUNfmNfIrWJTxBJmzh6w//HVFVpHXVPLjzyZw==",
+      "path": "google.apis.auth/1.40.3",
+      "hashPath": "google.apis.auth.1.40.3.nupkg.sha512"
+    },
+    "Google.Apis.Core/1.40.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-0OzlDSYyEWEj9BtR88Ey8ANL2XqK88TlJcMuhZKA4V/SXx3hzCxfHa0r6Q8qh6470IwU28A1I7wJSSkSBYDLbg==",
+      "path": "google.apis.core/1.40.3",
+      "hashPath": "google.apis.core.1.40.3.nupkg.sha512"
+    },
+    "Google.Apis.YouTube.v3/1.40.3.1663": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-bv4jmYHBCagcWiIeKbnJAZLyppU5lIXzQB3AmVpXdx5IRFW/vIgBfU99ElhVZmQ/lYk/lniJFE740WeW1ttaMw==",
+      "path": "google.apis.youtube.v3/1.40.3.1663",
+      "hashPath": "google.apis.youtube.v3.1.40.3.1663.nupkg.sha512"
     },
     "Microsoft.CodeAnalysis.CSharp.Workspaces/2.8.0": {
       "type": "package",
