@@ -53,7 +53,9 @@ namespace WorkoutGenerator.Services
                         catch (Exception e)
                         {
                             Console.WriteLine(e);
-                            throw;
+                            Thread.Sleep(1000* 60);
+                            await StartAsync(cancellationToken);
+                            return;
                         }
                         db.YoutubeVideoQueries.Add(new YoutubeVideoQuery
                         {
