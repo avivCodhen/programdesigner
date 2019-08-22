@@ -14,7 +14,9 @@
 
         .index-form label { color: white; }
 
-        nav { display: none !important; }
+         #siteNavBar{
+            box-shadow: 0px 0px !important;
+        }
 
         .lds-dual-ring {
             display: inline-block;
@@ -45,27 +47,23 @@
 <div class="bg-main">
 
 
-    <div class="container pb-5">
+    <div class="container py-5">
 
         <div class="d-flex vertical-align justify-content-center flex-column">
 
-            <div class="row d-flex justify-content-center py-4">
-                <div class="d-flex justify-content-center flex-column">
-                    <img src="~/images/white-text-logo.png"/>
+            <div class="row d-flex  justify-content-center">
+                <div class="col-10">
+                    <h1 class="text-white text-center" style="letter-spacing: 1px; font-weight: 300;">Professional Body Building Program Designer</h1>
+                    <p class="text-white mb-0 text-center" style="font-size: 20px; letter-spacing: 1px; font-weight: 300;">Generate professional and effective workouts for yourself or your clients.</p>
 
                 </div>
-            </div>
-
-            <div class="row d-flex  justify-content-center">
-                <h1 class="text-white text-center" style="font-size: 46px; letter-spacing: 1px; font-weight: 300;">Professional Body Building Program Designer</h1>
-                <p class="text-white mb-0 text-center" style="font-size: 24px; letter-spacing: 1px; font-weight: 300;">Generate professional and effective workouts for yourself or your clients.</p>
             </div>
 
 
             <div class="row d-flex  justify-content-center mt-5 index-form">
 
 
-                <div class="col-12 col-lg-5 d-flex justify-content-center flex-column">
+                <div class="col-10 col-lg-5 d-flex justify-content-center flex-column">
                     <div style="display: none;" id="loadingDiv">
                         <div class="d-flex justify-content-center" style="display: none">
                             <div class="d-block text-center">
@@ -94,7 +92,7 @@
                         <label>Pick a template to generate workout</label>
                         <div class="2 form-group">
                             <select asp-for="@Model.TemplateType" class="form-control" asp-items="Enum.GetValues(typeof(TemplateType)).Cast<TemplateType>().ToSelectListItems(null)">
-                                <option value="DecideForMe">Decide For Me</option>
+                                <option value="DecideForMe">Decide for me</option>
 
                             </select>
                             <span asp-validation-for="@Model.TemplateType" class="text-danger"></span>
@@ -154,7 +152,7 @@
 @section Scripts
 {
     <script>
-        $(function() {
+        $(function () {
             $("#generateForm").on("submit",
                 function() {
                     $("#generateForm").hide(200);

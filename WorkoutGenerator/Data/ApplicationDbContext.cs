@@ -15,6 +15,7 @@ namespace WorkoutGenerator.Data
         public DbSet<Exercise> Exercises { get; set; }
         public DbSet<BodyBuildingProgram> Programs { get; set; }
         public DbSet<YoutubeVideoQuery> YoutubeVideoQueries { get; set; }
+        public DbSet<FeedBack> FeedBacks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

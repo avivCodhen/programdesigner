@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 namespace WorkoutGenerator.Data
 {
-    public class YoutubeVideoQuery
+    public class FeedBack
     {
-
-        [Key] public int Id { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
-        public string Query { get; set; }
-        public string LinkId { get; set; }
-
+        [Key] public int Id { get; set; }
+        public string Text { get; set; }
     }
 }

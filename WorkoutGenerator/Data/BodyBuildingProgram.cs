@@ -13,6 +13,8 @@ namespace WorkoutGenerator.Data
         public int Id { get; set; }
         [ForeignKey("TemplateId")]
         public virtual Template Template { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
+
         public int TemplateId { get; set; }
     }
 }

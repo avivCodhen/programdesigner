@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
@@ -20,10 +21,12 @@ namespace WorkoutGenerator.Controllers
     public class HomeController : Controller
     {
         private ApplicationDbContext _db;
+        private readonly HtmlEncoder _htmlEncoder;
 
-        public HomeController(ApplicationDbContext db)
+        public HomeController(ApplicationDbContext db, HtmlEncoder htmlEncoder)
         {
             _db = db;
+            _htmlEncoder = htmlEncoder;
         }
 
         public IActionResult Index()
@@ -301,13 +304,14 @@ namespace WorkoutGenerator.Controllers
             return exerciseSetting;
         }
 
-        public IActionResult Program(int id)
+        public IActionResult Program(int id, bool feedback = false)
         {
             var program = _db.Programs.Single(x => x.Id == id);
 
             var vm = new ProgramViewModel()
             {
-                TemplateViewModel = new TemplateViewModel(program.Template)
+                TemplateViewModel = new TemplateViewModel(program.Template),
+                FeedBack =  feedback
             };
 
             foreach (WorkoutViewModel workoutViewModel in vm.TemplateViewModel.Workouts)
@@ -322,6 +326,13 @@ namespace WorkoutGenerator.Controllers
                 }
             }
             return View(vm);
+        }
+        [HttpPost]
+        public IActionResult Program(int id, string feedback)
+        {
+            _db.FeedBacks.Add(new FeedBack {Text = _htmlEncoder.Encode(feedback)});
+            _db.SaveChanges();
+            return Program(id, true);
         }
 
         public IActionResult Privacy()
