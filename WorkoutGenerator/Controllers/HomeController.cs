@@ -227,10 +227,27 @@ namespace WorkoutGenerator.Controllers
                                     repTypes = new[] {RepsType.HighNovice, RepsType.MedNovice};
                                     break;
                                 case TrainerLevelType.Intermediate:
-                                    repTypes = new[] {RepsType.Med, RepsType.High, RepsType.Low};
+                                    if (!templateWorkoutMuscleExercise.MuscleType.IsSmallExercise())
+                                    {
+                                        repTypes = new[] { RepsType.Med, RepsType.High, RepsType.Low };
+                                    }
+                                    else
+                                    {
+                                        repTypes = new[] { RepsType.Med, RepsType.High};
+
+                                    }
                                     break;
                                 case TrainerLevelType.Advanced:
                                     repTypes = new[] {RepsType.Med, RepsType.Low};
+                                    if (!templateWorkoutMuscleExercise.MuscleType.IsSmallExercise())
+                                    {
+                                        repTypes = new[] { RepsType.Med, RepsType.Low };
+                                    }
+                                    else
+                                    {
+                                        repTypes = new[] { RepsType.Med, RepsType.High };
+
+                                    }
                                     break;
                                 default:
                                     throw new ArgumentOutOfRangeException();
