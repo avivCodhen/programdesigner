@@ -126,7 +126,7 @@ namespace WorkoutGenerator.Factories
                             break;
                         case TrainerLevelType.Advanced:
                             bigMuscle = 5;
-                            smallMuscle = 4;
+                            smallMuscle = 2;
                             break;
                         default:
                             throw new ArgumentOutOfRangeException();
