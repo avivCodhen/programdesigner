@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Cohen\\source\\repos\\WorkoutGenerator\\WorkoutGenerator\\WorkoutGenerator.csproj": {}
+    "C:\\Users\\kaazz\\OneDrive\\מסמכים\\programdesigner\\WorkoutGenerator\\WorkoutGenerator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Cohen\\source\\repos\\WorkoutGenerator\\WorkoutGenerator\\WorkoutGenerator.csproj": {
+    "C:\\Users\\kaazz\\OneDrive\\מסמכים\\programdesigner\\WorkoutGenerator\\WorkoutGenerator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Cohen\\source\\repos\\WorkoutGenerator\\WorkoutGenerator\\WorkoutGenerator.csproj",
+        "projectUniqueName": "C:\\Users\\kaazz\\OneDrive\\מסמכים\\programdesigner\\WorkoutGenerator\\WorkoutGenerator.csproj",
         "projectName": "WorkoutGenerator",
-        "projectPath": "C:\\Users\\Cohen\\source\\repos\\WorkoutGenerator\\WorkoutGenerator\\WorkoutGenerator.csproj",
-        "packagesPath": "C:\\Users\\Cohen\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Cohen\\source\\repos\\WorkoutGenerator\\WorkoutGenerator\\obj\\",
+        "projectPath": "C:\\Users\\kaazz\\OneDrive\\מסמכים\\programdesigner\\WorkoutGenerator\\WorkoutGenerator.csproj",
+        "packagesPath": "C:\\Users\\kaazz\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\kaazz\\OneDrive\\מסמכים\\programdesigner\\WorkoutGenerator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
         ],
         "configFilePaths": [
-          "C:\\Users\\Cohen\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\kaazz\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
