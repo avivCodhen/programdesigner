@@ -13525,11 +13525,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Repos\\programdesigner\\WorkoutGenerator\\WorkoutGenerator.csproj",
+      "projectUniqueName": "C:\\Users\\kaazz\\OneDrive\\מסמכים\\programdesigner\\WorkoutGenerator\\WorkoutGenerator.csproj",
       "projectName": "WorkoutGenerator",
-      "projectPath": "C:\\Repos\\programdesigner\\WorkoutGenerator\\WorkoutGenerator.csproj",
+      "projectPath": "C:\\Users\\kaazz\\OneDrive\\מסמכים\\programdesigner\\WorkoutGenerator\\WorkoutGenerator.csproj",
       "packagesPath": "C:\\Users\\kaazz\\.nuget\\packages\\",
-      "outputPath": "C:\\Repos\\programdesigner\\WorkoutGenerator\\obj\\",
+      "outputPath": "C:\\Users\\kaazz\\OneDrive\\מסמכים\\programdesigner\\WorkoutGenerator\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
