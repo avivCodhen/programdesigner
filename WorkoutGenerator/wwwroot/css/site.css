@@ -7,6 +7,15 @@ a.navbar-brand {
   word-break: break-all;
 }
 
+.center-div {
+    display: flex;
+    justify-content: center;
+}
+
+.v-align {
+    align-items: center;
+}
+
 .color-main {
     color: #8781FF;
 }

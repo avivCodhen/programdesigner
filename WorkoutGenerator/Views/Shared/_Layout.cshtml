@@ -36,7 +36,7 @@
             <a class="navbar-brand " asp-area="" asp-controller="Home" asp-action="Index">
                 <img style="width: 150px;" src="~/images/white-text-logo.png"/>
             </a>
-            <button class="btn text-white my-2 my-sm-0 mr-2" style="background: #FFA500">Go Premium</button>
+            <button class="btn text-white my-2 my-sm-0 mr-2" style="background: #F95C44">Go Premium</button>
 
         </div>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -48,7 +48,7 @@
                 <li class="nav-item">
                     <div class="form-inline">
                         <button id="registerBtn" data-toggle="modal" data-target="#registerModal"  class="btn bg-white color-main my-2 my-sm-0 mr-2">Register</button>
-                        <button class="btn my-2 my-sm-0 text-white">Login</button>
+                        <a asp-area="Identity" asp-page="/Account/Login" class="btn my-2 my-sm-0 text-white">Login</a>
                     </div>
                 </li>
             </ul>
@@ -81,31 +81,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 </environment>
 <script src="~/js/site.js" asp-append-version="true"></script>
-<script>
-    $(function() {
-        $('#registerBtn').on('click',
-            function() {
-                $.ajax({
-                    url: '@Url.Action("RegisterAsyncAjax", "User")',        
-                    type: 'POST',   
-                    headers: {
-                        RequestVerificationToken: 
-                            $('input:hidden[name="__RequestVerificationToken"]').val()
-                    },
-                    processData: true,
-                    contentType: "application/json; charset=utf-8",
-                    success: function (data) {
-                        alert('success');
-                    }.bind(this),
-                    error: function (error) {
-                        alert('fuck');
-
-                    }
-                });
-            });
-    });
-</script>
-
 @RenderSection("Scripts", required: false)
 </body>
 </html>

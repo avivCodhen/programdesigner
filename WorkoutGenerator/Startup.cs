@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -64,8 +65,17 @@ namespace WorkoutGenerator
                 options.Tokens.PasswordResetTokenProvider = TokenOptions.DefaultEmailProvider;
             }).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
-
+            services.ConfigureApplicationCookie(options =>
+            {
+                // Cookie settings
+                options.Cookie.HttpOnly = true;
+                options.LoginPath = "/Identity/Account/Login";
+                options.AccessDeniedPath = "/Identity/Account/AccessDenied";
+                options.SlidingExpiration = true;
+            });
+            
             services.AddHostedService<YoutubeVideosService>();
+            services.AddSingleton<IEmailSender, SendGridEmailSender>();
 
         services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

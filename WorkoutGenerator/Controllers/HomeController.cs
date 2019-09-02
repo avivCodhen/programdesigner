@@ -363,7 +363,7 @@ namespace WorkoutGenerator.Controllers
                 {
                     foreach (ExerciseViewModel exerciseViewModel in muscleExerciseViewModel.Exercises)
                     {
-                        var linkId = _db.YoutubeVideoQueries.Single(x => x.Query == exerciseViewModel.Name).LinkId;
+                        var linkId = _db.YoutubeVideoQueries.SingleOrDefault(x => x.Query == exerciseViewModel.Name).LinkId;
                         exerciseViewModel.YoutubeVideoId = linkId;
                     }
                 }
