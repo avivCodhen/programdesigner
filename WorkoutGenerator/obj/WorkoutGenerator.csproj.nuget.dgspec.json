@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kaazz\\OneDrive\\מסמכים\\programdesigner\\WorkoutGenerator\\WorkoutGenerator.csproj": {}
+    "C:\\Repos\\programdesigner\\WorkoutGenerator\\WorkoutGenerator.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kaazz\\OneDrive\\מסמכים\\programdesigner\\WorkoutGenerator\\WorkoutGenerator.csproj": {
+    "C:\\Repos\\programdesigner\\WorkoutGenerator\\WorkoutGenerator.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kaazz\\OneDrive\\מסמכים\\programdesigner\\WorkoutGenerator\\WorkoutGenerator.csproj",
+        "projectUniqueName": "C:\\Repos\\programdesigner\\WorkoutGenerator\\WorkoutGenerator.csproj",
         "projectName": "WorkoutGenerator",
-        "projectPath": "C:\\Users\\kaazz\\OneDrive\\מסמכים\\programdesigner\\WorkoutGenerator\\WorkoutGenerator.csproj",
+        "projectPath": "C:\\Repos\\programdesigner\\WorkoutGenerator\\WorkoutGenerator.csproj",
         "packagesPath": "C:\\Users\\kaazz\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kaazz\\OneDrive\\מסמכים\\programdesigner\\WorkoutGenerator\\obj\\",
+        "outputPath": "C:\\Repos\\programdesigner\\WorkoutGenerator\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

@@ -162,3 +162,4 @@ C:\Users\kaazz\OneDrive\מסמכים\programdesigner\WorkoutGenerator\obj\Debug\
 C:\Users\kaazz\OneDrive\מסמכים\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Areas\Identity\Pages\_ViewStart.g.cshtml.cs
 C:\Users\kaazz\OneDrive\מסמכים\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_LoginPartial.g.cshtml.cs
 C:\Users\kaazz\OneDrive\מסמכים\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Register\_RegisterModalPartial.g.cshtml.cs
+C:\Repos\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Register\_RegisterModalPartial.g.cshtml.cs
