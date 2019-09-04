@@ -1,0 +1,35 @@
+﻿@model DashboardViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<div class="container">
+    <div class="row">
+        <h1>Your Generated Programs</h1>
+        
+        <div class="row no-gutters">
+            
+            @for(var i = 0; i < 4; i++)
+            {
+                <div class="col-3">
+                    <div class="card p-3">
+                        <p>ABC</p>
+                        <p>3 Days per week</p>
+                        <p>Novice</p>
+                    </div>
+                </div>
+            }
+
+            @*@foreach(var program in Model.Programs)
+            {
+                <div class="col-3">
+                <div class="card p-3">
+                    <p>@program.Type</p>
+                    <p>@program.Days</p>
+                    <p>@program.Level</p>
+                </div>
+                </div>
+            }*@
+        </div>
+    </div>
+</div>
