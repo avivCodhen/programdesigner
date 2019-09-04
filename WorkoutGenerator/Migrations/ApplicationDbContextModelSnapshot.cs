@@ -173,22 +173,6 @@ namespace WorkoutGenerator.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("WorkoutGenerator.Data.BodyBuildingProgram", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("Created");
-
-                    b.Property<int>("TemplateId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TemplateId");
-
-                    b.ToTable("Programs");
-                });
-
             modelBuilder.Entity("WorkoutGenerator.Data.Exercise", b =>
                 {
                     b.Property<int>("Id")
@@ -219,6 +203,26 @@ namespace WorkoutGenerator.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("FeedBacks");
+                });
+
+            modelBuilder.Entity("WorkoutGenerator.Data.FitnessProgram", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("ApplicationUserId");
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int>("TemplateId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.HasIndex("TemplateId");
+
+                    b.ToTable("Programs");
                 });
 
             modelBuilder.Entity("WorkoutGenerator.Data.MuscleExercises", b =>
@@ -352,8 +356,14 @@ namespace WorkoutGenerator.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("WorkoutGenerator.Data.BodyBuildingProgram", b =>
+            modelBuilder.Entity("WorkoutGenerator.Data.FitnessProgram", b =>
                 {
+                    b.HasOne("WorkoutGenerator.Data.ApplicationUser", "ApplicationUser")
+                        .WithMany("FitnessPrograms")
+                        .HasForeignKey("ApplicationUserId")
+                        .HasConstraintName("ApplicationUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("WorkoutGenerator.Data.Template", "Template")
                         .WithMany()
                         .HasForeignKey("TemplateId")

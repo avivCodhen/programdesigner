@@ -6,10 +6,12 @@ using System.Threading.Tasks;
 using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
 using Google.Apis.YouTube.v3.Data;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
 using WorkoutGenerator.Data;
 using WorkoutGenerator.Extensions;
+using WorkoutGenerator.Extentions;
 using WorkoutGenerator.Factories;
 using WorkoutGenerator.Models;
 using static WorkoutGenerator.Data.ExerciseEquipmentType;
@@ -20,44 +22,55 @@ namespace WorkoutGenerator.Controllers
 {
     public class HomeController : Controller
     {
+        private SignInManager<ApplicationUser> _signInManager;
         private ApplicationDbContext _db;
         private readonly HtmlEncoder _htmlEncoder;
 
-        public HomeController(ApplicationDbContext db, HtmlEncoder htmlEncoder)
+        public HomeController(ApplicationDbContext db, HtmlEncoder htmlEncoder, SignInManager<ApplicationUser> signInManager)
         {
             _db = db;
             _htmlEncoder = htmlEncoder;
+            _signInManager = signInManager;
         }
 
         public IActionResult Index()
         {
+            if (_signInManager.IsSignedIn(User))
+            {
+                return RedirectToAction("Dashboard");
+            }
             var vm = new IndexViewModel();
             return View(vm);
         }
 
-        public IActionResult Dashboard()
+        public async Task<IActionResult> Dashboard()
         {
-            return View();
+            var user = await _signInManager.UserManager.GetUserAsync(User);
+            var userPrograms = _db.Programs
+                .Where(x=>x.ApplicationUserId == user.Id)
+                .Select(x=> new DashboardProgramItemViewModel
+                    {
+                        Level = x.Template.TrainerLevelType.Description(),
+                        Type = x.Template.TemplateType.Description(),
+                        Days = x.Template.DaysType.Description()
+                    }
+            ).ToList();
+            return View(new DashboardViewModel(){Programs = userPrograms});
         }
         [HttpPost]
         public IActionResult Index(IndexViewModel indexViewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
-
-            var template = GetTemplate(indexViewModel);
-            var program = new BodyBuildingProgram() {Template = template};
-            _db.Programs.Add(program);
-            _db.SaveChanges();
-            return RedirectToAction("Program", new {id = program.Id});
+            return RedirectToAction("Program", new{ level = indexViewModel.TrainerLevelType, days = indexViewModel.DaysType, TemplateType = indexViewModel.TemplateType });
         }
 
-        public IActionResult Program(int id, bool feedback = false)
+        public IActionResult Program(TrainerLevelType level, DaysType days,string templateType, bool feedback = false)
         {
-            var program = _db.Programs.Single(x => x.Id == id);
+            var template = GetTemplate(level, days,templateType);
 
             var vm = new ProgramViewModel()
             {
-                TemplateViewModel = new TemplateViewModel(program.Template),
+                TemplateViewModel = new TemplateViewModel(template),
                 FeedBack = feedback
             };
 
@@ -77,11 +90,12 @@ namespace WorkoutGenerator.Controllers
         }
 
         [HttpPost]
-        public IActionResult Program(int id, string feedback)
+        public IActionResult ProgramAjax(string feedback)
         {
             _db.FeedBacks.Add(new FeedBack { Text = _htmlEncoder.Encode(feedback) });
             _db.SaveChanges();
-            return Program(id, true);
+            return Ok();
+
         }
 
         public IActionResult Privacy()
@@ -95,15 +109,13 @@ namespace WorkoutGenerator.Controllers
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
 
-        private Template GetTemplate(IndexViewModel indexViewModel)
+        private Template GetTemplate(TrainerLevelType level, DaysType days, string templateType)
         {
-            var level = indexViewModel.TrainerLevelType;
-            var days = indexViewModel.DaysType;
             Template template = null;
             TemplateFactory templateFactory = new TemplateFactory(level);
-            if (indexViewModel.TemplateType != "DecideForMe")
+            if (templateType != "DecideForMe")
             {
-                template = templateFactory.CreateBasicTemplate(Enum.Parse<TemplateType>(indexViewModel.TemplateType));
+                template = templateFactory.CreateBasicTemplate(Enum.Parse<TemplateType>(templateType));
             }
             else
             {

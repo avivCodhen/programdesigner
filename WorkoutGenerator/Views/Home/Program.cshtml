@@ -2,6 +2,7 @@
 @using WorkoutGenerator.Data
 @using WorkoutGenerator.Extentions
 @model ProgramViewModel
+@inject SignInManager<ApplicationUser> SignInManager
 <div class="container my-5">
     <div class="row d-flex justify-content-center">
         <div class="col-12 col-lg-6  d-flex flex-column">
@@ -30,10 +31,24 @@
                 <p>Workout should be done @Model.TemplateViewModel.DaysType.Description(). This program's difficulty is <span class="color-second font-weight-bold">@Model.TemplateViewModel.TrainerLevelType</span> </p>
 
             </div>
+            
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <div class="card p-3 text-white bg-main mb-4 text-center">
+                    <p>
+                        Shall we save this workout?
+
+                    </p>
+                    <div>
+                        <button id="registerBtn" data-toggle="modal" data-target="#registerModal" class="btn bg-white color-main d-inline-block">Register to save this workout</button>
+
+                    </div>
+                </div>
+            }
             @{
                 @foreach (var workoutViewModel in Model.TemplateViewModel.Workouts)
                  {
-                     <div class="card p-3 text-white bg-main mt-3">Workout @workoutViewModel.Name</div>
+                     <div class="card p-3 mt-3">Workout @workoutViewModel.Name</div>
 
                      @foreach (var muscle in workoutViewModel.MuscleExerciseViewModels)
                       {
@@ -74,7 +89,7 @@
             <button id="scrollToTopBtn" class="btn bg-main text-white my-5">Scroll To Top</button>
         </div>
 
-        <div class="d-flex justify-content-center mb-5 col-12 col-lg-6">
+        @*<div class="d-flex justify-content-center mb-5 col-12 col-lg-6">
             <div class="card">
                 <div class="p-3 text-center" style="background: #FFA500;">
                     <h5 class=" text-white">We need Your feedback. Help improve Program Designer</h5>
@@ -90,7 +105,7 @@
                     </form>
                 </div>
             </div>
-        </div>
+        </div>*@
     </div>
 
 

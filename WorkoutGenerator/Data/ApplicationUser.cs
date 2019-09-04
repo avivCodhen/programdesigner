@@ -9,5 +9,6 @@ namespace WorkoutGenerator.Data
     public class ApplicationUser : IdentityUser<int>
     {
         public DateTime Created { get; set; } = DateTime.Now;
+        public virtual ICollection<FitnessProgram> FitnessPrograms { get; set; }
     }
 }
