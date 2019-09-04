@@ -24,7 +24,7 @@ namespace WorkoutGenerator.Areas.Identity.Pages.Account
         {
             if (userId == null || code == null)
             {
-                return RedirectToPage("/Index");
+                return RedirectToAction("Index", "Home", new{area = ""});
             }
 
             var user = await _userManager.FindByIdAsync(userId);
@@ -39,7 +39,7 @@ namespace WorkoutGenerator.Areas.Identity.Pages.Account
                 throw new InvalidOperationException($"Error confirming email for user with ID '{userId}':");
             }
 
-            return Page();
+            return RedirectToAction("Index", "Home", new { area = "" });
         }
     }
 }

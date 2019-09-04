@@ -5,7 +5,7 @@
         <div class="modal-content">
             <div class="modal-header" style="border: 0;">
                 <div class="w-100 mt-4">
-                    <h5 class="modal-title text-center w-100">Register to proceed</h5>
+                    <h2 style="font-weight: 300;" class="text-center w-100">Login to your account</h2>
                     <p class="modal-title text-center w-100">It takes less than 10 seconds. :)</p>
                 </div>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -28,6 +28,8 @@
                                 <span asp-validation-for="Password" class="text-danger"></span>
                             </div>
                             <button type="submit" class=" my-4 w-100 btn bg-main text-white">Register</button>
+                            
+                            <a class="center-div" asp-page="/Account/Login" asp-area="Identity">Already registered? Sign in</a>
                         </form>
                     </div>
                     

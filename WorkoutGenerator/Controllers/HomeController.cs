@@ -35,11 +35,68 @@ namespace WorkoutGenerator.Controllers
             return View(vm);
         }
 
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
         [HttpPost]
         public IActionResult Index(IndexViewModel indexViewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
 
+            var template = GetTemplate(indexViewModel);
+            var program = new BodyBuildingProgram() {Template = template};
+            _db.Programs.Add(program);
+            _db.SaveChanges();
+            return RedirectToAction("Program", new {id = program.Id});
+        }
+
+        public IActionResult Program(int id, bool feedback = false)
+        {
+            var program = _db.Programs.Single(x => x.Id == id);
+
+            var vm = new ProgramViewModel()
+            {
+                TemplateViewModel = new TemplateViewModel(program.Template),
+                FeedBack = feedback
+            };
+
+            foreach (WorkoutViewModel workoutViewModel in vm.TemplateViewModel.Workouts)
+            {
+                foreach (MuscleExerciseViewModel muscleExerciseViewModel in workoutViewModel.MuscleExerciseViewModels)
+                {
+                    foreach (ExerciseViewModel exerciseViewModel in muscleExerciseViewModel.Exercises)
+                    {
+                        var linkId = _db.YoutubeVideoQueries.SingleOrDefault(x => x.Query == exerciseViewModel.Name)?.LinkId;
+                        exerciseViewModel.YoutubeVideoId = linkId;
+                    }
+                }
+            }
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        public IActionResult Program(int id, string feedback)
+        {
+            _db.FeedBacks.Add(new FeedBack { Text = _htmlEncoder.Encode(feedback) });
+            _db.SaveChanges();
+            return Program(id, true);
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private Template GetTemplate(IndexViewModel indexViewModel)
+        {
             var level = indexViewModel.TrainerLevelType;
             var days = indexViewModel.DaysType;
             Template template = null;
@@ -159,7 +216,7 @@ namespace WorkoutGenerator.Controllers
                         ExerciseTypes = new[] {Compound},
                         Reps = new[] {"6", "8"},
                         Sets = new[] {"3", "4"},
-                        Rest = new[] {"1 minute","1.5 minute", "2 minute"}
+                        Rest = new[] {"1 minute", "1.5 minute", "2 minute"}
                     }
                 },
                 {
@@ -287,7 +344,7 @@ namespace WorkoutGenerator.Controllers
                                     repTypes = new[] {RepsType.HighNovice, RepsType.MedNovice};
                                     break;
                                 case TrainerLevelType.Intermediate:
-                                    repTypes = new[] { RepsType.MedInter, RepsType.HighInter };
+                                    repTypes = new[] {RepsType.MedInter, RepsType.HighInter};
                                     break;
                                 case TrainerLevelType.Advanced:
                                     repTypes = new[] {RepsType.MedAdvanced, RepsType.HighAdvanced};
@@ -328,10 +385,7 @@ namespace WorkoutGenerator.Controllers
                 }
             }
 
-            var program = new BodyBuildingProgram() {Template = template};
-            _db.Programs.Add(program);
-            _db.SaveChanges();
-            return RedirectToAction("Program", new {id = program.Id});
+            return template;
         }
 
         private static ExerciseSettings ExerciseSettings(Dictionary<RepsType, ExerciseSettings> exerciseSettings,
@@ -347,48 +401,6 @@ namespace WorkoutGenerator.Controllers
             return exerciseSetting;
         }
 
-        public IActionResult Program(int id, bool feedback = false)
-        {
-            var program = _db.Programs.Single(x => x.Id == id);
-
-            var vm = new ProgramViewModel()
-            {
-                TemplateViewModel = new TemplateViewModel(program.Template),
-                FeedBack = feedback
-            };
-
-            foreach (WorkoutViewModel workoutViewModel in vm.TemplateViewModel.Workouts)
-            {
-                foreach (MuscleExerciseViewModel muscleExerciseViewModel in workoutViewModel.MuscleExerciseViewModels)
-                {
-                    foreach (ExerciseViewModel exerciseViewModel in muscleExerciseViewModel.Exercises)
-                    {
-                        var linkId = _db.YoutubeVideoQueries.SingleOrDefault(x => x.Query == exerciseViewModel.Name)?.LinkId;
-                        exerciseViewModel.YoutubeVideoId = linkId;
-                    }
-                }
-            }
-
-            return View(vm);
-        }
-
-        [HttpPost]
-        public IActionResult Program(int id, string feedback)
-        {
-            _db.FeedBacks.Add(new FeedBack {Text = _htmlEncoder.Encode(feedback)});
-            _db.SaveChanges();
-            return Program(id, true);
-        }
-
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
-        }
+      
     }
 }

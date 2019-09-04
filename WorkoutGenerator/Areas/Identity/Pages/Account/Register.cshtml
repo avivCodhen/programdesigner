@@ -4,25 +4,43 @@
     ViewData["Title"] = "Register";
 }
 
-<h1>@ViewData["Title"]</h1>
+<div class="container my-5">
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+    <div class="row center-div">
+        <div class="col-12 col-lg-6 mb-4">
+            <div class="modal-header" style="border: 0;">
+                <div class="w-100">
+                    <h5 class="modal-title text-center w-100">Register to Program Designer</h5>
+                    <p class="modal-title text-center w-100">It takes less than 10 seconds. :)</p>
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            <div class="">
+                <div class="row center-div">
+                    <div class="col-8">
+                        <form class="w-100" method="post">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                            <div class="form-group">
+                                <label asp-for="Input.Email"></label>
+                                <input asp-for="Input.Email" class="form-control" />
+                                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            </div>
+                            <div class="form-group">
+                                <label asp-for="Input.Password"></label>
+                                <input asp-for="Input.Password" class="form-control" />
+                                <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            </div>
+                            <button type="submit" class=" my-4 w-100 btn bg-main text-white">Register</button>
+                        </form>
+                    </div>
+
+                </div>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
-        </form>
+        </div>
     </div>
+
+
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
