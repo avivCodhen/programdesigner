@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
 using Google.Apis.YouTube.v3.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Internal;
@@ -43,6 +44,7 @@ namespace WorkoutGenerator.Controllers
             return View(vm);
         }
 
+        [Authorize]
         public async Task<IActionResult> Dashboard()
         {
             var user = await _signInManager.UserManager.GetUserAsync(User);
@@ -64,16 +66,15 @@ namespace WorkoutGenerator.Controllers
             return RedirectToAction("Program", new{ level = indexViewModel.TrainerLevelType, days = indexViewModel.DaysType, TemplateType = indexViewModel.TemplateType });
         }
 
-        public IActionResult Program(TrainerLevelType level, DaysType days,string templateType, bool feedback = false)
+        public async Task<IActionResult> Program(TrainerLevelType level, DaysType days,string templateType, bool feedback = false)
         {
             var template = GetTemplate(level, days,templateType);
-
             var vm = new ProgramViewModel()
             {
                 TemplateViewModel = new TemplateViewModel(template),
                 FeedBack = feedback
             };
-
+            
             foreach (WorkoutViewModel workoutViewModel in vm.TemplateViewModel.Workouts)
             {
                 foreach (MuscleExerciseViewModel muscleExerciseViewModel in workoutViewModel.MuscleExerciseViewModels)
@@ -86,6 +87,11 @@ namespace WorkoutGenerator.Controllers
                 }
             }
 
+            var user = await _signInManager.UserManager.GetUserAsync(User);
+            var program = new FitnessProgram {ApplicationUser = user, Template = template};
+            _db.Programs.Add(program);
+            _db.SaveChanges();
+            vm.Id = program.Id;
             return View(vm);
         }
 

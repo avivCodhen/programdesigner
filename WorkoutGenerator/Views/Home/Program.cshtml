@@ -28,20 +28,22 @@
                 </div>
                 <label class="font-weight-bold">Instructions:</label>
                 <p>Workout should be done @Model.TemplateViewModel.DaysType.Description(). This program's difficulty is <span class="color-second font-weight-bold">@Model.TemplateViewModel.TrainerLevelType</span> </p>
-
             </div>
 
             @if (!SignInManager.IsSignedIn(User))
             {
                 <div class="card p-3 text-white bg-main mb-4 text-center">
                     <p>
-                        Shall we save this workout?
-
+                        Shall we save your workout?
                     </p>
                     <div>
-                        <button id="registerBtn" data-toggle="modal" data-target="#registerModal" class="btn bg-white color-main d-inline-block">Register to save this workout</button>
-
+                        <button data-toggle="modal" data-target="#registerAndSaveModal" class="btn bg-white color-main d-inline-block">Sign up to save this workout</button>
                     </div>
+                </div>
+                <div class="modal fade" tabindex="-1" role="dialog" id="registerAndSaveModal">
+
+                    <partial name="Register/_RegisterPartial" model="@new RegisterViewModel(){ReturnUrl = @Url.Action("SaveProgramToUser", "Program", new {programId = @Model.Id}) }"/>
+           
                 </div>
             }
 

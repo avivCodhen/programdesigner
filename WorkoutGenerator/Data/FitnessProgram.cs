@@ -9,7 +9,7 @@ namespace WorkoutGenerator.Data
 {
     public class FitnessProgram
     {
-        public int ApplicationUserId { get; set; }
+        public int? ApplicationUserId { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
         [Key]
         public int Id { get; set; }

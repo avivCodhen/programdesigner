@@ -22,6 +22,8 @@ namespace WorkoutGenerator.Controllers
             _emailSender = emailSender;
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> RegisterAsync(RegisterViewModel vm)
         {
             var returnUrl = vm.ReturnUrl ?? Url.Content("~/");
