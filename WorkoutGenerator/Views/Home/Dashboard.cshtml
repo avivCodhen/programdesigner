@@ -41,8 +41,8 @@
 
                                 <div class="shadow py-3 px-4 d-flex flex-column " style="transform: rotate(0); border-radius: 10px;">
 
-                                    <div class="dropdown show dropleft" style="position: absolute; right: 15px; top: 15px">
-                                        <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <div class="dropdown show dropleft" style="z-index: 99;position: absolute; right: 0;">
+                                        <a class=" p-3" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-ellipsis-v text-secondary"></i>
                                         </a>
 
@@ -58,8 +58,8 @@
                                     <label style="font-size: 15px;" class="color-second">
                                         @program.Level<span class="text-black-50" style="text-transform: lowercase">, @program.Days</span>
                                     </label>
-                                    <div class="text-center px-3" style="transform: rotate(0);">
-                                        <a asp-action="Index" asp-controller="Program" asp-route-id="@program.ProgramId" class="w-100 mt-3 mb-1 btn stretched-link border-main color-main" style="border: 1px solid">View</a>
+                                    <div class="text-center px-3" >
+                                        <a asp-action="Index" asp-controller="Program" asp-route-id="@program.ProgramId" class="w-100 mt-1 btn stretched-link  color-main">View</a>
 
                                     </div>
                                 </div>
