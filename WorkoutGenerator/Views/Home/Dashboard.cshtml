@@ -1,36 +1,76 @@
-﻿@model DashboardViewModel
+﻿@using Castle.Core.Internal
+@using WorkoutGenerator.Extensions
+@model DashboardViewModel
 @{
     ViewData["Title"] = "Dashboard";
 }
 
+<style>
+    .programs-row {
+        width: 100%;
+        overflow-x: auto;
+        white-space: nowrap;
+        float: left;
+        position: relative;
+    }
+
+    .program-row a { text-decoration: none; }
+
+    .programs-row label { margin: 0; }
+</style>
+
 <div class="container my-5">
-    <div class="row d-block">
-        <h3>Your Generated Programs</h3>
+    <div class="row no-gutters d-block">
+        <h5 style="text-transform: uppercase; font-weight: 300;">Your Generated Programs</h5>
         <hr/>
-        <div class="row no-gutters">
+        <div class="row no-gutters my-2">
+            <div class="programs-row py-2">
 
-            @foreach (var program in Model.Programs)
-
-            {
-                <div class="col-2">
-                    <div class="card p-2 text-center mr-3">
-                        <label>ABC</label>
-                        <label>3 Days per week</label>
-                        <label>Novice</label>
+                @if (Model.Programs.IsNullOrEmpty())
+                {
+                    <div class="card p-3 text-center">
+                        <p class="mb-0">You haven't saved any programs yet.</p>
                     </div>
-                </div>
-            }
+                }
+                else
+                {
+                    @foreach (var program in Model.Programs)
+                    {
+                        <div href="#" class="d-inline-block">
+                            <div class="m-2" style="border-radius: 15px;">
 
-            @*@foreach(var program in Model.Programs)
-        {
-            <div class="col-3">
-            <div class="card p-3">
-                <p>@program.Type</p>
-                <p>@program.Days</p>
-                <p>@program.Level</p>
+                                <div class="shadow py-3 px-4 d-flex flex-column " style="transform: rotate(0); border-radius: 10px;">
+
+                                    <div class="dropdown show dropleft" style="position: absolute; right: 15px; top: 15px">
+                                        <a class="" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fas fa-ellipsis-v text-secondary"></i>
+                                        </a>
+
+                                        <div class="dropdown-menu bg" aria-labelledby="dropdownMenuLink">
+                                            <form method="post" asp-controller="Program" asp-action="DeleteProgram" asp-route-id="@program.ProgramId">
+                                                <button type="submit" class="dropdown-item" href="#"><i class="far fa-trash-alt"></i>&emsp; Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+
+                                    <label style="font-size: 13px;" class="text-secondary">@program.Created.FormatDate()</label>
+                                    <label style="font-size: 16px;" class="font-weight-bold">@program.Type</label>
+                                    <label style="font-size: 15px;" class="color-second">
+                                        @program.Level<span class="text-black-50" style="text-transform: lowercase">, @program.Days</span>
+                                    </label>
+                                    <div class="text-center px-3" style="transform: rotate(0);">
+                                        <a asp-action="Index" asp-controller="Program" asp-route-id="@program.ProgramId" class="w-100 mt-3 mb-1 btn stretched-link border-main color-main" style="border: 1px solid">View</a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                }
+
             </div>
-            </div>
-        }*@
+
         </div>
     </div>
 </div>

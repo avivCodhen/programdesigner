@@ -52,7 +52,8 @@
                     <div class="form-inline">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            <button class="btn bg-white color-main my-2 my-sm-0 mr-2">Dashboard</button>
+                            <a asp-controller="Home" asp-action="Index" class="white-border-btn btn bg-main my-2 my-sm-0 mr-2" style="color: white;border:1px solid white">Generate</a>
+                            <a asp-controller="Home" asp-action="Dashboard" class="btn bg-white color-main my-2 my-sm-0 mr-2">Dashboard</a>
                             <a asp-area="Identity" asp-page="/Account/Logout" class="btn my-2 my-sm-0 text-white">Logout</a>
                         }
                         else

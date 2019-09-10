@@ -78,7 +78,6 @@ C:\Repos\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\WorkoutGenerat
 C:\Repos\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\WorkoutGenerator.RazorCoreGenerate.cache
 C:\Repos\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Home\Index.g.cshtml.cs
 C:\Repos\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Home\Privacy.g.cshtml.cs
-C:\Repos\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Home\Program.g.cshtml.cs
 C:\Repos\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Error.g.cshtml.cs
 C:\Repos\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_CookieConsentPartial.g.cshtml.cs
 C:\Repos\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Shared\_Layout.g.cshtml.cs
@@ -164,3 +163,7 @@ C:\Users\kaazz\OneDrive\מסמכים\programdesigner\WorkoutGenerator\obj\Debug\
 C:\Users\kaazz\OneDrive\מסמכים\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Register\_RegisterModalPartial.g.cshtml.cs
 C:\Repos\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Home\Dashboard.g.cshtml.cs
 C:\Repos\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Register\_RegisterPartial.g.cshtml.cs
+C:\Repos\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Program\_ExercisePartial.g.cshtml.cs
+C:\Repos\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Program\_MuscleTitlePartial.g.cshtml.cs
+C:\Repos\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Shared\Program\_WorkoutTitlePartial.g.cshtml.cs
+C:\Repos\programdesigner\WorkoutGenerator\obj\Debug\netcoreapp2.2\Razor\Views\Program\Program.g.cshtml.cs

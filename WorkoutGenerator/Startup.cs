@@ -40,17 +40,11 @@ namespace WorkoutGenerator
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.Configure<CookiePolicyOptions>(options =>
-            {
-                options.CheckConsentNeeded = context => true;
-                options.MinimumSameSitePolicy = SameSiteMode.None;
-            });
 
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseLazyLoadingProxies();
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection"));
-
             });
 
             services.AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
@@ -73,11 +67,23 @@ namespace WorkoutGenerator
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
-            
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(120);
+                options.Cookie.HttpOnly = true;
+            });
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => false;
+                options.MinimumSameSitePolicy = SameSiteMode.None;
+            });
             services.AddHostedService<YoutubeVideosService>();
             services.AddSingleton<IEmailSender, SendGridEmailSender>();
 
-        services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+          
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -98,8 +104,7 @@ namespace WorkoutGenerator
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseCookiePolicy();
-
-
+            app.UseSession();
 
             app.UseMvc(routes =>
             {
