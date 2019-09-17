@@ -44,6 +44,14 @@ namespace WorkoutGenerator.Controllers
             return View("Program", vm);
         }
 
+        public IActionResult ProgramJson(TrainerLevelType level = TrainerLevelType.Intermediate,
+            DaysType days = DaysType.FourDays, TemplateType templateType = TemplateType.ABC)
+        {
+            var template = GetTemplate(level, days, templateType.ToString());
+            var program = new FitnessProgram {Template = template};
+            return new JsonResult(GetProgramViewModel(program));
+        }
+
 
         [Authorize]
         [HttpPost]
@@ -71,6 +79,7 @@ namespace WorkoutGenerator.Controllers
 
             return RedirectToAction("Dashboard", "Home");
         }
+
         private ProgramViewModel GetProgramViewModel(FitnessProgram program)
         {
             var vm = new ProgramViewModel
@@ -200,33 +209,33 @@ namespace WorkoutGenerator.Controllers
                     RepsType.Low, new ExerciseSettings()
                     {
                         AllowedTrainerLevel = new[] {TrainerLevelType.Advanced},
-                        ExerciseEquipments = new[] {Barbell.ToString(), Dumbbell.ToString()},
+                        UtilityType = new UtilityType[]{UtilityType.Basic},
                         ExerciseTypes = new[] {Compound},
                         Reps = new[] {"3", "4", "5"},
-                        Sets = new[] {"3", "4", "5"},
-                        Rest = new[] {"1.5 minute", "2 minute", "2.5 minute"}
+                        Sets = new[] {3, 4, 5},
+                        Rest = new[] {1.5, 2, 2.5}
                     }
                 },
                 {
                     RepsType.MedInter, new ExerciseSettings()
                     {
                         AllowedTrainerLevel = new[] {TrainerLevelType.Advanced, TrainerLevelType.Intermediate},
-                        ExerciseEquipments = new[] {Barbell.ToString(), Dumbbell.ToString(), Cable.ToString()},
+                        UtilityType = new UtilityType[]{UtilityType.Basic,UtilityType.AuxiliaryOrBasic},
                         ExerciseTypes = new[] {Compound},
                         Reps = new[] {"6", "8"},
-                        Sets = new[] {"3", "4"},
-                        Rest = new[] {"1 minute", "1.5 minute", "2 minute"}
+                        Sets = new[] {3, 4},
+                        Rest = new[] {1, 1.5, 2}
                     }
                 },
                 {
                     RepsType.MedAdvanced, new ExerciseSettings()
                     {
                         AllowedTrainerLevel = new[] {TrainerLevelType.Advanced, TrainerLevelType.Intermediate},
-                        ExerciseEquipments = new[] {Barbell.ToString(), Dumbbell.ToString(), Cable.ToString()},
+                        UtilityType = new UtilityType[]{UtilityType.Basic,UtilityType.AuxiliaryOrBasic},
                         ExerciseTypes = new[] {Compound},
                         Reps = new[] {"6", "8"},
-                        Sets = new[] {"3", "4"},
-                        Rest = new[] {"1 minute", "45 seconds", "1.5 minute",}
+                        Sets = new[] {3, 4},
+                        Rest = new[] {1, 0.45, 1.5,}
                     }
                 },
 
@@ -235,11 +244,11 @@ namespace WorkoutGenerator.Controllers
                     {
                         ExcludeExercises = new[] {"Front", "Decline", "Incline"},
                         AllowedTrainerLevel = new[] {TrainerLevelType.Advanced, TrainerLevelType.Intermediate},
-                        ExerciseEquipments = new[] {Dumbbell.ToString(), Cable.ToString(), Machine.ToString()},
+                        UtilityType = new UtilityType[]{UtilityType.Basic, UtilityType.AuxiliaryOrBasic},
                         ExerciseTypes = new[] {Compound},
                         Reps = new[] {"6", "8"},
-                        Sets = new[] {"3", "4"},
-                        Rest = new[] {"1 minute", "1.5 minute", "2 minute"}
+                        Sets = new[] {3, 4},
+                        Rest = new[] {1.5, 2}
                     }
                 },
                 {
@@ -247,12 +256,11 @@ namespace WorkoutGenerator.Controllers
                     {
                         AllowedTrainerLevel = new[]
                             {TrainerLevelType.Advanced, TrainerLevelType.Intermediate, TrainerLevelType.Novice},
-                        ExerciseEquipments = new[]
-                            {Barbell.ToString(), Dumbbell.ToString(), Cable.ToString(), Machine.ToString()},
+                        UtilityType = new UtilityType[]{UtilityType.Basic, UtilityType.AuxiliaryOrBasic, UtilityType.Auxiliary},
                         ExerciseTypes = new[] {Compound, Isolate},
                         Reps = new[] {"10", "12", "15"},
-                        Sets = new[] {"3"},
-                        Rest = new[] {"45 seconds", "1 minute", "1.5 minute"}
+                        Sets = new[] {3},
+                        Rest = new[] {0.45, 1, 1.5}
                     }
                 },
                 {
@@ -260,12 +268,11 @@ namespace WorkoutGenerator.Controllers
                     {
                         AllowedTrainerLevel = new[]
                             {TrainerLevelType.Advanced, TrainerLevelType.Intermediate, TrainerLevelType.Novice},
-                        ExerciseEquipments = new[]
-                            {Barbell.ToString(), Dumbbell.ToString(), Cable.ToString(), Machine.ToString()},
                         ExerciseTypes = new[] {Compound, Isolate},
+                        UtilityType = new UtilityType[]{UtilityType.Basic, UtilityType.AuxiliaryOrBasic, UtilityType.Auxiliary},
                         Reps = new[] {"10", "12", "15"},
-                        Sets = new[] {"3"},
-                        Rest = new[] {"35 seconds", "1 minute", "45 seconds"}
+                        Sets = new[] {3},
+                        Rest = new[] {0.35, 1, 0.45}
                     }
                 },
                 {
@@ -274,12 +281,11 @@ namespace WorkoutGenerator.Controllers
                         ExcludeExercises = new[] {"Front", "Decline"},
                         AllowedTrainerLevel = new[]
                             {TrainerLevelType.Advanced, TrainerLevelType.Intermediate, TrainerLevelType.Novice},
-                        ExerciseEquipments = new[]
-                            {Dumbbell.ToString(), Cable.ToString(), Machine.ToString()},
                         ExerciseTypes = new[] {Compound, Isolate},
+                        UtilityType = new UtilityType[]{UtilityType.Basic, UtilityType.AuxiliaryOrBasic, UtilityType.Auxiliary},
                         Reps = new[] {"10", "12", "15"},
-                        Sets = new[] {"3"},
-                        Rest = new[] {"1 minute", "1.5 minute"}
+                        Sets = new[] {3},
+                        Rest = new[] {1, 1.5}
                     }
                 }
             };
@@ -356,7 +362,7 @@ namespace WorkoutGenerator.Controllers
                         }
 
                         var exercisesToChoose = exercisesOfMuscle.Where(x =>
-                            x.Name.ContainsAny(exerciseSetting.ExerciseEquipments)
+                            exerciseSetting.UtilityType.Any(u => u == x.Utility)
                             &&
                             exerciseSetting.ExerciseTypes.Any(m => m == x.ExerciseType)
                         ).ToList();
@@ -376,9 +382,17 @@ namespace WorkoutGenerator.Controllers
                         int num = rExercise.Next(exercisesToChoose.Count);
                         var exerciseChose = exercisesToChoose[num];
                         workoutExercise.Name = exerciseChose.Name;
-                        workoutExercise.Reps = exerciseSetting.Reps[r.Next(exerciseSetting.Reps.Length)];
-                        workoutExercise.Rest = exerciseSetting.Rest[r.Next(exerciseSetting.Rest.Length)];
-                        workoutExercise.Sets = exerciseSetting.Sets[r.Next(exerciseSetting.Sets.Length)];
+
+                        var sets = exerciseSetting.Sets[r.Next(exerciseSetting.Sets.Length)];
+                        var reps = exerciseSetting.Reps[r.Next(exerciseSetting.Reps.Length)];
+                        var rest = exerciseSetting.Rest[r.Next(exerciseSetting.Rest.Length)];
+                        for (int j = 0; j < sets; j++)
+                        {
+                            var set = new Set {NumberOfSets = j + 1, Reps = reps, Rest = rest};
+
+                            workoutExercise.Sets.Add(set);
+                        }
+
                         exercisesOfMuscle.Remove(exerciseChose);
                     }
                 }

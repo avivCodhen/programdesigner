@@ -241,6 +241,28 @@ namespace WorkoutGenerator.Migrations
                     b.ToTable("MuscleExercises");
                 });
 
+            modelBuilder.Entity("WorkoutGenerator.Data.Set", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int>("NumberOfSets");
+
+                    b.Property<string>("Reps");
+
+                    b.Property<double>("Rest");
+
+                    b.Property<int?>("WorkoutExerciseId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WorkoutExerciseId");
+
+                    b.ToTable("Set");
+                });
+
             modelBuilder.Entity("WorkoutGenerator.Data.Template", b =>
                 {
                     b.Property<int>("Id")
@@ -278,15 +300,11 @@ namespace WorkoutGenerator.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime>("Created");
+
                     b.Property<int?>("MuscleExercisesId");
 
                     b.Property<string>("Name");
-
-                    b.Property<string>("Reps");
-
-                    b.Property<string>("Rest");
-
-                    b.Property<string>("Sets");
 
                     b.HasKey("Id");
 
@@ -376,6 +394,13 @@ namespace WorkoutGenerator.Migrations
                         .WithMany("MuscleExercises")
                         .HasForeignKey("WorkoutId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WorkoutGenerator.Data.Set", b =>
+                {
+                    b.HasOne("WorkoutGenerator.Data.WorkoutExercise")
+                        .WithMany("Sets")
+                        .HasForeignKey("WorkoutExerciseId");
                 });
 
             modelBuilder.Entity("WorkoutGenerator.Data.Workout", b =>

@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 
 namespace WorkoutGenerator.Data
 {
-    public class WorkoutExercise
+    public class Set 
     {
-        [Key]
-        public int Id { get; set; }
         public DateTime Created { get; set; }
-        public string Name { get; set; }
-        public virtual ICollection<Set> Sets { get; set; } = new List<Set>();
+        [Key] public int Id { get; set; }
+        public int NumberOfSets { get; set; }
+        public string Reps { get; set; }
+        public double Rest { get; set; }
 
     }
 }

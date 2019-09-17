@@ -1,18 +1,20 @@
 ﻿@model WorkoutViewModel
 
-<div class="card mt-3">
-    <div class="card-header">
-        Workout @Model.Name
-    </div>
+    <div class="card mt-3">
+        <div class="card-header d-flex">
 
-    @foreach (var muscle in Model.MuscleExerciseViewModels)
-    {
-        <partial name="Program/_MuscleTitlePartial" model="@muscle.MuscleType.ToString()"/>
+            <p class="flex-grow-1 d-flex  mb-0 v-align">Workout @Model.Name</p> <a class="btn bg-second text-white" href="#">Progress</a>
+        </div>
 
-        @foreach (var exercise in muscle.Exercises)
+        @foreach (var muscle in Model.MuscleExerciseViewModels)
         {
-            <partial name="Program/_ExercisePartial" model="@exercise"/>
-        }
-    }
+            <partial name="Program/_MuscleTitlePartial" model="@muscle.MuscleType.ToString()" />
 
-</div>
+            @foreach (var exercise in muscle.Exercises)
+            {
+                <hr class="m-0"/>
+                <partial name="Program/_ExercisePartial" model="@exercise" />
+            }
+        }
+
+    </div>

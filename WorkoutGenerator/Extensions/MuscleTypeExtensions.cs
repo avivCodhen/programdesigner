@@ -10,7 +10,7 @@ namespace WorkoutGenerator.Extensions
     {
         public static bool IsSmallExercise(this MuscleType muscleType)
         {
-            return muscleType == MuscleType.Triceps || muscleType == MuscleType.Biceps;
+            return muscleType == MuscleType.Triceps || muscleType == MuscleType.Biceps || muscleType == MuscleType.Shoulders;
         }
     }
 }

@@ -222,7 +222,7 @@ namespace WorkoutGenerator.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
-                    ApplicationUserId = table.Column<int>(nullable: false),
+                    ApplicationUserId = table.Column<int>(nullable: true),
                     Created = table.Column<DateTime>(nullable: false),
                     TemplateId = table.Column<int>(nullable: false)
                 },
@@ -289,10 +289,8 @@ namespace WorkoutGenerator.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Created = table.Column<DateTime>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    Reps = table.Column<string>(nullable: true),
-                    Sets = table.Column<string>(nullable: true),
-                    Rest = table.Column<string>(nullable: true),
                     MuscleExercisesId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -302,6 +300,29 @@ namespace WorkoutGenerator.Migrations
                         name: "FK_WorkoutExercise_MuscleExercises_MuscleExercisesId",
                         column: x => x.MuscleExercisesId,
                         principalTable: "MuscleExercises",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Set",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
+                    Created = table.Column<DateTime>(nullable: false),
+                    NumberOfSets = table.Column<int>(nullable: false),
+                    Reps = table.Column<string>(nullable: true),
+                    Rest = table.Column<double>(nullable: false),
+                    WorkoutExerciseId = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Set", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Set_WorkoutExercise_WorkoutExerciseId",
+                        column: x => x.WorkoutExerciseId,
+                        principalTable: "WorkoutExercise",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -359,6 +380,11 @@ namespace WorkoutGenerator.Migrations
                 column: "TemplateId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Set_WorkoutExerciseId",
+                table: "Set",
+                column: "WorkoutExerciseId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Workout_TemplateId",
                 table: "Workout",
                 column: "TemplateId");
@@ -396,7 +422,7 @@ namespace WorkoutGenerator.Migrations
                 name: "Programs");
 
             migrationBuilder.DropTable(
-                name: "WorkoutExercise");
+                name: "Set");
 
             migrationBuilder.DropTable(
                 name: "YoutubeVideoQueries");
@@ -406,6 +432,9 @@ namespace WorkoutGenerator.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUsers");
+
+            migrationBuilder.DropTable(
+                name: "WorkoutExercise");
 
             migrationBuilder.DropTable(
                 name: "MuscleExercises");
