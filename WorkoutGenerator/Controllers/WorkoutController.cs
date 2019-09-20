@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WorkoutGenerator.Data;
+using WorkoutGenerator.Extensions;
 using WorkoutGenerator.Models;
 
 namespace WorkoutGenerator.Controllers
@@ -23,22 +25,50 @@ namespace WorkoutGenerator.Controllers
         {
             var workout = _db.Workouts.Single(x => x.Id == id);
             var lastWorkoutHistory = workout.WorkoutHistories.Last();
-            (WorkoutHistory progressWorkoutHistory, int[] progressedExerciseIds) = ProgressWorkout(lastWorkoutHistory);
-            var vm = new WorkoutViewModel()
+            WorkoutHistory progressWorkoutHistory = ProgressWorkout(lastWorkoutHistory);
+            workout.WorkoutHistories.Add(progressWorkoutHistory);
+            
+            _db.SaveChanges();
+            return new JsonResult(new
             {
-                Name = workout.Name,
-                WorkoutHistoryViewModels = workout.WorkoutHistories.Select(x => new WorkoutHistoryViewModel()
-                {
-                    Id = x.Id,
-                    MuscleExerciseViewModels = x.MuscleExercises.Select(m => new MuscleExerciseViewModel(m)).ToList()
-                }).ToList()
-            };
-            return PartialView("Program/_WorkoutTitlePartial", );
+                partial = this.RenderViewAsync("Program/_WorkoutTitlePartial", new WorkoutViewModel(workout), true),
+                name = workout.Name
+            });
         }
 
-        private Tuple<WorkoutHistory, int[]> ProgressWorkout(WorkoutHistory workoutHistory)
+        private WorkoutHistory ProgressWorkout(WorkoutHistory wh)
         {
-            return null;
+            var workoutHistory = CloneWorkoutHistory(wh);
+            foreach (var me in workoutHistory.MuscleExercises)
+            {
+                foreach (var workoutExercise in me.Exercises)
+                {
+                    workoutExercise.Name = Guid.NewGuid().ToString();
+                }
+            }
+            return workoutHistory;
+        }
+
+        private WorkoutHistory CloneWorkoutHistory(WorkoutHistory wh)
+        {
+            var workoutHistory = new WorkoutHistory();
+            foreach (var m in wh.MuscleExercises)
+            {
+                var me = new MuscleExercises {MuscleType = m.MuscleType};
+                foreach (var e in m.Exercises)
+                {
+                    var ne = new WorkoutExercise {Name = e.Name};
+                    foreach (var s in e.Sets)
+                    {
+                        ne.Sets.Add(new Set(){NumberOfSets = s.NumberOfSets, Reps = s.Reps, Rest = s.Rest});
+                    }
+
+                    me.Exercises.Add(ne);
+                }
+                workoutHistory.MuscleExercises.Add(me);
+            }
+
+            return workoutHistory;
         }
     }
 }

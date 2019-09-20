@@ -28,82 +28,82 @@
 
             <div class="">
                 <div class="d-flex">
-                <p class="font-weight-bold">
-                    Program Type:
-                    <span class="color-second font-weight-bold ml-2">@Model.TemplateViewModel.TemplateType.Description()</span>
-                </p>
-            </div>
-            <label class="font-weight-bold">Instructions:</label>
-            <p>Workout should be done @Model.TemplateViewModel.DaysType.Description(). This program's difficulty is <span class="color-second font-weight-bold">@Model.TemplateViewModel.TrainerLevelType</span> </p>
-        </div>
-        @{
-
-            if (!SignInManager.IsSignedIn(User))
-            {
-                <div class="card p-3 text-white bg-main my-4 text-center">
-                    <p>
-                        Shall we save your workout?
+                    <p class="font-weight-bold">
+                        Program Type:
+                        <span class="color-second font-weight-bold ml-2">@Model.TemplateViewModel.TemplateType.Description()</span>
                     </p>
-                    <div>
-                        <button data-toggle="modal" data-target="#registerAndSaveModal" class="btn bg-white color-main d-inline-block">Sign up to save this workout</button>
-                    </div>
                 </div>
-                <div class="modal fade" tabindex="-1" role="dialog" id="registerAndSaveModal">
+                <label class="font-weight-bold">Instructions:</label>
+                <p>Workout should be done @Model.TemplateViewModel.DaysType.Description(). This program's difficulty is <span class="color-second font-weight-bold">@Model.TemplateViewModel.TrainerLevelType</span> </p>
+            </div>
+            @{
 
-                    <partial name="Register/_RegisterPartial" model="@new RegisterViewModel(){ReturnUrl = @Url.Action("SaveProgramToUser", "Program", new {created = @Model.Created}) }"/>
+                if (!SignInManager.IsSignedIn(User))
+                {
+                    <div class="card p-3 text-white bg-main my-4 text-center">
+                        <p>
+                            Shall we save your workout?
+                        </p>
+                        <div>
+                            <button data-toggle="modal" data-target="#registerAndSaveModal" class="btn bg-white color-main d-inline-block">Sign up to save this workout</button>
+                        </div>
+                    </div>
+                    <div class="modal fade" tabindex="-1" role="dialog" id="registerAndSaveModal">
 
-                </div>
-            }
-            else if (Model.ApplicationIdNull)
-            {
-                <form class="center-div"asp-controller="Program" asp-action="SaveProgramToUser" asp-route-created="@Model.Created">
-                    <div class="card p-3 my-3 d-inline-block text-center">
-                        <p>Like this program? Don't lose it by saving it to yourself.</p>
-                        <button type="submit" class="btn bg-main text-white">Save Workout</button>
+                        <partial name="Register/_RegisterPartial" model="@new RegisterViewModel(){ReturnUrl = @Url.Action("SaveProgramToUser", "Program", new {created = @Model.Created}) }"/>
 
                     </div>
-                </form>
+                }
+                else if (Model.ApplicationIdNull)
+                {
+                    <form class="center-div"asp-controller="Program" asp-action="SaveProgramToUser" asp-route-created="@Model.Created">
+                        <div class="card p-3 my-3 d-inline-block text-center">
+                            <p>Like this program? Don't lose it by saving it to yourself.</p>
+                            <button type="submit" class="btn bg-main text-white">Save Workout</button>
+
+                        </div>
+                    </form>
+                }
             }
-        }
-        <div class="workout-tabs my-3 center-div flex-column">
-            <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <div class="workout-tabs my-3 center-div flex-column">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
 
-                <li class="nav-item">
-                    <a class="nav-link color-second" id="tabAll" data-toggle="tab" href="#" role="tab" aria-controls="home" aria-selected="true">All</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link color-second" id="tabAll" data-toggle="tab" href="#" role="tab" aria-controls="home" aria-selected="true">All</a>
+                    </li>
 
-                @{
-                    if (Model.TemplateViewModel.Workouts.Count > 1)
-                    {
-                        @foreach (var item in Model.TemplateViewModel.Workouts)
+                    @{
+                        if (Model.TemplateViewModel.Workouts.Count > 1)
                         {
-                            <li class="nav-item ">
-                                <a class="nav-link color-second @(Model.TemplateViewModel.Workouts.First() == item ? "active" : "")" id="profile-tab" data-toggle="tab" href="#@item.Name" role="tab" aria-controls="profile" aria-selected="false">@item.Name</a>
-                            </li>
+                            @foreach (var item in Model.TemplateViewModel.Workouts)
+                            {
+                                <li class="nav-item ">
+                                    <a class="nav-link color-second @(Model.TemplateViewModel.Workouts.First() == item ? "active" : "")" id="profile-tab" data-toggle="tab" href="#@($"workout{item.Name}")" role="tab" aria-controls="profile" aria-selected="false">@item.Name</a>
+                                </li>
+                            }
                         }
                     }
-                }
 
-            </ul>
-            <div class="tab-content" id="myTabContent">
-                @foreach (var workoutViewModel in Model.TemplateViewModel.Workouts)
-                {
-                    <div class="tab-pane fade @(Model.TemplateViewModel.Workouts.First() == workoutViewModel ? "active show" : "")" role="tabpanel" id="@workoutViewModel.Name">
-                        <partial name="Program/_WorkoutTitlePartial" model="@workoutViewModel"/>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    @foreach (var workoutViewModel in Model.TemplateViewModel.Workouts)
+                    {
+                        <div class="tab-pane fade @(Model.TemplateViewModel.Workouts.First() == workoutViewModel ? "active show" : "")" role="tabpanel" id="@($"workout{@workoutViewModel.Name}")">
+                            <partial name="Program/_WorkoutTitlePartial" model="@workoutViewModel"/>
 
-                    </div>
-                }
+                        </div>
+                    }
+                </div>
             </div>
+
+
         </div>
 
+        <div class="d-flex justify-content-center col-12">
+            <button id="scrollToTopBtn" class="btn bg-main text-white my-5">Scroll To Top</button>
+        </div>
 
-    </div>
-
-    <div class="d-flex justify-content-center col-12">
-        <button id="scrollToTopBtn" class="btn bg-main text-white my-5">Scroll To Top</button>
-    </div>
-
-    @*<div class="d-flex justify-content-center mb-5 col-12 col-lg-6">
+        @*<div class="d-flex justify-content-center mb-5 col-12 col-lg-6">
             <div class="card">
                 <div class="p-3 text-center" style="background: #FFA500;">
                     <h5 class=" text-white">We need Your feedback. Help improve Program Designer</h5>
@@ -120,7 +120,7 @@
                 </div>
             </div>
         </div>*@
-</div>
+    </div>
 
 
 </div>
@@ -142,16 +142,18 @@
 @section Scripts{
     <script src="~/lib/modal-video/modal-video.js"></script>
     <script>
-        $(function () {
-            $('#tabAll').on('click',function(){
-                $('#tabAll').parent().addClass('active');  
-                $('.tab-pane').addClass('active show');  
-                $('[data-toggle="tab"]').parent().removeClass('active');
-            });
+        $(function() {
+            $('#tabAll').on('click',
+                function() {
+                    $('#tabAll').parent().addClass('active');
+                    $('.tab-pane').addClass('active show');
+                    $('[data-toggle="tab"]').parent().removeClass('active');
+                });
 
-            $(".nav-link").not("#tabAll").on("click", function() {
-                $(".tab-pane").not(this.hash).removeClass("active").removeClass("show");
-            });
+            $(".nav-link").not("#tabAll").on("click",
+                function() {
+                    $(".tab-pane").not(this.hash).removeClass("active").removeClass("show");
+                });
 
             $("#scrollToTopBtn").on('click',
                 function() {
@@ -169,7 +171,26 @@
                             $(theModal + ' iframe').attr('src', '');
                         });
                 });
-
+            $('#progressAjax').on('click',
+                function() {
+                    var url = $(this).data('url');
+                    $.ajax({
+                        url: url,
+                        type: 'POST',   
+                        headers: {
+                            RequestVerificationToken: 
+                                $('input:hidden[name="__RequestVerificationToken"]').val()
+                        },
+                        processData: true,
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            $('#workout'+data.name).html(data.partial.result);
+                        },
+                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                            alert('fuck');
+                        }
+                    });
+                });
         });
     </script>
 }

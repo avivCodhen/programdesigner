@@ -11,6 +11,7 @@ namespace WorkoutGenerator.Models
         public WorkoutViewModel(Workout workout)
         {
             Name = workout.Name;
+            Id = workout.Id;
             WorkoutHistoryViewModels = workout.WorkoutHistories.Select(x => new WorkoutHistoryViewModel()
             {
                 Id = x.Id,
@@ -23,7 +24,7 @@ namespace WorkoutGenerator.Models
             
         }
         public string Name { get; set; }
-
+        public int Id { get; set; }
         public List<WorkoutHistoryViewModel> WorkoutHistoryViewModels { get; set; }
     }
 }

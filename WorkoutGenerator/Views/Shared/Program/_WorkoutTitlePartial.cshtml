@@ -3,7 +3,11 @@
     <div class="card mt-3">
         <div class="card-header d-flex">
 
-            <p class="flex-grow-1 d-flex  mb-0 v-align">Workout @Model.Name</p> <a class="btn bg-second text-white" href="#">Progress</a>
+            <p class="flex-grow-1 d-flex  mb-0 v-align">Workout @Model.Name</p>
+            <a >
+                <i class="fas fa-arrow-alt-circle-right color-main center-div v-align fa-2x px-3"></i>
+            </a>
+            <button id="progressAjax" data-url="@Url.Action("ProgressPartialAjax","Workout", new{Model.Id})" class="btn bg-second text-white">Progress</button>
         </div>
 
         @foreach (var muscle in Model.WorkoutHistoryViewModels.Last().MuscleExerciseViewModels)

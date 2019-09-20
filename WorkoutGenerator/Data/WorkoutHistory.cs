@@ -9,8 +9,8 @@ namespace WorkoutGenerator.Data
     public class WorkoutHistory
     {
         [Key] public int Id { get; set; }
-
-        public virtual ICollection<MuscleExercises> MuscleExercises { get; set; }
+        public DateTime Created { get; set; } = DateTime.Now;
+        public virtual ICollection<MuscleExercises> MuscleExercises { get; set; } = new List<MuscleExercises>();
 
     }
 }
