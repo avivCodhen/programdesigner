@@ -10,14 +10,20 @@ namespace WorkoutGenerator.Models
     {
         public WorkoutViewModel(Workout workout)
         {
-            Id = workout.Id;
-            MuscleExerciseViewModels = workout.MuscleExercises.Select(x => new MuscleExerciseViewModel(x)).ToList();
             Name = workout.Name;
+            WorkoutHistoryViewModels = workout.WorkoutHistories.Select(x => new WorkoutHistoryViewModel()
+            {
+                Id = x.Id,
+                MuscleExerciseViewModels = x.MuscleExercises.Select(m => new MuscleExerciseViewModel(m)).ToList(),
+            }).ToList();
         }
 
-        public int Id { get; set; }
+        public WorkoutViewModel()
+        {
+            
+        }
         public string Name { get; set; }
-        
-        public  List<MuscleExerciseViewModel> MuscleExerciseViewModels { get; set; }
+
+        public List<WorkoutHistoryViewModel> WorkoutHistoryViewModels { get; set; }
     }
 }

@@ -91,7 +91,7 @@ namespace WorkoutGenerator.Controllers
             };
             foreach (WorkoutViewModel workoutViewModel in vm.TemplateViewModel.Workouts)
             {
-                foreach (MuscleExerciseViewModel muscleExerciseViewModel in workoutViewModel.MuscleExerciseViewModels)
+                foreach (MuscleExerciseViewModel muscleExerciseViewModel in workoutViewModel.WorkoutHistoryViewModels.Last().MuscleExerciseViewModels)
                 {
                     foreach (ExerciseViewModel exerciseViewModel in muscleExerciseViewModel.Exercises)
                     {
@@ -293,7 +293,7 @@ namespace WorkoutGenerator.Controllers
 
             foreach (Workout templateWorkout in template.Workouts)
             {
-                foreach (MuscleExercises templateWorkoutMuscleExercise in templateWorkout.MuscleExercises)
+                foreach (MuscleExercises templateWorkoutMuscleExercise in templateWorkout.WorkoutHistories.First().MuscleExercises)
                 {
                     var exercisesOfMuscle = _db.Exercises.Where(x =>
                         x.MuscleType == templateWorkoutMuscleExercise.MuscleType).ToList();

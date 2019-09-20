@@ -6,7 +6,7 @@
             <p class="flex-grow-1 d-flex  mb-0 v-align">Workout @Model.Name</p> <a class="btn bg-second text-white" href="#">Progress</a>
         </div>
 
-        @foreach (var muscle in Model.MuscleExerciseViewModels)
+        @foreach (var muscle in Model.WorkoutHistoryViewModels.Last().MuscleExerciseViewModels)
         {
             <partial name="Program/_MuscleTitlePartial" model="@muscle.MuscleType.ToString()" />
 
