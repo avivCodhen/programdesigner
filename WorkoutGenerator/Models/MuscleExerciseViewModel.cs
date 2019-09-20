@@ -8,16 +8,13 @@ namespace WorkoutGenerator.Models
 {
     public class MuscleExerciseViewModel
     {
-        public MuscleExerciseViewModel(MuscleExercises muscleExercises)
+        public MuscleExerciseViewModel()
         {
-            Id = muscleExercises.Id;
-            MuscleType = muscleExercises.MuscleType;
-            Exercises = muscleExercises.Exercises.Select(x => new ExerciseViewModel(x)).ToList();
         }
 
         public int Id { get; set; }
 
-        public  List<ExerciseViewModel> Exercises { get; set; }
+        public  LinkedList<WorkoutExerciseViewModel> Exercises { get; set; }
         public MuscleType MuscleType { get; set; }
     }
 }

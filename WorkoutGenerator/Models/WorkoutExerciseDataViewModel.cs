@@ -2,19 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using WorkoutGenerator.Data;
 
 namespace WorkoutGenerator.Models
 {
-    public class WorkoutViewModel
+    public class WorkoutExerciseDataViewModel
     {
-        public WorkoutViewModel()
-        {
-        }
-
+        public string YoutubeVideoId { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
-        
-        public  List<MuscleExerciseViewModel> MuscleExerciseViewModels { get; set; }
+        public List<SetViewModel> SetViewModels { get; set; } = new List<SetViewModel>();
+
     }
 }

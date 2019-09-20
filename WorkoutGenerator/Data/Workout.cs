@@ -13,6 +13,7 @@ namespace WorkoutGenerator.Data
         [ForeignKey("TemplateId")] public virtual Template Template { get; set; }
 
         public virtual ICollection<MuscleExercises> MuscleExercises { get; set; }
+        public int CurrentProgressIndex { get; set; }
 
         public Workout(string name)
         {

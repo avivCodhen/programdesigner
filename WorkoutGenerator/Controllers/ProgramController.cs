@@ -84,16 +84,42 @@ namespace WorkoutGenerator.Controllers
         {
             var vm = new ProgramViewModel
             {
-                TemplateViewModel = new TemplateViewModel(program.Template),
+                TemplateViewModel = new TemplateViewModel{
+                    Id = program.Id,
+                    DaysType = program.Template.DaysType,
+                    TemplateType = program.Template.TemplateType,
+                    TrainerLevelType = program.Template.TrainerLevelType,
+                    Workouts = program.Template.Workouts.Select(workout => new WorkoutViewModel{Id = workout.Id,
+                        Name = workout.Name, MuscleExerciseViewModels = workout.MuscleExercises.Select(muscleExercise => new MuscleExerciseViewModel
+                        {
+                            Id = muscleExercise.Id,
+                            MuscleType = muscleExercise.MuscleType,
+                            Exercises = muscleExercise.Exercises.Select(workoutExercise => new WorkoutExerciseViewModel
+                            {
+                                WorkoutExerciseDataViewModels = workoutExercise.WorkoutExerciseData.Select(workoutExerciseData => new WorkoutExerciseDataViewModel()
+                                {
+                                    Id = workoutExerciseData.Id,
+                                    Name = workoutExerciseData.Name,
+                                    YoutubeVideoId = _db.YoutubeVideoQueries.SingleOrDefault(x => x.Query == workoutExerciseData.Name)
+                                        ?.LinkId,
+                                    SetViewModels = workoutExerciseData.Sets.Select(x=> new SetViewModel(x)).ToList()
+
+                                }).ToList()
+                            }).ToList()
+                        }).ToList()
+                    }).ToList()
+                },
                 Id = program.Id,
                 Created = program.Created,
                 ApplicationIdNull = program.ApplicationUserId == null
             };
+/*
+
             foreach (WorkoutViewModel workoutViewModel in vm.TemplateViewModel.Workouts)
             {
                 foreach (MuscleExerciseViewModel muscleExerciseViewModel in workoutViewModel.MuscleExerciseViewModels)
                 {
-                    foreach (ExerciseViewModel exerciseViewModel in muscleExerciseViewModel.Exercises)
+                    foreach (WorkoutExerciseViewModel exerciseViewModel in muscleExerciseViewModel.Exercises)
                     {
                         var linkId = _db.YoutubeVideoQueries.SingleOrDefault(x => x.Query == exerciseViewModel.Name)
                             ?.LinkId;
@@ -101,6 +127,7 @@ namespace WorkoutGenerator.Controllers
                     }
                 }
             }
+*/
 
             return vm;
         }
@@ -381,16 +408,20 @@ namespace WorkoutGenerator.Controllers
                         var rExercise = new Random();
                         int num = rExercise.Next(exercisesToChoose.Count);
                         var exerciseChose = exercisesToChoose[num];
-                        workoutExercise.Name = exerciseChose.Name;
-
+                       
                         var sets = exerciseSetting.Sets[r.Next(exerciseSetting.Sets.Length)];
                         var reps = exerciseSetting.Reps[r.Next(exerciseSetting.Reps.Length)];
                         var rest = exerciseSetting.Rest[r.Next(exerciseSetting.Rest.Length)];
+                        workoutExercise.WorkoutExerciseData.Add(new WorkoutExerciseData()
+                        {
+                            Name = exerciseChose.Name
+                        });
+
                         for (int j = 0; j < sets; j++)
                         {
                             var set = new Set {NumberOfSets = j + 1, Reps = reps, Rest = rest};
 
-                            workoutExercise.Sets.Add(set);
+                            workoutExercise.WorkoutExerciseData.First().Sets.Add(set);
                         }
 
                         exercisesOfMuscle.Remove(exerciseChose);

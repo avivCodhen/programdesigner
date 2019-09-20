@@ -6,13 +6,8 @@ namespace WorkoutGenerator.Models
 {
     public class TemplateViewModel
     {
-        public TemplateViewModel(Template t)
+        public TemplateViewModel()
         {
-            Id = t.Id;
-            Workouts = t.Workouts.Select(x => new WorkoutViewModel(x)).ToList();
-            DaysType = t.DaysType;
-            TrainerLevelType = t.TrainerLevelType;
-            TemplateType = t.TemplateType;
         }
 
       public int Id { get; set; }

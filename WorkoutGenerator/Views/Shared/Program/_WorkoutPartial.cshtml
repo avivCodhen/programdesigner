@@ -3,7 +3,7 @@
     <div class="card mt-3">
         <div class="card-header d-flex">
 
-            <p class="flex-grow-1 d-flex  mb-0 v-align">Workout @Model.Name</p> <a class="btn bg-second text-white" href="#">Progress</a>
+            <p class="flex-grow-1 d-flex  mb-0 v-align">Workout @Model.Name</p> <a asp-controller="Progress" asp-action="WorkoutProgress" asp-route-workoutId="" class="btn bg-second text-white" href="#">Progress</a>
         </div>
 
         @foreach (var muscle in Model.MuscleExerciseViewModels)
