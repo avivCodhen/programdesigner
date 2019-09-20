@@ -387,3 +387,4 @@ Website/wwwroot/js/*.min.js
 #rider
 /.idea/config/applicationhost.config
 /.vs
+/WorkoutGenerator/bin
