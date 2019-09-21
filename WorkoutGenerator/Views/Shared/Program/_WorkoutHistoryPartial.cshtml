@@ -1,0 +1,14 @@
+﻿@model WorkoutHistoryViewModel
+
+
+
+@foreach (var muscle in Model.MuscleExerciseViewModels)
+{
+    <partial name="Program/_MuscleTitlePartial" model="@muscle.MuscleType.ToString()"/>
+
+    @foreach (var exercise in muscle.Exercises)
+    {
+        <hr class="m-0"/>
+        <partial name="Program/_ExercisePartial" model="@exercise"/>
+    }
+}

@@ -8,24 +8,18 @@
     .workout-tabs .nav-tabs .nav-link.active { border-color: #40E0D0 #40E0D0 #fff; }
 
     .workout-tabs .nav-tabs { border-bottom: 1px solid #40E0D0; }
-     
+
+    .disabled {
+        cursor: none;
+        pointer-events: none;
+        border: 1px solid gray;
+        color: gray;
+        opacity: 0.4 !important;
+    }
 </style>
-<div class="container my-5">
+<div class="container my-5" id="#vueApp">
     <div class="row d-flex justify-content-center">
         <div class="col-12 col-lg-6  d-flex flex-column">
-            @if (Model.FeedBack)
-            {
-                <div class="alert alert-success mb-4" role="alert">
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h4 class="alert-heading">Thank you so much!</h4>
-                    <p>We've got your feedback, and we're ready to roll.</p>
-                    <hr>
-                    <p class="mb-0">You can continue to offer us feedback of course, or use the feedback to contact us. :)</p>
-                </div>
-            }
-
             <div class="">
                 <div class="d-flex">
                     <p class="font-weight-bold">
@@ -56,7 +50,7 @@
                 }
                 else if (Model.ApplicationIdNull)
                 {
-                    <form class="center-div"asp-controller="Program" asp-action="SaveProgramToUser" asp-route-created="@Model.Created">
+                    <form class="center-div" asp-controller="Program" asp-action="SaveProgramToUser" asp-route-created="@Model.Created">
                         <div class="card p-3 my-3 d-inline-block text-center">
                             <p>Like this program? Don't lose it by saving it to yourself.</p>
                             <button type="submit" class="btn bg-main text-white">Save Workout</button>
@@ -69,7 +63,7 @@
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
 
                     <li class="nav-item">
-                        <a class="nav-link color-second" id="tabAll" data-toggle="tab" href="#" role="tab" aria-controls="home" aria-selected="true">All</a>
+                        <a style="cursor: pointer;" class="nav-link color-second" id="tabAll" data-toggle="tab" href="#" role="tab" aria-controls="home" aria-selected="true">All</a>
                     </li>
 
                     @{
@@ -78,7 +72,7 @@
                             @foreach (var item in Model.TemplateViewModel.Workouts)
                             {
                                 <li class="nav-item ">
-                                    <a class="nav-link color-second @(Model.TemplateViewModel.Workouts.First() == item ? "active" : "")" id="profile-tab" data-toggle="tab" href="#@($"workout{item.Name}")" role="tab" aria-controls="profile" aria-selected="false">@item.Name</a>
+                                    <a style="cursor: pointer" class="nav-link color-second @(Model.TemplateViewModel.Workouts.First() == item ? "active" : "")" id="profile-tab" data-toggle="tab" data-target="#@($"workout{item.Name}")" role="tab" aria-controls="profile" aria-selected="false">@item.Name</a>
                                 </li>
                             }
                         }
@@ -89,7 +83,21 @@
                     @foreach (var workoutViewModel in Model.TemplateViewModel.Workouts)
                     {
                         <div class="tab-pane fade @(Model.TemplateViewModel.Workouts.First() == workoutViewModel ? "active show" : "")" role="tabpanel" id="@($"workout{@workoutViewModel.Name}")">
-                            <partial name="Program/_WorkoutTitlePartial" model="@workoutViewModel"/>
+
+                            <div class="card mt-3">
+                                <div class="card-header d-flex">
+
+                                    <p class="flex-grow-1 d-flex  mb-0 v-align">Workout @workoutViewModel.Name</p>
+                                    <button  class="prevProgressAjax btn second-outline-btn mr-2">Prev</button>
+                                    <button  class=" nextProgressAjax btn second-outline-btn mr-2 disabled">Next</button>
+                                    <button data-url="@Url.Action("ProgressPartialAjax", "Workout", new {workoutViewModel.Id})" class="progressAjax btn bg-second text-white">Progress</button>
+                                </div>
+                                <div id="@($"workout_history{@workoutViewModel.Name}")">
+                                    <partial name="Program/_WorkoutHistoryPartial" model="@workoutViewModel.WorkoutHistoryViewModels.Last()"/>
+
+                                </div>
+
+                            </div>
 
                         </div>
                     }
@@ -102,24 +110,6 @@
         <div class="d-flex justify-content-center col-12">
             <button id="scrollToTopBtn" class="btn bg-main text-white my-5">Scroll To Top</button>
         </div>
-
-        @*<div class="d-flex justify-content-center mb-5 col-12 col-lg-6">
-            <div class="card">
-                <div class="p-3 text-center" style="background: #FFA500;">
-                    <h5 class=" text-white">We need Your feedback. Help improve Program Designer</h5>
-                    <p class="mb-0 text-white">Anything you wish to add, change or fix so you will have a better experience.</p>
-                </div>
-                <div class="p-3">
-                    <label>Your suggestions:</label>
-                    <form method="post" asp-action="Program">
-                        <textarea name="feedback" class="form-control"></textarea>
-                        <div class="d-flex justify-content-center">
-                            <button class="btn text-white mt-3" style="background: #FFA500;">Submit Feedback</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>*@
     </div>
 
 
@@ -130,8 +120,8 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             @*<button type="button" class="close btn-round btn-primary" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>*@
+                    <span aria-hidden="true">&times;</span>
+                </button>*@
             <div class="embed-responsive embed-responsive-16by9">
                 <iframe class="embed-responsive-item" src="" allowfullscreen></iframe>
             </div>
@@ -140,9 +130,19 @@
 </div>
 
 @section Scripts{
+
+    <script src="~/lib/vuejs/vue.js"></script>
     <script src="~/lib/modal-video/modal-video.js"></script>
     <script>
         $(function() {
+
+            var vue = new Vue({
+                el: '#vueApp',
+                data: {
+                },
+                methods: {
+                }
+            });
             $('#tabAll').on('click',
                 function() {
                     $('#tabAll').parent().addClass('active');
@@ -171,23 +171,64 @@
                             $(theModal + ' iframe').attr('src', '');
                         });
                 });
-            $('#progressAjax').on('click',
+            $('.progressAjax').on('click',
                 function() {
                     var url = $(this).data('url');
                     $.ajax({
                         url: url,
-                        type: 'POST',   
+                        type: 'POST',
                         headers: {
-                            RequestVerificationToken: 
-                                $('input:hidden[name="__RequestVerificationToken"]').val()
+                            RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
                         },
                         processData: true,
                         contentType: "application/json; charset=utf-8",
-                        success: function (data) {
-                            $('#workout'+data.name).html(data.partial.result);
-                        },
-                        error: function (XMLHttpRequest, textStatus, errorThrown) {
+                        success: function(data) {
+                            $('#workout_history' + data.name).html(data.partial.result);
+                        }.bind(this),
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
                             alert('fuck');
+                        }
+                    });
+                });
+
+            $('.prevProgressAjax').on('click',
+                function() {
+                    $.ajax({
+                        url: "@Url.Action("WorkoutHistoryAjax","Workout")",
+                        type: 'POST',
+                        data: {
+                            workoutHistoryId:$(this).data('currentPosition')
+                        },
+                        headers: {
+                            RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
+                        },
+                        processData: true,
+                        contentType: "application/json; charset=utf-8",
+                        success: function(data) {
+                            $('#workout_history' + data.name).html(data.partial.result);
+                        },
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
+                        }
+                    });
+                });
+
+            $('.nextProgressAjax').on('click',
+                function() {
+                    $.ajax({
+                        url: "@Url.Action("WorkoutHistoryAjax","Workout")",
+                        type: 'POST',
+                        data: {
+                            workoutHistoryId:$(this).data('currentPosition')
+                        },
+                        headers: {
+                            RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
+                        },
+                        processData: true,
+                        contentType: "application/json; charset=utf-8",
+                        success: function(data) {
+                            $('#workout_history' + data.name).html(data.partial.result);
+                        }.bind(this),
+                        error: function(XMLHttpRequest, textStatus, errorThrown) {
                         }
                     });
                 });

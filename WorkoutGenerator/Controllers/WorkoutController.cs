@@ -31,8 +31,19 @@ namespace WorkoutGenerator.Controllers
             _db.SaveChanges();
             return new JsonResult(new
             {
-                partial = this.RenderViewAsync("Program/_WorkoutTitlePartial", new WorkoutViewModel(workout), true),
-                name = workout.Name
+                partial = this.RenderViewAsync("Program/_WorkoutHistoryPartial", new WorkoutHistoryViewModel(progressWorkoutHistory), true),
+                name = workout.Name,
+                count = workout.WorkoutHistories.Count
+            });
+        }
+
+        public IActionResult WorkoutHistoryAjax(int workoutHistoryId)
+        {
+            WorkoutHistory workoutHistory = _db.WorkoutHistories.Single(x=>x.Id == workoutHistoryId);
+            return new JsonResult(new
+            {
+                partial = this.RenderViewAsync("Program/_WorkoutHistoryPartial", new WorkoutHistoryViewModel(workoutHistory), true),
+                name = workoutHistory.Workout.Name
             });
         }
 

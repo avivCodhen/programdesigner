@@ -388,3 +388,4 @@ Website/wwwroot/js/*.min.js
 /.idea/config/applicationhost.config
 /.vs
 /WorkoutGenerator/bin
+/WorkoutGenerator/obj
