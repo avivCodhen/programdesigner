@@ -27,11 +27,12 @@ namespace WorkoutGenerator.Controllers
             var lastWorkoutHistory = workout.WorkoutHistories.Last();
             WorkoutHistory progressWorkoutHistory = ProgressWorkout(lastWorkoutHistory);
             workout.WorkoutHistories.Add(progressWorkoutHistory);
-            
+
             _db.SaveChanges();
             return new JsonResult(new
             {
-                partial = this.RenderViewAsync("Program/_WorkoutHistoryPartial", new WorkoutHistoryViewModel(progressWorkoutHistory), true),
+                partial = this.RenderViewAsync("Program/_WorkoutHistoryPartial",
+                    new WorkoutHistoryViewModel(progressWorkoutHistory), true),
                 name = workout.Name,
                 count = workout.WorkoutHistories.Count
             });
@@ -39,24 +40,59 @@ namespace WorkoutGenerator.Controllers
 
         public IActionResult WorkoutHistoryAjax(int workoutHistoryId)
         {
-            WorkoutHistory workoutHistory = _db.WorkoutHistories.Single(x=>x.Id == workoutHistoryId);
+            WorkoutHistory workoutHistory = _db.WorkoutHistories.Single(x => x.Id == workoutHistoryId);
             return new JsonResult(new
             {
-                partial = this.RenderViewAsync("Program/_WorkoutHistoryPartial", new WorkoutHistoryViewModel(workoutHistory), true),
+                partial = this.RenderViewAsync("Program/_WorkoutHistoryPartial",
+                    new WorkoutHistoryViewModel(workoutHistory), true),
                 name = workoutHistory.Workout.Name
             });
         }
 
         private WorkoutHistory ProgressWorkout(WorkoutHistory wh)
         {
-            var workoutHistory = CloneWorkoutHistory(wh);
-            foreach (var me in workoutHistory.MuscleExercises)
+            var volume = new Dictionary<VolumeType, VolumeSettings>()
             {
-                foreach (var workoutExercise in me.Exercises)
                 {
-                    workoutExercise.Name = Guid.NewGuid().ToString();
-                }
+                    VolumeType.MetabolicStress, new VolumeSettings()
+                    {
+                        VolumeProgressTypes = new[]
+                        {
+                            VolumeProgressType.AddHighReps,
+                            VolumeProgressType.ChangeToHighReps,
+                            VolumeProgressType.ShortRest
+                        }
+                    }
+                },
+                {
+                    VolumeType.MechanicalTension, new VolumeSettings()
+                    {
+                        VolumeProgressTypes = new[]
+                        {
+                            VolumeProgressType.AddMidLowReps,
+                            VolumeProgressType.ChangeToLowReps
+                        }
+                    }
+                },
+            };
+            var workoutHistory = CloneWorkoutHistory(wh);
+            var exercises = workoutHistory.MuscleExercises.SelectMany(x => x.Exercises).ToList();
+            var mechanicalRepsCount = exercises.SelectMany(x => x.Sets).Select(x => x.Reps <= 10).Count();
+            var stressRepsCount = exercises.SelectMany(x => x.Sets).Select(x => x.Reps > 10).Count();
+
+            if (mechanicalRepsCount > stressRepsCount)
+            {
+                //should add stress
             }
+            else if (stressRepsCount > mechanicalRepsCount)
+            {
+                //should add mechanical
+            }
+            else
+            {
+                //random on which to add
+            }
+
             return workoutHistory;
         }
 
@@ -71,11 +107,12 @@ namespace WorkoutGenerator.Controllers
                     var ne = new WorkoutExercise {Name = e.Name};
                     foreach (var s in e.Sets)
                     {
-                        ne.Sets.Add(new Set(){NumberOfSets = s.NumberOfSets, Reps = s.Reps, Rest = s.Rest});
+                        ne.Sets.Add(new Set() {NumberOfSets = s.NumberOfSets, Reps = s.Reps, Rest = s.Rest});
                     }
 
                     me.Exercises.Add(ne);
                 }
+
                 workoutHistory.MuscleExercises.Add(me);
             }
 

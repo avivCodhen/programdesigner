@@ -211,7 +211,7 @@ namespace WorkoutGenerator.Controllers
                         AllowedTrainerLevel = new[] {TrainerLevelType.Advanced},
                         UtilityType = new UtilityType[]{UtilityType.Basic},
                         ExerciseTypes = new[] {Compound},
-                        Reps = new[] {"3", "4", "5"},
+                        Reps = new[] {3, 4, 5},
                         Sets = new[] {3, 4, 5},
                         Rest = new[] {1.5, 2, 2.5}
                     }
@@ -222,7 +222,7 @@ namespace WorkoutGenerator.Controllers
                         AllowedTrainerLevel = new[] {TrainerLevelType.Advanced, TrainerLevelType.Intermediate},
                         UtilityType = new UtilityType[]{UtilityType.Basic,UtilityType.AuxiliaryOrBasic},
                         ExerciseTypes = new[] {Compound},
-                        Reps = new[] {"6", "8"},
+                        Reps = new[] {6, 7, 8},
                         Sets = new[] {3, 4},
                         Rest = new[] {1, 1.5, 2}
                     }
@@ -233,7 +233,7 @@ namespace WorkoutGenerator.Controllers
                         AllowedTrainerLevel = new[] {TrainerLevelType.Advanced, TrainerLevelType.Intermediate},
                         UtilityType = new UtilityType[]{UtilityType.Basic,UtilityType.AuxiliaryOrBasic},
                         ExerciseTypes = new[] {Compound},
-                        Reps = new[] {"6", "8"},
+                        Reps = new[] {6, 7, 8},
                         Sets = new[] {3, 4},
                         Rest = new[] {1, 0.45, 1.5,}
                     }
@@ -246,7 +246,7 @@ namespace WorkoutGenerator.Controllers
                         AllowedTrainerLevel = new[] {TrainerLevelType.Advanced, TrainerLevelType.Intermediate},
                         UtilityType = new UtilityType[]{UtilityType.Basic, UtilityType.AuxiliaryOrBasic},
                         ExerciseTypes = new[] {Compound},
-                        Reps = new[] {"6", "8"},
+                        Reps = new[] {6, 7, 8},
                         Sets = new[] {3, 4},
                         Rest = new[] {1.5, 2}
                     }
@@ -258,7 +258,7 @@ namespace WorkoutGenerator.Controllers
                             {TrainerLevelType.Advanced, TrainerLevelType.Intermediate, TrainerLevelType.Novice},
                         UtilityType = new UtilityType[]{UtilityType.Basic, UtilityType.AuxiliaryOrBasic, UtilityType.Auxiliary},
                         ExerciseTypes = new[] {Compound, Isolate},
-                        Reps = new[] {"10", "12", "15"},
+                        Reps = new[] {10, 11, 12, 13, 14, 15},
                         Sets = new[] {3},
                         Rest = new[] {0.45, 1, 1.5}
                     }
@@ -270,7 +270,7 @@ namespace WorkoutGenerator.Controllers
                             {TrainerLevelType.Advanced, TrainerLevelType.Intermediate, TrainerLevelType.Novice},
                         ExerciseTypes = new[] {Compound, Isolate},
                         UtilityType = new UtilityType[]{UtilityType.Basic, UtilityType.AuxiliaryOrBasic, UtilityType.Auxiliary},
-                        Reps = new[] {"10", "12", "15"},
+                        Reps = new[] {10, 11, 12, 13, 14, 15},
                         Sets = new[] {3},
                         Rest = new[] {0.35, 1, 0.45}
                     }
@@ -283,7 +283,7 @@ namespace WorkoutGenerator.Controllers
                             {TrainerLevelType.Advanced, TrainerLevelType.Intermediate, TrainerLevelType.Novice},
                         ExerciseTypes = new[] {Compound, Isolate},
                         UtilityType = new UtilityType[]{UtilityType.Basic, UtilityType.AuxiliaryOrBasic, UtilityType.Auxiliary},
-                        Reps = new[] {"10", "12", "15"},
+                        Reps = new[] {10, 11, 12, 13, 14, 15},
                         Sets = new[] {3},
                         Rest = new[] {1, 1.5}
                     }
