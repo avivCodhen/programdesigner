@@ -4,19 +4,47 @@
 @model ProgramViewModel
 @inject SignInManager<ApplicationUser> SignInManager
 
-<style>
-    .workout-tabs .nav-tabs .nav-link.active { border-color: #40E0D0 #40E0D0 #fff; }
+@section Head
+{
+    <link href="~/lib/jquery-ui-1.12.1/jquery-ui.min.css" rel="stylesheet" />
+    <style>
+        ul.tabs{
+            margin: 15px 0px;
+            padding: 0px;
+            list-style: none;
+            border: 2px solid #8187ff;
+        }
+        ul.tabs li{
+            background: none;
+            color: #222;
+            display: inline-block;
+            padding: 10px 15px;
+            cursor: pointer;
+        }
 
-    .workout-tabs .nav-tabs { border-bottom: 1px solid #40E0D0; }
+        ul.tabs li.current{
+            background: #8187ff;
+            color: white;
+        }
 
-    .disabled {
-        cursor: none;
-        pointer-events: none;
-        border: 1px solid gray;
-        color: gray;
-        opacity: 0.4 !important;
-    }
-</style>
+        .tab-content{
+            display: none;
+        }
+
+        .tab-content.current{
+            display: inherit;
+        }
+
+        .disabled {
+            cursor: none;
+            pointer-events: none;
+            border: 1px solid gray;
+            color: gray;
+            opacity: 0.4 !important;
+        }
+    </style>
+}
+
 <div class="container my-5" id="#vueApp">
     <div class="row d-flex justify-content-center">
         <div class="col-12 col-lg-6  d-flex flex-column">
@@ -44,7 +72,7 @@
                     </div>
                     <div class="modal fade" tabindex="-1" role="dialog" id="registerAndSaveModal">
 
-                        <partial name="Register/_RegisterPartial" model="@new RegisterViewModel(){ReturnUrl = @Url.Action("SaveProgramToUser", "Program", new {created = @Model.Created}) }"/>
+                        <partial name="Register/_RegisterPartial" model="@new RegisterViewModel(){ReturnUrl = @Url.Action("SaveProgramToUser", "Program", new {created = @Model.Created}) }" />
 
                     </div>
                 }
@@ -59,11 +87,11 @@
                     </form>
                 }
             }
-            <div class="workout-tabs my-3 center-div flex-column">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <div class="center-div flex-column">
+                <ul class="tabs row no-gutters" role="tablist">
 
-                    <li class="nav-item">
-                        <a style="cursor: pointer;" class="nav-link color-second" id="tabAll" data-toggle="tab" href="#" role="tab" aria-controls="home" aria-selected="true">All</a>
+                    <li class="tab-link current col text-center" data-tab="tab-0">
+                       Show All
                     </li>
 
                     @{
@@ -71,29 +99,26 @@
                         {
                             @foreach (var item in Model.TemplateViewModel.Workouts)
                             {
-                                <li class="nav-item ">
-                                    <a style="cursor: pointer" class="nav-link color-second @(Model.TemplateViewModel.Workouts.First() == item ? "active" : "")" id="profile-tab" data-toggle="tab" data-target="#@($"workout{item.Name}")" role="tab" aria-controls="profile" aria-selected="false">@item.Name</a>
-                                </li>
+                                <li class="tab-link col text-center" data-tab="@($"workout{item.Name}")">
+                                    @item.Name
+                                    </li>
                             }
                         }
                     }
 
                 </ul>
-                <div class="tab-content" id="myTabContent">
                     @foreach (var workoutViewModel in Model.TemplateViewModel.Workouts)
                     {
-                        <div class="tab-pane fade @(Model.TemplateViewModel.Workouts.First() == workoutViewModel ? "active show" : "")" role="tabpanel" id="@($"workout{@workoutViewModel.Name}")">
+                        <div class="tab-content current" role="tabpanel" id="@($"workout{@workoutViewModel.Name}")">
 
-                            <div class="card mt-3">
-                                <div class="card-header d-flex">
+                            <div class="card mt-3 w-100">
+                                <div class="bg-main p-2 text-white d-flex">
 
                                     <p class="flex-grow-1 d-flex  mb-0 v-align">Workout @workoutViewModel.Name</p>
-                                    <button  class="prevProgressAjax btn second-outline-btn mr-2">Prev</button>
-                                    <button  class=" nextProgressAjax btn second-outline-btn mr-2 disabled">Next</button>
                                     <button data-url="@Url.Action("ProgressPartialAjax", "Workout", new {workoutViewModel.Id})" class="progressAjax btn bg-second text-white">Progress</button>
                                 </div>
                                 <div id="@($"workout_history{@workoutViewModel.Name}")">
-                                    <partial name="Program/_WorkoutHistoryPartial" model="@workoutViewModel.WorkoutHistoryViewModel"/>
+                                    <partial name="Program/_WorkoutHistoryPartial" model="@workoutViewModel.WorkoutHistoryViewModel" />
 
                                 </div>
 
@@ -101,7 +126,6 @@
 
                         </div>
                     }
-                </div>
             </div>
 
 
@@ -130,30 +154,26 @@
 </div>
 
 @section Scripts{
-
+    <script src="~/lib/jquery-ui-1.12.1/jquery-ui.min.js"></script>
     <script src="~/lib/vuejs/vue.js"></script>
     <script src="~/lib/modal-video/modal-video.js"></script>
     <script>
         $(function() {
 
-            var vue = new Vue({
-                el: '#vueApp',
-                data: {
-                },
-                methods: {
-                }
-            });
-            $('#tabAll').on('click',
-                function() {
-                    $('#tabAll').parent().addClass('active');
-                    $('.tab-pane').addClass('active show');
-                    $('[data-toggle="tab"]').parent().removeClass('active');
-                });
 
-            $(".nav-link").not("#tabAll").on("click",
-                function() {
-                    $(".tab-pane").not(this.hash).removeClass("active").removeClass("show");
-                });
+            $('ul.tabs li').click(function() {
+                var tab_id = $(this).attr('data-tab');
+                $('ul.tabs li').removeClass('current');
+                $('.tab-content').removeClass('current');
+
+                if (tab_id == 'tab-0') {
+                    $('.tab-content').addClass('current');
+                } else {
+                    $("#" + tab_id).addClass('current');
+                }
+                $(this).addClass('current');
+
+            });
 
             $("#scrollToTopBtn").on('click',
                 function() {
