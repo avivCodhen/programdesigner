@@ -60,7 +60,7 @@ namespace WorkoutGenerator.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SaveProgramToUser(DateTime created)
+        public async Task<IActionResult> SaveProgramToUser(string created)
         {
             var user = await _signInManager.UserManager.GetUserAsync(User);
             var program = HttpContext.Session.Get<FitnessProgram>($"{ProgramSessionPrefix}{created}");
