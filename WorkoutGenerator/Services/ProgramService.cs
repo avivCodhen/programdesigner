@@ -14,7 +14,7 @@ namespace WorkoutGenerator.Services
 {
     public class ProgramService
     {
-        public delegate bool ModifyExerciseDelegate(WorkoutExercise exercise, int reps, double rest);
+        public delegate bool ModifyExerciseDelegate(WorkoutExercise e, ExerciseSettings exerciseSettings);
 
         private readonly IServiceScopeFactory _serviceScopeFactory;
         public Dictionary<RepsType, ExerciseSettings> ExerciseData { get; set; }
@@ -202,6 +202,18 @@ namespace WorkoutGenerator.Services
             return exercisesToChoose[num];
         }
 
+        public int PickReps(ExerciseSettings exerciseSetting)
+        {
+            return exerciseSetting.Reps[new Random().Next(exerciseSetting.Reps.Length)];
+
+        }
+
+        public double PickRest(ExerciseSettings exerciseSetting)
+        {
+            return exerciseSetting.Rest[new Random().Next(exerciseSetting.Rest.Length)];
+
+        }
+
         /*
         public bool ModifyExerciseAddSet(WorkoutExercise e, int reps, double rest)
         {
@@ -220,9 +232,11 @@ namespace WorkoutGenerator.Services
         }
 
 */
-        public bool ModifyExerciseChangeSet(WorkoutExercise e, int reps, double rest)
+        public bool ModifyExerciseChangeSet(WorkoutExercise e, ExerciseSettings exerciseSettings)
         {
             Set set = null;
+            var reps = PickReps(exerciseSettings);
+            var rest = PickRest(exerciseSettings);
             if (reps > 10)
             {
                 if (e.Sets.All(x => x.Reps >= 10))
@@ -243,8 +257,9 @@ namespace WorkoutGenerator.Services
             return true;
         }
 
-        public bool ModifyExerciseChangeRest(WorkoutExercise e, int reps, double rest)
+        public bool ModifyExerciseChangeRest(WorkoutExercise e, ExerciseSettings exerciseSettings)
         {
+            var rest = PickRest(exerciseSettings);
             e.Sets.Select(x =>
             {
                 x.Rest = rest;
@@ -254,8 +269,10 @@ namespace WorkoutGenerator.Services
             return true;
         }
 
-        public bool ModifyExerciseChangeReps(WorkoutExercise e, int reps, double rest)
+        public bool ModifyExerciseChangeReps(WorkoutExercise e, ExerciseSettings exerciseSettings)
         {
+            var reps = PickReps(exerciseSettings);
+
             if (reps > 10)
             {
                 if (e.Sets.All(x => x.Reps >= reps))

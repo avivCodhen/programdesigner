@@ -148,6 +148,7 @@ namespace WorkoutGenerator.Controllers
                 };
 
                 selectedExercises = selectedExercises.OrderBy(x=> r.Next()).Take(numOfExercisesToProgress).ToDictionary(x=>x.Key,x=>x.Value);
+
                 foreach (var selectedExercise in selectedExercises)
                 {
                     var exerciseSettings = _programService.GetRelevantExerciseData(selectedExercise.Key,
@@ -157,14 +158,10 @@ namespace WorkoutGenerator.Controllers
                         .OrderBy(x => r.Next())
                         .Take(1).Select(x => x.Value).Single();
 
-                    var reps = exerciseSetting.Reps[r.Next(exerciseSetting.Reps.Length)];
-                    var rest = exerciseSetting.Rest[r.Next(exerciseSetting.Rest.Length)];
-
-                    
                     modifyFuncs = modifyFuncs.OrderBy(x => r.Next()).ToArray();
                     foreach (var modifyExerciseDelegate in modifyFuncs)
                     {
-                        if (modifyExerciseDelegate.Invoke(selectedExercise.Value, reps, rest)) break;
+                        if (modifyExerciseDelegate.Invoke(selectedExercise.Value, exerciseSetting)) break;
                     }
                 }
             }

@@ -221,7 +221,9 @@ namespace WorkoutGenerator.Controllers
                         Random r = new Random();
                         var exerciseSettings =
                             _programService.GetRelevantExerciseData(i, level, templateWorkoutMuscleExercise.MuscleType);
-                        var exerciseSetting = exerciseSettings[exerciseSettings.Select(x=>x.Key).ToArray()[r.Next(exerciseSettings.Count)]];
+                        var exerciseSetting =
+                            exerciseSettings[
+                                exerciseSettings.Select(x => x.Key).ToArray()[r.Next(exerciseSettings.Count)]];
 
                         var workoutExercise = templateWorkoutMuscleExercise.Exercises[i];
 
@@ -229,8 +231,8 @@ namespace WorkoutGenerator.Controllers
                         workoutExercise.Name = exerciseChose.Name;
 
                         var numOfSets = exerciseSetting.Sets[r.Next(exerciseSetting.Sets.Length)];
-                        var reps = exerciseSetting.Reps[r.Next(exerciseSetting.Reps.Length)];
-                        var rest = exerciseSetting.Rest[r.Next(exerciseSetting.Rest.Length)];
+                        var reps = _programService.PickReps(exerciseSetting);
+                        var rest = _programService.PickRest(exerciseSetting);
                         for (int j = 0; j < numOfSets; j++)
                         {
                             var set = new Set() {Reps = reps, Rest = rest};
