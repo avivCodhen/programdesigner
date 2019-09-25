@@ -81,7 +81,7 @@ namespace WorkoutGenerator
             });
             services.AddHostedService<YoutubeVideosService>();
             services.AddSingleton<IEmailSender, SendGridEmailSender>();
-
+            services.AddScoped<ProgramService>();
           
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }

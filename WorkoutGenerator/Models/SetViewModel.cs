@@ -7,7 +7,9 @@ namespace WorkoutGenerator.Models
 {
     public class SetViewModel
     {
-        public int NumberOfSets { get; set; }
+        public bool SetAdded { get; set; }
+        public bool RepsChanged { get; set; }
+        public bool RestChanged { get; set; }
         public int Reps { get; set; }
         public double Rest { get; set; }
     }

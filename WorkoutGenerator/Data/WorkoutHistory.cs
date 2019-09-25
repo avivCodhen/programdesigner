@@ -15,7 +15,7 @@ namespace WorkoutGenerator.Data
         [ForeignKey("WorkoutId")]
         public virtual Workout Workout { get; set; }
         public int WorkoutId { get; set; }
-        public virtual ICollection<MuscleExercises> MuscleExercises { get; set; } = new List<MuscleExercises>();
+        public virtual IList<MuscleExercises> MuscleExercises { get; set; } = new List<MuscleExercises>();
 
     }
 }

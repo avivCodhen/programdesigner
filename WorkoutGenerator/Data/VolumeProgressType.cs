@@ -7,6 +7,6 @@ namespace WorkoutGenerator.Data
 {
     public enum VolumeProgressType
     {
-        AddHighReps, AddMidLowReps, ChangeToHighReps, ChangeToLowReps, ShortRest,  
+        AddHighReps, AddMidLowReps, ChangeToHighReps, ChangeToLowReps, ChangeToHighRepsAcross, ChangeToLowRepsAcross, ShortRest,  
     }
 }

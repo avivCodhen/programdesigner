@@ -12,7 +12,7 @@ namespace WorkoutGenerator.Models
         {
             Name = workout.Name;
             Id = workout.Id;
-            WorkoutHistoryViewModels = workout.WorkoutHistories.Select(x => new WorkoutHistoryViewModel(x)).ToList();
+            WorkoutHistoryViewModel = new WorkoutHistoryViewModel(workout.WorkoutHistories.Last());
         }
 
         public WorkoutViewModel()
@@ -21,6 +21,6 @@ namespace WorkoutGenerator.Models
         }
         public string Name { get; set; }
         public int Id { get; set; }
-        public List<WorkoutHistoryViewModel> WorkoutHistoryViewModels { get; set; }
+        public WorkoutHistoryViewModel WorkoutHistoryViewModel { get; set; }
     }
 }

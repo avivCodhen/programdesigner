@@ -9,6 +9,8 @@ namespace WorkoutGenerator.Models
 {
     public class ExerciseViewModel
     {
+        public bool ChangedName { get; set; }
+        public bool AddedExercise { get; set; }
         public string YoutubeVideoId { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
@@ -20,7 +22,6 @@ namespace WorkoutGenerator.Models
             SetViewModels = exercise.Sets
                 .Select(x => new SetViewModel()
                 {
-                    NumberOfSets = x.NumberOfSets,
                     Rest = x.Rest,
                     Reps = x.Reps
                 }).ToList();

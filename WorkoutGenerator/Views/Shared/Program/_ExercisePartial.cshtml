@@ -3,32 +3,64 @@
 @model ExerciseViewModel
 
 @{
-    var sets = Model.SetViewModels.GroupBy(x => new {x.Reps, x.Rest}).Where(g => g.Any());
+    var sets = Model.SetViewModels.OrderBy(x => x.Reps).ToList();
+    var highlight = "background: red; color: white;border-radius: 5px;";
 }
+
+<style>
+    .table-bordered>thead>tr>th, .table-bordered>tbody>tr>th, .table-bordered>tfoot>tr>th, .table-bordered>thead>tr>td, .table-bordered>tbody>tr>td, .table-bordered>tfoot>tr>td {
+        padding: 5px;
+        text-align: center;
+        font-weight: 400;
+        font-size: 14px;
+    }
+    
+</style>
 <div class="p-3">
 
     <div>
         <a href="x" style="text-decoration: none;" class="color-main videoModalTriger" data-toggle="modal" data-target="#videoModal" data-videoModal="https://www.youtube.com/embed/@Model.YoutubeVideoId">
-            <p class="mb-1 " style="font-size: 16px; letter-spacing: 1px;">@Model.Name</p>
+            <p class="" style="font-size: 16px; letter-spacing: 1px;">@Model.Name</p>
         </a>
-        @foreach (var set in sets)
-        {
-            <div class="d-flex">
-                <p class="pr-3 mb-0">
-                    <span style="font-weight: 500;" class="">Sets: </span>@set.Count()
-                </p>
-                <p class="pr-3 mb-0">
-                    <span style="font-weight: 500;" class="">Reps: </span>@set.Key.Reps.ToFitnessRepsFormat()
-                </p>
-                <p class="mb-0">
-                    <span style="font-weight: 500;" class="">Rest: </span>@set.Key.Rest.ToFitnessTimeFormat()
-                </p>
-                <div class="ml-auto">
+        <div class="table-responsive">
 
-                </div>
-            </div>
-        }
+            <table class="table table-bordered sad">
+                <thead class="thead-light">
 
+                    <tr>
+                        <th></th>
+                        @for (var i = 0; i < sets.Count(); i++)
+                        {
+                            <th  style="@(sets[i].SetAdded ? highlight : "")">Set @(i + 1)</th>
+                        }
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th style="width: 10%;">Reps:</th>
+                        @foreach (var set in sets)
+                        {
+                            <td style="@(set.RepsChanged ? highlight : "")">@set.Reps.ToFitnessRepsFormat()</td>
+                        }
+
+                    </tr>
+                    <tr>
+                        <th  style="width: 10%;">Rest:</th>
+                        @foreach (var set in sets)
+                        {
+                            @if (set != sets.Last())
+                            {
+                                <td style="@(set.RestChanged ? highlight : "")">@set.Rest.ToFitnessTimeFormat()</td>
+
+                            }
+                        }
+                    </tr>
+                </tbody>
+
+            </table>
+
+        </div>
 
     </div>
 </div>

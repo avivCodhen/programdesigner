@@ -93,7 +93,7 @@
                                     <button data-url="@Url.Action("ProgressPartialAjax", "Workout", new {workoutViewModel.Id})" class="progressAjax btn bg-second text-white">Progress</button>
                                 </div>
                                 <div id="@($"workout_history{@workoutViewModel.Name}")">
-                                    <partial name="Program/_WorkoutHistoryPartial" model="@workoutViewModel.WorkoutHistoryViewModels.Last()"/>
+                                    <partial name="Program/_WorkoutHistoryPartial" model="@workoutViewModel.WorkoutHistoryViewModel"/>
 
                                 </div>
 

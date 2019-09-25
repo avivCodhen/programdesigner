@@ -9,6 +9,7 @@ using WorkoutGenerator.Data;
 using WorkoutGenerator.Extensions;
 using WorkoutGenerator.Factories;
 using WorkoutGenerator.Models;
+using WorkoutGenerator.Services;
 using static WorkoutGenerator.Data.ExerciseEquipmentType;
 using static WorkoutGenerator.Data.ExerciseType;
 
@@ -19,11 +20,14 @@ namespace WorkoutGenerator.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private ApplicationDbContext _db;
         public const string ProgramSessionPrefix = "program_";
+        private ProgramService _programService;
 
-        public ProgramController(SignInManager<ApplicationUser> signInManager, ApplicationDbContext db)
+        public ProgramController(SignInManager<ApplicationUser> signInManager, ApplicationDbContext db,
+            ProgramService programService)
         {
             _signInManager = signInManager;
             _db = db;
+            _programService = programService;
         }
 
 
@@ -91,7 +95,8 @@ namespace WorkoutGenerator.Controllers
             };
             foreach (WorkoutViewModel workoutViewModel in vm.TemplateViewModel.Workouts)
             {
-                foreach (MuscleExerciseViewModel muscleExerciseViewModel in workoutViewModel.WorkoutHistoryViewModels.Last().MuscleExerciseViewModels)
+                foreach (MuscleExerciseViewModel muscleExerciseViewModel in workoutViewModel.WorkoutHistoryViewModel
+                    .MuscleExerciseViewModels)
                 {
                     foreach (ExerciseViewModel exerciseViewModel in muscleExerciseViewModel.Exercises)
                     {
@@ -203,97 +208,10 @@ namespace WorkoutGenerator.Controllers
 
             template.DaysType = days;
             template.TrainerLevelType = level;
-            var exerciseSettings = new Dictionary<RepsType, ExerciseSettings>()
-            {
-                {
-                    RepsType.Low, new ExerciseSettings()
-                    {
-                        AllowedTrainerLevel = new[] {TrainerLevelType.Advanced},
-                        UtilityType = new UtilityType[]{UtilityType.Basic},
-                        ExerciseTypes = new[] {Compound},
-                        Reps = new[] {3, 4, 5},
-                        Sets = new[] {3, 4, 5},
-                        Rest = new[] {1.5, 2, 2.5}
-                    }
-                },
-                {
-                    RepsType.MedInter, new ExerciseSettings()
-                    {
-                        AllowedTrainerLevel = new[] {TrainerLevelType.Advanced, TrainerLevelType.Intermediate},
-                        UtilityType = new UtilityType[]{UtilityType.Basic,UtilityType.AuxiliaryOrBasic},
-                        ExerciseTypes = new[] {Compound},
-                        Reps = new[] {6, 7, 8},
-                        Sets = new[] {3, 4},
-                        Rest = new[] {1, 1.5, 2}
-                    }
-                },
-                {
-                    RepsType.MedAdvanced, new ExerciseSettings()
-                    {
-                        AllowedTrainerLevel = new[] {TrainerLevelType.Advanced, TrainerLevelType.Intermediate},
-                        UtilityType = new UtilityType[]{UtilityType.Basic,UtilityType.AuxiliaryOrBasic},
-                        ExerciseTypes = new[] {Compound},
-                        Reps = new[] {6, 7, 8},
-                        Sets = new[] {3, 4},
-                        Rest = new[] {1, 0.45, 1.5,}
-                    }
-                },
-
-                {
-                    RepsType.MedNovice, new ExerciseSettings()
-                    {
-                        ExcludeExercises = new[] {"Front", "Decline", "Incline"},
-                        AllowedTrainerLevel = new[] {TrainerLevelType.Advanced, TrainerLevelType.Intermediate},
-                        UtilityType = new UtilityType[]{UtilityType.Basic, UtilityType.AuxiliaryOrBasic},
-                        ExerciseTypes = new[] {Compound},
-                        Reps = new[] {6, 7, 8},
-                        Sets = new[] {3, 4},
-                        Rest = new[] {1.5, 2}
-                    }
-                },
-                {
-                    RepsType.HighInter, new ExerciseSettings()
-                    {
-                        AllowedTrainerLevel = new[]
-                            {TrainerLevelType.Advanced, TrainerLevelType.Intermediate, TrainerLevelType.Novice},
-                        UtilityType = new UtilityType[]{UtilityType.Basic, UtilityType.AuxiliaryOrBasic, UtilityType.Auxiliary},
-                        ExerciseTypes = new[] {Compound, Isolate},
-                        Reps = new[] {10, 11, 12, 13, 14, 15},
-                        Sets = new[] {3},
-                        Rest = new[] {0.45, 1, 1.5}
-                    }
-                },
-                {
-                    RepsType.HighAdvanced, new ExerciseSettings()
-                    {
-                        AllowedTrainerLevel = new[]
-                            {TrainerLevelType.Advanced, TrainerLevelType.Intermediate, TrainerLevelType.Novice},
-                        ExerciseTypes = new[] {Compound, Isolate},
-                        UtilityType = new UtilityType[]{UtilityType.Basic, UtilityType.AuxiliaryOrBasic, UtilityType.Auxiliary},
-                        Reps = new[] {10, 11, 12, 13, 14, 15},
-                        Sets = new[] {3},
-                        Rest = new[] {0.35, 1, 0.45}
-                    }
-                },
-                {
-                    RepsType.HighNovice, new ExerciseSettings()
-                    {
-                        ExcludeExercises = new[] {"Front", "Decline"},
-                        AllowedTrainerLevel = new[]
-                            {TrainerLevelType.Advanced, TrainerLevelType.Intermediate, TrainerLevelType.Novice},
-                        ExerciseTypes = new[] {Compound, Isolate},
-                        UtilityType = new UtilityType[]{UtilityType.Basic, UtilityType.AuxiliaryOrBasic, UtilityType.Auxiliary},
-                        Reps = new[] {10, 11, 12, 13, 14, 15},
-                        Sets = new[] {3},
-                        Rest = new[] {1, 1.5}
-                    }
-                }
-            };
-
-
             foreach (Workout templateWorkout in template.Workouts)
             {
-                foreach (MuscleExercises templateWorkoutMuscleExercise in templateWorkout.WorkoutHistories.First().MuscleExercises)
+                foreach (MuscleExercises templateWorkoutMuscleExercise in templateWorkout.WorkoutHistories.First()
+                    .MuscleExercises)
                 {
                     var exercisesOfMuscle = _db.Exercises.Where(x =>
                         x.MuscleType == templateWorkoutMuscleExercise.MuscleType).ToList();
@@ -301,95 +219,21 @@ namespace WorkoutGenerator.Controllers
                     for (int i = 0; i < templateWorkoutMuscleExercise.Exercises.Count; i++)
                     {
                         Random r = new Random();
+                        var exerciseSettings =
+                            _programService.GetRelevantExerciseData(i, level, templateWorkoutMuscleExercise.MuscleType);
+                        var exerciseSetting = exerciseSettings[exerciseSettings.Select(x=>x.Key).ToArray()[r.Next(exerciseSettings.Count)]];
+
                         var workoutExercise = templateWorkoutMuscleExercise.Exercises[i];
-                        ExerciseSettings exerciseSetting;
-                        RepsType[] repTypes;
-                        if (i == 0)
-                        {
-                            switch (level)
-                            {
-                                case TrainerLevelType.Novice:
-                                    repTypes = new[] {RepsType.HighNovice, RepsType.MedNovice};
-                                    break;
-                                case TrainerLevelType.Intermediate:
-                                    if (!templateWorkoutMuscleExercise.MuscleType.IsSmallExercise())
-                                    {
-                                        repTypes = new[] {RepsType.MedInter, RepsType.HighInter, RepsType.Low};
-                                    }
-                                    else
-                                    {
-                                        repTypes = new[] {RepsType.MedInter, RepsType.HighInter};
-                                    }
 
-                                    break;
-                                case TrainerLevelType.Advanced:
-                                    repTypes = new[] {RepsType.MedAdvanced, RepsType.Low};
-                                    if (!templateWorkoutMuscleExercise.MuscleType.IsSmallExercise())
-                                    {
-                                        repTypes = new[] {RepsType.MedAdvanced, RepsType.Low};
-                                    }
-                                    else
-                                    {
-                                        repTypes = new[] {RepsType.MedAdvanced, RepsType.HighAdvanced};
-                                    }
-
-                                    break;
-                                default:
-                                    throw new ArgumentOutOfRangeException();
-                            }
-
-                            exerciseSetting = ExerciseSettings(exerciseSettings, repTypes);
-                        }
-
-                        else
-                        {
-                            switch (level)
-                            {
-                                case TrainerLevelType.Novice:
-                                    repTypes = new[] {RepsType.HighNovice, RepsType.MedNovice};
-                                    break;
-                                case TrainerLevelType.Intermediate:
-                                    repTypes = new[] {RepsType.MedInter, RepsType.HighInter};
-                                    break;
-                                case TrainerLevelType.Advanced:
-                                    repTypes = new[] {RepsType.MedAdvanced, RepsType.HighAdvanced};
-                                    break;
-                                default:
-                                    throw new ArgumentOutOfRangeException();
-                            }
-
-                            exerciseSetting = ExerciseSettings(exerciseSettings, repTypes);
-                        }
-
-                        var exercisesToChoose = exercisesOfMuscle.Where(x =>
-                            exerciseSetting.UtilityType.Any(u => u == x.Utility)
-                            &&
-                            exerciseSetting.ExerciseTypes.Any(m => m == x.ExerciseType)
-                        ).ToList();
-
-                        if (exerciseSetting.ExcludeExercises != null)
-                        {
-                            exercisesToChoose = exercisesToChoose
-                                .Where(x => !x.Name.ContainsAny(exerciseSetting.ExcludeExercises)).ToList();
-                        }
-
-                        if (i == 0)
-                        {
-                            exercisesToChoose = exercisesToChoose.Where(x => x.Utility == UtilityType.Basic).ToList();
-                        }
-
-                        var rExercise = new Random();
-                        int num = rExercise.Next(exercisesToChoose.Count);
-                        var exerciseChose = exercisesToChoose[num];
+                        var exerciseChose = _programService.PickExercise(i, exerciseSetting, exercisesOfMuscle);
                         workoutExercise.Name = exerciseChose.Name;
 
-                        var sets = exerciseSetting.Sets[r.Next(exerciseSetting.Sets.Length)];
+                        var numOfSets = exerciseSetting.Sets[r.Next(exerciseSetting.Sets.Length)];
                         var reps = exerciseSetting.Reps[r.Next(exerciseSetting.Reps.Length)];
                         var rest = exerciseSetting.Rest[r.Next(exerciseSetting.Rest.Length)];
-                        for (int j = 0; j < sets; j++)
+                        for (int j = 0; j < numOfSets; j++)
                         {
-                            var set = new Set {NumberOfSets = j + 1, Reps = reps, Rest = rest};
-
+                            var set = new Set() {Reps = reps, Rest = rest};
                             workoutExercise.Sets.Add(set);
                         }
 
@@ -399,19 +243,6 @@ namespace WorkoutGenerator.Controllers
             }
 
             return template;
-        }
-
-        private static ExerciseSettings ExerciseSettings(Dictionary<RepsType, ExerciseSettings> exerciseSettings,
-            RepsType[] repTypes)
-        {
-            Random r;
-            ExerciseSettings exerciseSetting;
-            var relevantExerciseSettings = exerciseSettings
-                .Where(x => repTypes.Any(rep => x.Key == rep))
-                .ToDictionary(x => x.Key, y => y.Value);
-            r = new Random();
-            exerciseSetting = relevantExerciseSettings[repTypes[r.Next(relevantExerciseSettings.Count)]];
-            return exerciseSetting;
         }
     }
 }
