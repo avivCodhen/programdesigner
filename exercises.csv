@@ -4,31 +4,31 @@ Id;Name;MuscleType;ExerciseType;Utility
 2;Barbell Decline Bench Press;0;0;1
 3;Dumbell Decline Bench Press;0;0;1
 4;Pushups;0;0;1
-5;Dips;0;0;0
+5;Dips;0;0;1
 6;Dumbbell Flat Bench Press;0;0;0
 7;Dumbbell Incline Bench Press;0;0;1
 8;Dumbbell Flat Flies;0;1;2
 9;Dumbbell Incline Flies;0;1;2
 10;Dumbbell Decline Flies;0;1;2
 11;Cable Standing Flies;0;1;2
-12;Machine Bench Press;0;0;0
+12;Machine Bench Press;0;0;2
 13;Machine Incline Bench Press;0;0;1
 14;Machine Decline Bench Press;0;0;1
 15;Machine Flies;0;1;2
-16;Smith Machine Bench Press;0;0;1
+16;Smith Machine Bench Press;0;0;2
 17;Barbell Deadlift;1;0;0
-18;Barbell Bent Over Row;1;0;0
+18;Barbell Bent Over Row;1;0;1
 19;Barbell Rack Pulse;1;0;1
 20;Dumbell Chainsaw Row;1;0;0
 21;Pullups;1;0;0
 22;Chinups;1;0;0
 23;Dumbell Pullover;1;1;2
 24;Cable Sitted Row;1;0;0
-25;Cable Wide-Grip Seated Row;1;0;0
+25;Cable Wide-Grip Seated Row;1;0;1
 26;Cable Pulldown;1;1;0
-27;Cable Close-Grip Pulldown;1;1;0
+27;Cable Close-Grip Pulldown;1;1;1
 28;Cable Pullover;1;1;2
-29;Machine Row;1;0;0
+29;Machine Row;1;0;2
 30;Machine Pullover;1;1;2
 31;Barbell Standing Overhead Press;2;0;0
 32;Barbell Sited Overhead Press;2;0;0
@@ -41,9 +41,9 @@ Id;Name;MuscleType;ExerciseType;Utility
 39;Dumbbell Rear Delt Row;2;1;1
 40;Dumbbell Rear Delt Lateral Raise;2;1;2
 41;Cable Lateral Raise;2;1;1
-42;Cable Upright Row;2;0;0
+42;Cable Upright Row;2;0;2
 43;Cable Rear Delt Lateral Raise;2;1;2
-44;Smith Machine Sited Overhead Press;2;0;0
+44;Smith Machine Sited Overhead Press;2;0;2
 45;Machine Shoulder Press;2;0;0
 46;Machine Front Raise;2;1;2
 47;Machine Lateral Raise;2;1;2
@@ -59,7 +59,7 @@ Id;Name;MuscleType;ExerciseType;Utility
 57;Machine Knee Extension;3;1;2
 58;Machine Knee Flexion;3;1;2
 59;Machine Hack Squat;3;0;1
-60;Smith Machine Squat;3;0;0
+60;Smith Machine Squat;3;0;2
 61;Smith Machine Front Squat;3;0;2
 62;Smith Machine Lunge;3;0;2
 63;Smith Machine Calves;3;1;2
