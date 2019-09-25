@@ -9,7 +9,6 @@ namespace WorkoutGenerator.Models
     {
         public int Id { get; set; }
         public TemplateViewModel TemplateViewModel { get; set; }
-        public bool FeedBack { get; set; }
         public DateTime Created { get; set; }
         public bool ApplicationIdNull { get; set; }
 

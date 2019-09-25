@@ -19,7 +19,8 @@ namespace WorkoutGenerator.Data
         public DbSet<FitnessProgram> Programs { get; set; }
         public DbSet<YoutubeVideoQuery> YoutubeVideoQueries { get; set; }
         public DbSet<FeedBack> FeedBacks { get; set; }
-
+        public DbSet<Workout> Workouts { get; set; }
+        public DbSet<WorkoutHistory> WorkoutHistories { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<FitnessProgram>()

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WorkoutGenerator.Data;
 
 namespace WorkoutGenerator.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190920142751_WorkoutChanges")]
+    partial class WorkoutChanges
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,7 +248,11 @@ namespace WorkoutGenerator.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("Reps");
+                    b.Property<DateTime>("Created");
+
+                    b.Property<int>("NumberOfSets");
+
+                    b.Property<string>("Reps");
 
                     b.Property<double>("Rest");
 
@@ -282,7 +288,7 @@ namespace WorkoutGenerator.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<int>("TemplateId");
+                    b.Property<int?>("TemplateId");
 
                     b.HasKey("Id");
 
@@ -316,13 +322,13 @@ namespace WorkoutGenerator.Migrations
 
                     b.Property<DateTime>("Created");
 
-                    b.Property<int>("WorkoutId");
+                    b.Property<int?>("WorkoutId");
 
                     b.HasKey("Id");
 
                     b.HasIndex("WorkoutId");
 
-                    b.ToTable("WorkoutHistories");
+                    b.ToTable("WorkoutHistory");
                 });
 
             modelBuilder.Entity("WorkoutGenerator.Data.YoutubeVideoQuery", b =>
@@ -416,10 +422,9 @@ namespace WorkoutGenerator.Migrations
 
             modelBuilder.Entity("WorkoutGenerator.Data.Workout", b =>
                 {
-                    b.HasOne("WorkoutGenerator.Data.Template", "Template")
+                    b.HasOne("WorkoutGenerator.Data.Template")
                         .WithMany("Workouts")
-                        .HasForeignKey("TemplateId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("TemplateId");
                 });
 
             modelBuilder.Entity("WorkoutGenerator.Data.WorkoutExercise", b =>
@@ -431,10 +436,9 @@ namespace WorkoutGenerator.Migrations
 
             modelBuilder.Entity("WorkoutGenerator.Data.WorkoutHistory", b =>
                 {
-                    b.HasOne("WorkoutGenerator.Data.Workout", "Workout")
+                    b.HasOne("WorkoutGenerator.Data.Workout")
                         .WithMany("WorkoutHistories")
-                        .HasForeignKey("WorkoutId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("WorkoutId");
                 });
 #pragma warning restore 612, 618
         }

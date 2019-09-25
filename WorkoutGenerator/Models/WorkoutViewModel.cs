@@ -10,14 +10,17 @@ namespace WorkoutGenerator.Models
     {
         public WorkoutViewModel(Workout workout)
         {
-            Id = workout.Id;
-            MuscleExerciseViewModels = workout.MuscleExercises.Select(x => new MuscleExerciseViewModel(x)).ToList();
             Name = workout.Name;
+            Id = workout.Id;
+            WorkoutHistoryViewModel = new WorkoutHistoryViewModel(workout.WorkoutHistories.Last());
         }
 
-        public int Id { get; set; }
+        public WorkoutViewModel()
+        {
+            
+        }
         public string Name { get; set; }
-        
-        public  List<MuscleExerciseViewModel> MuscleExerciseViewModels { get; set; }
+        public int Id { get; set; }
+        public WorkoutHistoryViewModel WorkoutHistoryViewModel { get; set; }
     }
 }

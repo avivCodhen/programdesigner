@@ -8,7 +8,7 @@ namespace WorkoutGenerator.Models
 {
     public class ExerciseSettings
     {
-        public string[] Reps { get; set; }
+        public int[] Reps { get; set; }
         public int[] Sets { get; set; }
         public double[] Rest { get; set; }
         public ExerciseType[] ExerciseTypes { get; set; }

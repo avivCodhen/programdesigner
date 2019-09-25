@@ -11,7 +11,7 @@ namespace WorkoutGenerator.Extensions
         public static string ToFitnessTimeFormat(this double d)
         {
             var minutes = (int) d != 0;
-            return $"{ (minutes ? d.ToString(CultureInfo.InvariantCulture) :  d.ToString(CultureInfo.InvariantCulture).Remove(0,2))} { ( minutes ? "minutes" : "seconds")}";
+            return $"{ (minutes ? d.ToString(CultureInfo.InvariantCulture) :  d.ToString(CultureInfo.InvariantCulture).Remove(0,2))} { ( minutes ? "min" : "sec")}";
         }
     }
 }

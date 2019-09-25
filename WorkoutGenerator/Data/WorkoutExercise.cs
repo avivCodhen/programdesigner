@@ -13,7 +13,7 @@ namespace WorkoutGenerator.Data
         public int Id { get; set; }
         public DateTime Created { get; set; }
         public string Name { get; set; }
-        public virtual ICollection<Set> Sets { get; set; } = new List<Set>();
+        public virtual IList<Set> Sets { get; set; } = new List<Set>();
 
     }
 }

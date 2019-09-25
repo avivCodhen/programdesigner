@@ -5,7 +5,14 @@ h1, h2, h3 {
     letter-spacing: 1px;
     font-weight: 300;
 }
-
+.btn:focus, .btn:active:focus, .btn.active:focus {
+    outline: none;
+    box-shadow: none;
+}
+.second-outline-btn {
+    border: 1px solid #40e0d0;
+    color: #40e0d0;
+}
 a.navbar-brand {
     white-space: normal;
     text-align: center;
