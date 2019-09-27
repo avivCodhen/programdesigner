@@ -18,6 +18,7 @@ namespace WorkoutGenerator.Models
 
         public ExerciseViewModel(WorkoutExercise exercise)
         {
+            Id = exercise.Id;
             Name = exercise.Name;
             SetViewModels = exercise.Sets
                 .Select(x => new SetViewModel()

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using WorkoutGenerator.Data;
 using WorkoutGenerator.Extensions;
 using WorkoutGenerator.Factories;
@@ -20,7 +21,7 @@ namespace WorkoutGenerator.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private ApplicationDbContext _db;
         public const string ProgramSessionPrefix = "program_";
-        private ProgramService _programService;
+        private readonly ProgramService _programService;
 
         public ProgramController(SignInManager<ApplicationUser> signInManager, ApplicationDbContext db,
             ProgramService programService)
@@ -93,11 +94,14 @@ namespace WorkoutGenerator.Controllers
                 Created = program.Created,
                 ApplicationIdNull = program.ApplicationUserId == null
             };
+            var exerciseList = _db.Exercises.ToList();
             foreach (WorkoutViewModel workoutViewModel in vm.TemplateViewModel.Workouts)
             {
                 foreach (MuscleExerciseViewModel muscleExerciseViewModel in workoutViewModel.WorkoutHistoryViewModel
                     .MuscleExerciseViewModels)
                 {
+                    muscleExerciseViewModel.ExerciseList = exerciseList
+                        .Where(x => x.MuscleType == muscleExerciseViewModel.MuscleType).ToList();
                     foreach (ExerciseViewModel exerciseViewModel in muscleExerciseViewModel.Exercises)
                     {
                         var linkId = _db.YoutubeVideoQueries.SingleOrDefault(x => x.Query == exerciseViewModel.Name)
@@ -219,11 +223,10 @@ namespace WorkoutGenerator.Controllers
                     for (int i = 0; i < templateWorkoutMuscleExercise.Exercises.Count; i++)
                     {
                         Random r = new Random();
-                        var exerciseSettings =
-                            _programService.GetRelevantExerciseData(i, level, templateWorkoutMuscleExercise.MuscleType);
                         var exerciseSetting =
-                            exerciseSettings[
-                                exerciseSettings.Select(x => x.Key).ToArray()[r.Next(exerciseSettings.Count)]];
+                            _programService.PickExerciseSetting(
+                                _programService.GetRelevantExerciseData(i, level,
+                                    templateWorkoutMuscleExercise.MuscleType));
 
                         var workoutExercise = templateWorkoutMuscleExercise.Exercises[i];
 

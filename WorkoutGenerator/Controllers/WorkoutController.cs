@@ -14,7 +14,7 @@ namespace WorkoutGenerator.Controllers
     public class WorkoutController : Controller
     {
         private readonly ApplicationDbContext _db;
-        private ProgramService _programService;
+        private readonly ProgramService _programService;
 
         public WorkoutController(ApplicationDbContext db, ProgramService programService)
         {
@@ -104,9 +104,12 @@ namespace WorkoutGenerator.Controllers
             foreach (var workoutHistoryMuscleExercise in workoutHistory.MuscleExercises)
             {
                 var exercises = workoutHistoryMuscleExercise.Exercises;
+
                 var mechanicalRepsCount = exercises.SelectMany(x => x.Sets).Count(x => x.Reps < 10);
                 var stressRepsCount = exercises.SelectMany(x => x.Sets).Count(x => x.Reps >= 10);
+
                 int numOfExercisesToProgress = (int) Math.Ceiling((decimal) exercises.Count / 2);
+
                 Dictionary<int, WorkoutExercise> selectedExercises;
                 VolumeType vt;
                 RepsType[] neededReps;

@@ -1,4 +1,5 @@
-﻿@model WorkoutHistoryViewModel
+﻿@using WorkoutGenerator.Extensions
+@model WorkoutHistoryViewModel
 
 
 
@@ -6,9 +7,93 @@
 {
     <partial name="Program/_MuscleTitlePartial" model="@muscle.MuscleType.ToString()"/>
 
-    @foreach (var exercise in muscle.Exercises)
+    foreach (var exercise in muscle.Exercises)
     {
         <hr class="m-0"/>
-        <partial name="Program/_ExercisePartial" model="@exercise"/>
+
+            var sets = exercise.SetViewModels.OrderBy(x => x.Reps).ToList();
+            var highlight = "background: red; color: white;border-radius: 5px;";
+
+        <style>
+            .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+                padding: 5px;
+                text-align: center;
+                font-weight: 400;
+                font-size: 14px;
+            }
+        </style>
+        <div class="p-3">
+
+            <div>
+                <div class="d-flex">
+                    <a id="@($"exercise{exercise.Id}")" href="x" style="text-decoration: none; font-size: 16px; letter-spacing: 1px;" class="flex-grow-1 color-main videoModalTriger" data-toggle="modal" data-target="#videoModal" data-videoModal="https://www.youtube.com/embed/@exercise.YoutubeVideoId">
+                        @exercise.Name
+                    </a>
+                    <div class="dropdown">
+                        <a href="#" class="pl-3" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-ellipsis-v text-secondary"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a data-toggle="modal" data-target="#@($"exercise{exercise.Id}modal")" class="dropdown-item" href="#">Change exercise</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal fade" id="@($"exercise{exercise.Id}modal")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content p-5 select-exercise-modal">
+                            <div class="d-inline-block">
+                                <p>Choose an exercise:</p>
+                                <select class="custom-select" asp-items="@(new SelectList(muscle.ExerciseList, "Name", "Name",exercise.Name))">
+                                </select>
+                            </div>
+                            <div class="center-div mt-3">
+                                <button data-dismiss="modal" data-exerciseId="@exercise.Id" type="button" class="btn bg-main text-white">Change</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="table-responsive mt-3">
+
+                    <table class="table table-bordered sad">
+                        <thead class="thead-light">
+
+                        <tr>
+                            <th></th>
+                            @for (var i = 0; i < sets.Count(); i++)
+                            {
+                                <th style="@(sets[i].SetAdded ? highlight : "")">Set @(i + 1)</th>
+                            }
+
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <th style="width: 10%;">Reps:</th>
+                            @foreach (var set in sets)
+                            {
+                                <td style="@(set.RepsChanged ? highlight : "")">@set.Reps.ToFitnessRepsFormat()</td>
+                            }
+
+                        </tr>
+                        <tr>
+                            <th style="width: 10%;">Rest:</th>
+                            @foreach (var set in sets)
+                            {
+                                @if (set != sets.Last())
+                                {
+                                    <td style="@(set.RestChanged ? highlight : "")">@set.Rest.ToFitnessTimeFormat()</td>
+                                }
+                            }
+                        </tr>
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+        </div>
     }
 }

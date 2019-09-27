@@ -211,42 +211,25 @@
                     });
                 });
 
-            $('.prevProgressAjax').on('click',
+            $('.select-exercise-modal ').on('click','button',
                 function() {
+                    $('.select-exercise-modal select').val();
+                    var data = {
+                        exerciseId: $(this).data('exerciseid'),
+                        exerciseName:  $('.select-exercise-modal select').val()
+                    }
                     $.ajax({
-                        url: "@Url.Action("WorkoutHistoryAjax","Workout")",
+                        url: "@Url.Action("ChangeExercise","Exercise")",
+                        data: JSON.stringify(data),
                         type: 'POST',
-                        data: {
-                            workoutHistoryId:$(this).data('currentPosition')
-                        },
                         headers: {
                             RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
                         },
                         processData: true,
+                        dataType: 'json',
                         contentType: "application/json; charset=utf-8",
-                        success: function(data) {
-                            $('#workout_history' + data.name).html(data.partial.result);
-                        },
-                        error: function(XMLHttpRequest, textStatus, errorThrown) {
-                        }
-                    });
-                });
-
-            $('.nextProgressAjax').on('click',
-                function() {
-                    $.ajax({
-                        url: "@Url.Action("WorkoutHistoryAjax","Workout")",
-                        type: 'POST',
-                        data: {
-                            workoutHistoryId:$(this).data('currentPosition')
-                        },
-                        headers: {
-                            RequestVerificationToken: $('input:hidden[name="__RequestVerificationToken"]').val()
-                        },
-                        processData: true,
-                        contentType: "application/json; charset=utf-8",
-                        success: function(data) {
-                            $('#workout_history' + data.name).html(data.partial.result);
+                        success: function (res) {
+                            $('#exercise' + $(this).data('exerciseid')).text(res.name);
                         }.bind(this),
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
                         }

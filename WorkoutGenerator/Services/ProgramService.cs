@@ -14,18 +14,18 @@ namespace WorkoutGenerator.Services
 {
     public class ProgramService
     {
-        public delegate bool ModifyExerciseDelegate(WorkoutExercise e, ExerciseSettings exerciseSettings);
+        public delegate bool ModifyExerciseDelegate(WorkoutExercise e, ExerciseSetting exerciseSetting);
 
         private readonly IServiceScopeFactory _serviceScopeFactory;
-        public Dictionary<RepsType, ExerciseSettings> ExerciseData { get; set; }
+        public Dictionary<RepsType, ExerciseSetting> ExerciseData { get; set; }
 
         public ProgramService(IServiceScopeFactory serviceScopeFactory)
         {
             _serviceScopeFactory = serviceScopeFactory;
-            ExerciseData = new Dictionary<RepsType, ExerciseSettings>()
+            ExerciseData = new Dictionary<RepsType, ExerciseSetting>()
             {
                 {
-                    RepsType.Low, new ExerciseSettings()
+                    RepsType.Low, new ExerciseSetting()
                     {
                         AllowedTrainerLevel = new[] {TrainerLevelType.Advanced},
                         UtilityType = new UtilityType[] {UtilityType.Basic},
@@ -36,7 +36,7 @@ namespace WorkoutGenerator.Services
                     }
                 },
                 {
-                    RepsType.MedInter, new ExerciseSettings()
+                    RepsType.MedInter, new ExerciseSetting()
                     {
                         AllowedTrainerLevel = new[] {TrainerLevelType.Advanced, TrainerLevelType.Intermediate},
                         UtilityType = new UtilityType[] {UtilityType.Basic, UtilityType.AuxiliaryOrBasic},
@@ -47,7 +47,7 @@ namespace WorkoutGenerator.Services
                     }
                 },
                 {
-                    RepsType.MedAdvanced, new ExerciseSettings()
+                    RepsType.MedAdvanced, new ExerciseSetting()
                     {
                         AllowedTrainerLevel = new[] {TrainerLevelType.Advanced, TrainerLevelType.Intermediate},
                         UtilityType = new UtilityType[] {UtilityType.Basic, UtilityType.AuxiliaryOrBasic},
@@ -59,7 +59,7 @@ namespace WorkoutGenerator.Services
                 },
 
                 {
-                    RepsType.MedNovice, new ExerciseSettings()
+                    RepsType.MedNovice, new ExerciseSetting()
                     {
                         ExcludeExercises = new[] {"Front", "Decline", "Incline"},
                         AllowedTrainerLevel = new[] {TrainerLevelType.Advanced, TrainerLevelType.Intermediate},
@@ -71,7 +71,7 @@ namespace WorkoutGenerator.Services
                     }
                 },
                 {
-                    RepsType.HighInter, new ExerciseSettings()
+                    RepsType.HighInter, new ExerciseSetting()
                     {
                         AllowedTrainerLevel = new[]
                             {TrainerLevelType.Advanced, TrainerLevelType.Intermediate, TrainerLevelType.Novice},
@@ -84,7 +84,7 @@ namespace WorkoutGenerator.Services
                     }
                 },
                 {
-                    RepsType.HighAdvanced, new ExerciseSettings()
+                    RepsType.HighAdvanced, new ExerciseSetting()
                     {
                         AllowedTrainerLevel = new[]
                             {TrainerLevelType.Advanced, TrainerLevelType.Intermediate, TrainerLevelType.Novice},
@@ -97,7 +97,7 @@ namespace WorkoutGenerator.Services
                     }
                 },
                 {
-                    RepsType.HighNovice, new ExerciseSettings()
+                    RepsType.HighNovice, new ExerciseSetting()
                     {
                         ExcludeExercises = new[] {"Front", "Decline"},
                         AllowedTrainerLevel = new[]
@@ -113,7 +113,7 @@ namespace WorkoutGenerator.Services
             };
         }
 
-        public Dictionary<RepsType, ExerciseSettings> GetRelevantExerciseData(int exercisePosition,
+        public Dictionary<RepsType, ExerciseSetting> GetRelevantExerciseData(int exercisePosition,
             TrainerLevelType level,
             MuscleType muscleType)
         {
@@ -178,7 +178,11 @@ namespace WorkoutGenerator.Services
             return relevantExerciseSettings;
         }
 
-        public Exercise PickExercise(int position, ExerciseSettings exerciseSetting, List<Exercise> exercisesOfMuscle)
+        public ExerciseSetting PickExerciseSetting(Dictionary<RepsType, ExerciseSetting> es, RepsType[] arr = null)
+        {
+            return es[arr?[new Random().Next(arr.Length)] ?? es.Select(x => x.Key).ToArray()[new Random().Next(es.Count)]];
+        }
+        public Exercise PickExercise(int position, ExerciseSetting exerciseSetting, List<Exercise> exercisesOfMuscle)
         {
             var exercisesToChoose = exercisesOfMuscle.Where(x =>
                 exerciseSetting.UtilityType.Any(u => u == x.Utility)
@@ -202,13 +206,13 @@ namespace WorkoutGenerator.Services
             return exercisesToChoose[num];
         }
 
-        public int PickReps(ExerciseSettings exerciseSetting)
+        public int PickReps(ExerciseSetting exerciseSetting)
         {
             return exerciseSetting.Reps[new Random().Next(exerciseSetting.Reps.Length)];
 
         }
 
-        public double PickRest(ExerciseSettings exerciseSetting)
+        public double PickRest(ExerciseSetting exerciseSetting)
         {
             return exerciseSetting.Rest[new Random().Next(exerciseSetting.Rest.Length)];
 
@@ -232,11 +236,11 @@ namespace WorkoutGenerator.Services
         }
 
 */
-        public bool ModifyExerciseChangeSet(WorkoutExercise e, ExerciseSettings exerciseSettings)
+        public bool ModifyExerciseChangeSet(WorkoutExercise e, ExerciseSetting exerciseSetting)
         {
             Set set = null;
-            var reps = PickReps(exerciseSettings);
-            var rest = PickRest(exerciseSettings);
+            var reps = PickReps(exerciseSetting);
+            var rest = PickRest(exerciseSetting);
             if (reps > 10)
             {
                 if (e.Sets.All(x => x.Reps >= 10))
@@ -257,9 +261,9 @@ namespace WorkoutGenerator.Services
             return true;
         }
 
-        public bool ModifyExerciseChangeRest(WorkoutExercise e, ExerciseSettings exerciseSettings)
+        public bool ModifyExerciseChangeRest(WorkoutExercise e, ExerciseSetting exerciseSetting)
         {
-            var rest = PickRest(exerciseSettings);
+            var rest = PickRest(exerciseSetting);
             e.Sets.Select(x =>
             {
                 x.Rest = rest;
@@ -269,9 +273,9 @@ namespace WorkoutGenerator.Services
             return true;
         }
 
-        public bool ModifyExerciseChangeReps(WorkoutExercise e, ExerciseSettings exerciseSettings)
+        public bool ModifyExerciseChangeReps(WorkoutExercise e, ExerciseSetting exerciseSetting)
         {
-            var reps = PickReps(exerciseSettings);
+            var reps = PickReps(exerciseSetting);
 
             if (reps > 10)
             {

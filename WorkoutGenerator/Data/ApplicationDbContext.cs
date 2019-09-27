@@ -21,6 +21,8 @@ namespace WorkoutGenerator.Data
         public DbSet<FeedBack> FeedBacks { get; set; }
         public DbSet<Workout> Workouts { get; set; }
         public DbSet<WorkoutHistory> WorkoutHistories { get; set; }
+        public DbSet<WorkoutExercise> WorkoutExercises { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<FitnessProgram>()

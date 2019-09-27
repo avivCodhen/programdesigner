@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using WorkoutGenerator.Data;
 
 namespace WorkoutGenerator.Models
@@ -16,7 +17,7 @@ namespace WorkoutGenerator.Models
         }
 
         public int Id { get; set; }
-
+        public List<Exercise> ExerciseList { get; set; }
         public  List<ExerciseViewModel> Exercises { get; set; }
         public MuscleType MuscleType { get; set; }
     }

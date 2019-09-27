@@ -6,7 +6,7 @@ using WorkoutGenerator.Data;
 
 namespace WorkoutGenerator.Models
 {
-    public class ExerciseSettings
+    public class ExerciseSetting
     {
         public int[] Reps { get; set; }
         public int[] Sets { get; set; }
