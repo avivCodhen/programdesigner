@@ -216,7 +216,7 @@
                     $('.select-exercise-modal select').val();
                     var data = {
                         exerciseId: $(this).data('exerciseid'),
-                        exerciseName:  $('.select-exercise-modal select').val()
+                        exerciseName:  $(this).closest('.select-exercise-modal').find('select').val()
                     }
                     $.ajax({
                         url: "@Url.Action("ChangeExercise","Exercise")",
@@ -229,7 +229,9 @@
                         dataType: 'json',
                         contentType: "application/json; charset=utf-8",
                         success: function (res) {
-                            $('#exercise' + $(this).data('exerciseid')).text(res.name);
+                            var exerciseId = $(this).data('exerciseid');
+                            $('#exercise' + exerciseId).text(res.name);
+                            $('#exercise' + exerciseId).attr('data-videomodal', 'https://www.youtube.com/embed/'+res.linkId);
                         }.bind(this),
                         error: function(XMLHttpRequest, textStatus, errorThrown) {
                         }

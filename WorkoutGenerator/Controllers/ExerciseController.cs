@@ -23,11 +23,12 @@ namespace WorkoutGenerator.Controllers
         public IActionResult ChangeExercise([FromBody]ChangeExerciseModel model)
         {
             var exercise = _db.WorkoutExercises.Single(x=>x.Id == model.ExerciseId);
+            var link = _db.YoutubeVideoQueries.Single(x => x.Query == model.ExerciseName);
             exercise.Name = model.ExerciseName;
             _db.SaveChanges();
             return new JsonResult(new
             {
-                name = model.ExerciseName
+                name = model.ExerciseName, link.LinkId
             });
         }
 

@@ -21,21 +21,21 @@ namespace WorkoutGenerator.Extensions
 
             if (reps > 6 && reps < 8)
             {
-                return "6-10";
+                return "6-8";
             }
 
             if (reps > 8 && reps < 10)
             {
-                return "6-10";
+                return "8-10";
             }
 
             if (reps > 10 && reps < 12)
             {
-                return "10-15";
+                return "10-12";
             }
             if (reps > 12 && reps < 15)
             {
-                return "10-15";
+                return "12-15";
             }
 
             return reps.ToString();

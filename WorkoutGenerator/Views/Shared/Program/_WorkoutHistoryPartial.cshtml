@@ -29,11 +29,11 @@
                     <a id="@($"exercise{exercise.Id}")" href="x" style="text-decoration: none; font-size: 16px; letter-spacing: 1px;" class="flex-grow-1 color-main videoModalTriger" data-toggle="modal" data-target="#videoModal" data-videoModal="https://www.youtube.com/embed/@exercise.YoutubeVideoId">
                         @exercise.Name
                     </a>
-                    <div class="dropdown">
+                    <div class="dropdown ">
                         <a href="#" class="pl-3" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v text-secondary"></i>
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
                             <a data-toggle="modal" data-target="#@($"exercise{exercise.Id}modal")" class="dropdown-item" href="#">Change exercise</a>
                         </div>
                     </div>
@@ -41,13 +41,13 @@
 
                 <div class="modal fade" id="@($"exercise{exercise.Id}modal")" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" role="document">
-                        <div class="modal-content p-5 select-exercise-modal">
+                        <div class="modal-content p-4 select-exercise-modal">
                             <div class="d-inline-block">
                                 <p>Choose an exercise:</p>
                                 <select class="custom-select" asp-items="@(new SelectList(muscle.ExerciseList, "Name", "Name",exercise.Name))">
                                 </select>
                             </div>
-                            <div class="center-div mt-3">
+                            <div class="center-div mt-4">
                                 <button data-dismiss="modal" data-exerciseId="@exercise.Id" type="button" class="btn bg-main text-white">Change</button>
                             </div>
                         </div>
