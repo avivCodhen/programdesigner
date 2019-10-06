@@ -12,7 +12,6 @@
             background: white;
             color: #8187ff !important;
         }
-        .index-form label { color: white; }
 
          #siteNavBar{
             /*box-shadow: 0px 0px !important;*/
@@ -37,6 +36,10 @@
             animation: lds-dual-ring 1.2s linear infinite;
         }
 
+        .index-form .form-control{
+            border-width: 0.5px;
+        }
+
         @@keyframes lds-dual-ring {
             0% { transform: rotate(0deg); }
 
@@ -50,33 +53,22 @@
 
     <div class="container py-5">
 
-        <div class="d-flex justify-content-center flex-column">
+        <div class="row">
 
-            <div class="row d-flex  justify-content-center">
-                <div class="col-10">
-                    <h1 class="text-white text-center" style="letter-spacing: 1px; font-weight: 300;">Professional Body Building Program Designer</h1>
-                    <p class="text-white mb-0 text-center" style="font-size: 20px; letter-spacing: 1px; font-weight: 300;">Generate professional and effective workouts for yourself or your clients.</p>
-
-                </div>
+            <div class="col-12 col-lg-6 px-5 py-3">
+                <h1 class="text-white" style="letter-spacing: 2px;">Put Your Training on Autopilot.</h1>
+                    <p class="text-white mb-0 mt-3" style="font-size: 25px; letter-spacing: 1px; font-weight: 300;">Generate professional and effective workouts for yourself or your clients.</p>
             </div>
 
 
-            <div class="row d-flex  justify-content-center mt-5 index-form">
+            <div class="col-12 col-lg-6 px-4 py-3 index-form">
 
 
-                <div class="col-11 col-lg-5 d-flex justify-content-center flex-column">
-                    <div style="display: none;" id="loadingDiv">
-                        <div class="d-flex justify-content-center" style="display: none">
-                            <div class="d-block text-center">
-                                <p class="text-white w-100">Generating program</p>
-                                <div class="lds-dual-ring"></div>
-                            </div>
-                        </div>
+                <div class="card shadow p-4 justify-content-center flex-column">
+                    
+                    <h2 class="text-center mb-4" style="font-family: Ink Free;">Generate Program <span style="background: yellow;">Now</span>!</h2>
 
-
-                    </div>
-
-                    <form method="post" asp-controller="Home" asp-action="Index" id="generateForm">
+                    <form method="post" asp-controller="Home" asp-action="Index" id="generateForm" >
 
                         <label>Choose workout difficulty</label>
                         <div class="2 form-group">
@@ -99,8 +91,17 @@
                             <span asp-validation-for="@Model.TemplateType" class="text-danger"></span>
                         </div>
 
-                        <div class="d-flex justify-content-center mt-5">
-                            <button type="submit" class="submit-hover bg-main btn p-4 px-5 shadow" style="color: white; border: solid 1px white;">Create Program</button>
+                        <div class="row d-flex justify-content-center mt-4">
+                            
+                            <button id="generateBtn" type="submit" class="col-10 col-lg-8 submit-hover bg-main btn p-4 px-5 shadow" style="z-index: 99;color: white; border: solid 1px white;">
+                                Generate Program
+                            </button>
+                            <button id="loadingBtn" class="col-10 col-lg-8 bg-main btn p-4 px-5 shadow" style="display: none;color: white; border: solid 1px white;">
+                                <div id="generateLoading">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                    Generating Program
+                                </div>
+                            </button>
                         </div>
 
                     </form>
@@ -155,8 +156,8 @@
         $(function () {
             $("#generateForm").on("submit",
                 function() {
-                    $("#generateForm").hide(200);
-                    $("#loadingDiv").show(200);
+                    $("#generateBtn").hide();
+                    $("#loadingBtn").show();
                 });
         });
 

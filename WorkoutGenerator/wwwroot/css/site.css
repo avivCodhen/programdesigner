@@ -3,7 +3,7 @@ for details on configuring this project to bundle and minify static web assets. 
 
 h1, h2, h3 {
     letter-spacing: 1px;
-    font-weight: 300;
+    font-weight: 400;
 }
 .btn:focus, .btn:active:focus, .btn.active:focus {
     outline: none;
