@@ -24,6 +24,16 @@ a.navbar-brand {
     color: #40e0d0 !important;
 }
 
+.white-border-btn {
+    border-color: white !important;
+    color: white;
+}
+
+.main-border-btn {
+    border-color: #8187ff !important;
+    color: #8187ff;
+}
+
 .center-div {
     display: flex;
     justify-content: center;
