@@ -12,9 +12,13 @@ namespace WorkoutGenerator.Models
         public bool ChangedName { get; set; }
         public bool AddedExercise { get; set; }
         public string YoutubeVideoId { get; set; }
+        public string SupersetYoutubeVideoId { get; set; }
         public int Id { get; set; }
         public string Name { get; set; }
         public List<SetViewModel> SetViewModels { get; set; } = new List<SetViewModel>();
+        public List<SetViewModel> SupersetSetViewModels { get; set; } = new List<SetViewModel>();
+
+        public string SupersetName { get; set; }
 
         public ExerciseViewModel(WorkoutExercise exercise)
         {

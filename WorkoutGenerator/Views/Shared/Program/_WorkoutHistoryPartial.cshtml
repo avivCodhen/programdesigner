@@ -1,4 +1,5 @@
-﻿@using WorkoutGenerator.Extensions
+﻿@using Castle.Core.Internal
+@using WorkoutGenerator.Extensions
 @model WorkoutHistoryViewModel
 
 
@@ -11,8 +12,9 @@
     {
         <hr class="m-0"/>
 
-            var sets = exercise.SetViewModels.OrderBy(x => x.Reps).ToList();
-            var highlight = "background: red; color: white;border-radius: 5px;";
+        var sets = exercise.SetViewModels.OrderBy(x => x.Reps).ToList();
+        var highlight = "background: red; color: white;border-radius: 5px;";
+        var superset = string.IsNullOrEmpty(exercise.SupersetName);
 
         <style>
             .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
@@ -26,10 +28,27 @@
 
             <div>
                 <div class="d-flex">
-                    <a id="@($"exercise{exercise.Id}")" href="x" style="text-decoration: none; font-size: 16px; letter-spacing: 1px;" class="flex-grow-1 color-main videoModalTriger" data-toggle="modal" data-target="#videoModal" data-videoModal="https://www.youtube.com/embed/@exercise.YoutubeVideoId">
-                        @exercise.Name
-                    </a>
-                    <div class="dropdown ">
+                    <div class="d-flex flex-column">
+                        <ol type="I" class="m-0 pl-3">
+                            <li>
+
+                                <a id="@($"exercise{exercise.Id}")" href="x" style="text-decoration: none; font-size: 16px; letter-spacing: 1px;" class="flex-grow-1 color-main videoModalTriger" data-toggle="modal" data-target="#videoModal" data-videoModal="https://www.youtube.com/embed/@exercise.YoutubeVideoId">
+                                    @exercise.Name
+                                </a>
+                            </li>
+
+                            @if (superset)
+                            {
+                                <a id="@($"superset_exercise{exercise.Id}")" href="x" style="text-decoration: none; font-size: 16px; letter-spacing: 1px;" class="flex-grow-1 color-main videoModalTriger" data-toggle="modal" data-target="#videoModal" data-videoModal="https://www.youtube.com/embed/@exercise.SupersetYoutubeVideoId">
+                                    @exercise.SupersetName
+                                </a>
+                            }
+                        </ol>
+
+                    </div>
+
+
+                    <div class="dropdown" style="position: absolute; right: 16px">
                         <a href="#" class="pl-3" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-ellipsis-v text-secondary"></i>
                         </a>
@@ -44,7 +63,7 @@
                         <div class="modal-content p-4 select-exercise-modal">
                             <div class="d-inline-block">
                                 <p>Choose an exercise:</p>
-                                <select class="custom-select" asp-items="@(new SelectList(muscle.ExerciseList, "Name", "Name",exercise.Name))">
+                                <select class="custom-select" asp-items="@(new SelectList(muscle.ExerciseList, "Name", "Name", exercise.Name))">
                                 </select>
                             </div>
                             <div class="center-div mt-4">
@@ -53,14 +72,14 @@
                         </div>
                     </div>
                 </div>
-
+                
                 <div class="table-responsive mt-3">
 
                     <table class="table table-bordered sad">
                         <thead class="thead-light">
-
+                            
                         <tr>
-                            <th></th>
+                            <th>I</th>
                             @for (var i = 0; i < sets.Count(); i++)
                             {
                                 <th style="@(sets[i].SetAdded ? highlight : "")">Set @(i + 1)</th>
@@ -75,7 +94,7 @@
                             {
                                 <td style="@(set.RepsChanged ? highlight : "")">@set.Reps.ToFitnessRepsFormat()</td>
                             }
-
+                            
                         </tr>
                         <tr>
                             <th style="width: 10%;">Rest:</th>
@@ -92,6 +111,52 @@
                     </table>
 
                 </div>
+                
+                @if (!exercise.SupersetSetViewModels.IsNullOrEmpty())
+                {
+                    var superSets = exercise.SupersetSetViewModels.OrderBy(x => x.Reps).ToList();
+
+                    <div class="table-responsive mt-3">
+
+                        <table class="table table-bordered sad">
+                            <thead class="thead-light">
+
+                            <tr>
+                                <th>@(!string.IsNullOrEmpty(exercise.SupersetName) ? "II" : "")</th>
+                                <th></th>
+                                @for (var i = 0; i < superSets.Count(); i++)
+                                {
+                                    <th style="@(sets[i].SetAdded ? highlight : "")">Set @(i + 1)</th>
+                                }
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th style="width: 10%;">Reps:</th>
+                                @foreach (var set in superSets)
+                                {
+                                    <td style="@(set.RepsChanged ? highlight : "")">@set.Reps.ToFitnessRepsFormat()</td>
+                                }
+
+                            </tr>
+                            <tr>
+                                <th style="width: 10%;">Rest:</th>
+                                @foreach (var set in superSets)
+                                {
+                                    @if (set != sets.Last())
+                                    {
+                                        <td style="@(set.RestChanged ? highlight : "")">@set.Rest.ToFitnessTimeFormat()</td>
+                                    }
+                                }
+                            </tr>
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                }
 
             </div>
         </div>

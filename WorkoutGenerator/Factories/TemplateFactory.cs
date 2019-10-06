@@ -23,35 +23,68 @@ namespace WorkoutGenerator.Factories
             switch (templateType)
             {
                 case TemplateType.FBW:
-                    bigMuscle = TrainerLevelType == TrainerLevelType.Novice ? 1 : 2;
-                    smallMuscle = TrainerLevelType == TrainerLevelType.Novice ? 1 : 2;
-                    list = new List<Workout>()
+                    switch (TrainerLevelType)
                     {
-                        new Workout("A")
-                        {
-                            WorkoutHistories = new List<WorkoutHistory>()
+                        case TrainerLevelType.Novice:
+                            bigMuscle = 1;
+                            smallMuscle = 1;
+                            list = new List<Workout>()
                             {
-                                new WorkoutHistory()
+                                new Workout("A")
                                 {
-                                    MuscleExercises = new List<MuscleExercises>()
+                                    WorkoutHistories = new List<WorkoutHistory>()
                                     {
-                                        new MuscleExercises
-                                            {MuscleType = MuscleType.Chest, Exercises = GetExercises(bigMuscle)},
-                                        new MuscleExercises()
-                                            {MuscleType = MuscleType.Back, Exercises = GetExercises(bigMuscle)},
-                                        new MuscleExercises()
-                                            {MuscleType = MuscleType.Shoulders, Exercises = GetExercises(smallMuscle)},
-                                        new MuscleExercises()
-                                            {MuscleType = MuscleType.Legs, Exercises = GetExercises(bigMuscle)},
-                                        new MuscleExercises()
-                                            {MuscleType = MuscleType.Biceps, Exercises = GetExercises(smallMuscle)},
-                                        new MuscleExercises()
-                                            {MuscleType = MuscleType.Triceps, Exercises = GetExercises(smallMuscle)},
+                                        new WorkoutHistory()
+                                        {
+                                            MuscleExercises = new List<MuscleExercises>()
+                                            {
+                                                new MuscleExercises
+                                                    {MuscleType = MuscleType.Chest, Exercises = GetExercises(bigMuscle)},
+                                                new MuscleExercises()
+                                                    {MuscleType = MuscleType.Back, Exercises = GetExercises(bigMuscle)},
+                                                new MuscleExercises()
+                                                    {MuscleType = MuscleType.Shoulders, Exercises = GetExercises(smallMuscle)},
+                                                new MuscleExercises()
+                                                    {MuscleType = MuscleType.Legs, Exercises = GetExercises(bigMuscle)},
+                                                new MuscleExercises()
+                                                    {MuscleType = MuscleType.Biceps, Exercises = GetExercises(smallMuscle)},
+                                                new MuscleExercises()
+                                                    {MuscleType = MuscleType.Triceps, Exercises = GetExercises(smallMuscle)},
+                                            }
+                                        }
                                     }
                                 }
-                            }
-                        }
-                    };
+                            };
+
+                            break;
+                        case TrainerLevelType.Intermediate:
+                        case TrainerLevelType.Advanced:
+                            list = new List<Workout>()
+                            {
+                                new Workout("A")
+                                {
+                                    WorkoutHistories = new List<WorkoutHistory>()
+                                    {
+                                        new WorkoutHistory()
+                                        {
+                                            MuscleExercises = new List<MuscleExercises>()
+                                            {
+                                                new MuscleExercises()
+                                                    {MuscleType = MuscleType.Legs, Exercises = GetExercises(2)},
+                                                new MuscleExercises
+                                                    {MuscleType = MuscleType.Chest, Exercises = GetExercises(2)},
+                                                new MuscleExercises()
+                                                    {MuscleType = MuscleType.Back, Exercises = GetExercises(2)},
+                                            }
+                                        }
+                                    }
+                                }
+                            };
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+                    
                     break;
                 case TemplateType.AB:
                     bigMuscle = TrainerLevelType == TrainerLevelType.Novice ? 2 : 3;
