@@ -13,9 +13,9 @@
             color: #8187ff !important;
         }
 
-         #siteNavBar{
+        #siteNavBar {
             /*box-shadow: 0px 0px !important;*/
-             border: 0 !important;
+            border: 0 !important;
         }
 
         .lds-dual-ring {
@@ -36,9 +36,7 @@
             animation: lds-dual-ring 1.2s linear infinite;
         }
 
-        .index-form .form-control{
-            border-width: 0.5px;
-        }
+        .index-form .form-control { border-width: 0.5px; }
 
         @@keyframes lds-dual-ring {
             0% { transform: rotate(0deg); }
@@ -65,10 +63,10 @@
 
 
                 <div class="card shadow p-4 justify-content-center flex-column">
-                    
+
                     <h2 class="text-center mb-4" style="font-family: Ink Free;">Generate Program <span style="background: yellow;">Now</span>!</h2>
 
-                    <form method="post" asp-controller="Home" asp-action="Index" id="generateForm" >
+                    <form method="post" asp-controller="Home" asp-action="Index" id="generateForm">
 
                         <div class="form-group">
                             <small>Choose workout difficulty</small>
@@ -82,7 +80,7 @@
                             <span asp-validation-for="@Model.DaysType" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                        <small>Pick a template to generate workout</small>
+                            <small>Pick a template to generate workout</small>
                             <select asp-for="@Model.TemplateType" class="form-control" asp-items="Enum.GetValues(typeof(TemplateType)).Cast<TemplateType>().ToSelectListItems(null)">
                                 <option value="DecideForMe">Decide for me</option>
 
@@ -91,11 +89,11 @@
                         </div>
 
                         <div class="row d-flex justify-content-center mt-4">
-                            
+
                             <button id="generateBtn" type="submit" class="col-10 col-lg-8 submit-hover bg-main btn p-4 px-5 shadow" style="color: white;">
                                 Generate Program
                             </button>
-                            <button id="loadingBtn" class="col-10 col-lg-8 bg-main btn p-4 px-5 shadow" style="display: none;color: white; border: solid 1px white;">
+                            <button id="loadingBtn" class="col-10 col-lg-8 bg-main btn p-4 px-5 shadow" style="display: none; color: white; border: solid 1px white;">
                                 <div id="generateLoading">
                                     <i class="fas fa-circle-notch fa-spin"></i>
                                     Generating Program
@@ -116,12 +114,13 @@
 </div>
 
 <div class="container py-5">
+
     <div class="row">
         <div class="col-12 col-lg-6 order-1 order-md-2 p-5">
-            <img class="card shadow img-fluid"src="images/workout.PNG"/>
-            <img  class="" style="width: 31%; height:50%;bottom: 10px; position: absolute;right: 47px; -webkit-box-shadow: 0px 0px 23px -7px rgba(82,82,82,1);-moz-box-shadow: 0px 0px 23px -7px rgba(82,82,82,1); box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1);" src="images/mobileProgram.PNG"/>
+            <img class="card shadow img-fluid" src="images/workout.PNG"/>
+            <img class="" style="width: 31%; height: 50%; bottom: 10px; position: absolute; right: 47px; -webkit-box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1); -moz-box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1); box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1);" src="images/mobileProgram.PNG"/>
         </div>
-        
+
         <div class="col-12 col-lg-6 p-3 order-md-1 center-div v-align">
             <div>
                 <h1 class="text-center" style="letter-spacing: 2px;">Modern <span style="border-bottom: 1px solid yellow;">Sport-Science </span>algorithm, Modern BodyBuilding programs.</h1>
@@ -131,17 +130,19 @@
     </div>
 </div>
 
+<div class="bg-light">
 
-<div class="container py-5">
-    <div class="row">
-        <div class="col-12 col-lg-6 order-2 order-md-1 p-5">
-            <img class=" img-fluid"src="images/model.jpg"/>
-        </div>
-        
-        <div class="col-12 col-lg-6 p-3 order-md-2 center-div v-align">
-            <div>
-                <h1 class="text-center" style="letter-spacing: 2px;">Modern <span style="border-bottom: 1px solid yellow;">Sport-Science </span>algorithm, Modern BodyBuilding programs.</h1>
-                <p class=" text-center mb-0 mt-3" style="font-size: 25px; letter-spacing: 1px; font-weight: 300;"> Our technology allows you to create powerful workouts in an instant. You will have a CLEAR line for success by following our <span style="border-bottom: 1px solid yellow;">Autopilot Mode</span>.</p>
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-12 col-lg-6 order-2 order-md-1 p-5">
+                <img class=" img-fluid" src="images/model.jpg"/>
+            </div>
+
+            <div class="col-12 col-lg-6 p-3 order-md-2 center-div v-align">
+                <div>
+                    <h1 class="text-center" style="letter-spacing: 2px;">Modern <span style="border-bottom: 1px solid yellow;">Sport-Science </span>algorithm, Modern BodyBuilding programs.</h1>
+                    <p class=" text-center mb-0 mt-3" style="font-size: 25px; letter-spacing: 1px; font-weight: 300;"> Our technology allows you to create powerful workouts in an instant. You will have a CLEAR line for success by following our <span style="border-bottom: 1px solid yellow;">Autopilot Mode</span>.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -149,45 +150,45 @@
 
 
 @*
-<div class="container mt-5">
-    <div class="d-flex vertical-align justify-content-center flex-column mb-5">
+        <div class="container mt-5">
+            <div class="d-flex vertical-align justify-content-center flex-column mb-5">
 
-        <h1 style="letter-spacing: 1px; font-weight: 300;" class="text-center color-main">The Most Precise Program Generator Ever.</h1>
-        <h3 class="text-center color-main" style="letter-spacing: 1px; font-weight: 300">The fitness industry's technology is accelerating, and we're leading it.</h3>
-    </div>
+                <h1 style="letter-spacing: 1px; font-weight: 300;" class="text-center color-main">The Most Precise Program Generator Ever.</h1>
+                <h3 class="text-center color-main" style="letter-spacing: 1px; font-weight: 300">The fitness industry's technology is accelerating, and we're leading it.</h3>
+            </div>
 
-    <div class="row">
+            <div class="row">
 
-        <div class="col-12 col-lg-4 text-center">
-            <i class=" mb-3 text-center color-main fas fa-rocket fa-3x"></i>
-            <p class="mb-3 color-main text-center">Lightning Fast</p>
-            <p class="text-center">In less than 10 seconds, you'll have a professional program per your specification.</p>
+                <div class="col-12 col-lg-4 text-center">
+                    <i class=" mb-3 text-center color-main fas fa-rocket fa-3x"></i>
+                    <p class="mb-3 color-main text-center">Lightning Fast</p>
+                    <p class="text-center">In less than 10 seconds, you'll have a professional program per your specification.</p>
+                </div>
+
+                <div class="col-12 col-lg-4 text-center">
+                    <i class=" mb-3 text-center color-main fab fa-magento fa-3x"></i>
+                    <p class="mb-3 color-main text-center">Tailor-Made</p>
+                    <p class="text-center">Our algorithm can receive data and generate programs accordingly. Else, he'll use his brains and creat a tailor-made program just for you, with little data.</p>
+                </div>
+
+                <div class="col-12 col-lg-4 text-center">
+                    <i class=" mb-3 text-center color-main fas fa-dollar-sign fa-3x"></i>
+                    <p class="mb-3 color-main text-center">Our Algorithm Is Free</p>
+                    <p class="text-center">We're charging nothing for our algorithm. So Enjoy and happy generating!</p>
+                </div>
+
+
+            </div>
+            <div class="d-flex justify-content-center">
+                <button id="scrollToTopBtn" class="btn bg-main text-white my-5">Scroll To Top</button>
+            </div>
         </div>
-
-        <div class="col-12 col-lg-4 text-center">
-            <i class=" mb-3 text-center color-main fab fa-magento fa-3x"></i>
-            <p class="mb-3 color-main text-center">Tailor-Made</p>
-            <p class="text-center">Our algorithm can receive data and generate programs accordingly. Else, he'll use his brains and creat a tailor-made program just for you, with little data.</p>
-        </div>
-
-        <div class="col-12 col-lg-4 text-center">
-            <i class=" mb-3 text-center color-main fas fa-dollar-sign fa-3x"></i>
-            <p class="mb-3 color-main text-center">Our Algorithm Is Free</p>
-            <p class="text-center">We're charging nothing for our algorithm. So Enjoy and happy generating!</p>
-        </div>
-
-
-    </div>
-    <div class="d-flex justify-content-center">
-        <button id="scrollToTopBtn" class="btn bg-main text-white my-5">Scroll To Top</button>
-    </div>
-</div>
-*@
+        *@
 
 @section Scripts
 {
     <script>
-        $(function () {
+        $(function() {
             $("#generateForm").on("submit",
                 function() {
                     $("#generateBtn").hide();
