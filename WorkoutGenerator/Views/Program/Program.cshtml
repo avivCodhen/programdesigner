@@ -46,18 +46,17 @@
 }
 
 <div class="container my-5" id="#vueApp">
-    <div class="row d-flex justify-content-center">
+    <div class="row no-gutters center-div">
+        
         <div class="col-12 col-lg-6  d-flex flex-column">
-            <div class="">
-                <div class="d-flex">
-                    <p class="font-weight-bold">
-                        Program Type:
-                        <span class="color-second font-weight-bold ml-2">@Model.TemplateViewModel.TemplateType.Description()</span>
-                    </p>
-                </div>
-                <label class="font-weight-bold">Instructions:</label>
-                <p>Workout should be done @Model.TemplateViewModel.DaysType.Description(). This program's difficulty is <span class="color-second font-weight-bold">@Model.TemplateViewModel.TrainerLevelType</span> </p>
+            <div class="d-flex">
+                <p class="font-weight-bold">
+                    Program Type:
+                    <span class="color-second font-weight-bold ml-2">@Model.TemplateViewModel.TemplateType.Description()</span>
+                </p>
             </div>
+            <label class="font-weight-bold">Instructions:</label>
+            <p>Workout should be done @Model.TemplateViewModel.DaysType.Description(). This program's difficulty is <span class="color-second font-weight-bold">@Model.TemplateViewModel.TrainerLevelType</span> </p>
             @{
 
                 if (!SignInManager.IsSignedIn(User))
@@ -72,7 +71,7 @@
                     </div>
                     <div class="modal fade" tabindex="-1" role="dialog" id="registerAndSaveModal">
 
-                        <partial name="Register/_RegisterPartial" model="@new RegisterViewModel(){ReturnUrl = @Url.Action("SaveProgramToUser", "Program", new {created = @Model.Created}) }" />
+                        <partial name="Register/_RegisterPartial" model="@new RegisterViewModel(){ReturnUrl = @Url.Action("SaveProgramToUser", "Program", new {created = @Model.Created}) }"/>
 
                     </div>
                 }
@@ -87,50 +86,66 @@
                     </form>
                 }
             }
-            <div class="center-div flex-column">
-                <ul class="tabs row no-gutters" role="tablist">
-
-                    <li class="tab-link current col text-center" data-tab="tab-0">
-                       Show All
-                    </li>
-
-                    @{
-                        if (Model.TemplateViewModel.Workouts.Count > 1)
-                        {
-                            @foreach (var item in Model.TemplateViewModel.Workouts)
-                            {
-                                <li class="tab-link col text-center" data-tab="@($"workout{item.Name}")">
-                                    @item.Name
-                                    </li>
-                            }
-                        }
-                    }
-
-                </ul>
-                    @foreach (var workoutViewModel in Model.TemplateViewModel.Workouts)
-                    {
-                        <div class="tab-content current" role="tabpanel" id="@($"workout{@workoutViewModel.Name}")">
-
-                            <div class="card mt-3 w-100">
-                                <div class="bg-main p-2 text-white d-flex">
-
-                                    <p class="flex-grow-1 d-flex  mb-0 v-align">Workout @workoutViewModel.Name</p>
-                                    <button data-url="@Url.Action("ProgressPartialAjax", "Workout", new {workoutViewModel.Id})" class="progressAjax btn bg-second text-white">Progress</button>
-                                </div>
-                                <div id="@($"workout_history{@workoutViewModel.Name}")">
-                                    <partial name="Program/_WorkoutHistoryPartial" model="@workoutViewModel.WorkoutHistoryViewModel" />
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                    }
-            </div>
 
 
         </div>
 
+       
+    </div>
+    <div class="row no-gutters center-div">
+        
+        <div class="col-12 col-lg-6">
+            <ul class="tabs row no-gutters" role="tablist">
+
+                <li class="tab-link current col text-center" data-tab="tab-0">
+                    Show All
+                </li>
+
+                @{
+                    if (Model.TemplateViewModel.Workouts.Count > 1)
+                    {
+                        @foreach (var item in Model.TemplateViewModel.Workouts)
+                        {
+                            <li class="tab-link col text-center" data-tab="@($"workout{item.Name}")">
+                                @item.Name
+                            </li>
+                        }
+                    }
+                }
+
+            </ul>
+
+        </div>
+
+    </div>
+
+    <div class="row no-gutters center-div">
+
+        <div class="col-12 col-lg-6 ">
+            @foreach (var workoutViewModel in Model.TemplateViewModel.Workouts)
+            {
+                <div class="tab-content current" role="tabpanel" id="@($"workout{@workoutViewModel.Name}")">
+
+                    <div class="card mt-3 w-100">
+                        <div class="bg-main p-2 text-white d-flex">
+
+                            <p class="flex-grow-1 d-flex  mb-0 v-align">Workout @workoutViewModel.Name</p>
+                            <button data-url="@Url.Action("ProgressPartialAjax", "Workout", new {workoutViewModel.Id})" class="progressAjax btn bg-second text-white">Progress</button>
+                        </div>
+                        <div id="@($"workout_history{@workoutViewModel.Name}")">
+                            <partial name="Program/_WorkoutHistoryPartial" model="@workoutViewModel.WorkoutHistoryViewModel" />
+
+                        </div>
+
+                    </div>
+
+                </div>
+            }
+
+        </div>
+
+    </div>
+    <div class="row no-gutters">
         <div class="d-flex justify-content-center col-12">
             <button id="scrollToTopBtn" class="btn bg-main text-white my-5">Scroll To Top</button>
         </div>
