@@ -12,7 +12,6 @@
             background: white;
             color: #8187ff !important;
         }
-        .index-form label { color: white; }
 
          #siteNavBar{
             /*box-shadow: 0px 0px !important;*/
@@ -37,6 +36,10 @@
             animation: lds-dual-ring 1.2s linear infinite;
         }
 
+        .index-form .form-control{
+            border-width: 0.5px;
+        }
+
         @@keyframes lds-dual-ring {
             0% { transform: rotate(0deg); }
 
@@ -48,50 +51,38 @@
 <div class="bg-main">
 
 
-    <div class="container py-5">
+    <div class="container pt-5">
 
-        <div class="d-flex justify-content-center flex-column">
+        <div class="row">
 
-            <div class="row d-flex  justify-content-center">
-                <div class="col-10">
-                    <h1 class="text-white text-center" style="letter-spacing: 1px; font-weight: 300;">Professional Body Building Program Designer</h1>
-                    <p class="text-white mb-0 text-center" style="font-size: 20px; letter-spacing: 1px; font-weight: 300;">Generate professional and effective workouts for yourself or your clients.</p>
-
-                </div>
+            <div class="col-12 col-lg-7 p-4 py-5">
+                <h1 class="text-white" style="letter-spacing: 2px;">Modern <span style="border-bottom: 1px solid yellow;">Sport-Science </span>algorithm, Modern BodyBuilding programs.</h1>
+                <p class="text-white mb-0 mt-3" style="font-size: 25px; letter-spacing: 1px; font-weight: 300;"> Our technology allows you to create powerful workouts in an instant. You will have a CLEAR line for success by following our <span style="border-bottom: 1px solid yellow;">Autopilot Mode</span>.</p>
             </div>
 
 
-            <div class="row d-flex  justify-content-center mt-5 index-form">
+            <div class="col-12 col-lg-5 p-4 index-form">
 
 
-                <div class="col-11 col-lg-5 d-flex justify-content-center flex-column">
-                    <div style="display: none;" id="loadingDiv">
-                        <div class="d-flex justify-content-center" style="display: none">
-                            <div class="d-block text-center">
-                                <p class="text-white w-100">Generating program</p>
-                                <div class="lds-dual-ring"></div>
-                            </div>
-                        </div>
+                <div class="card shadow p-4 justify-content-center flex-column">
+                    
+                    <h2 class="text-center mb-4" style="font-family: Ink Free;">Generate Program <span style="background: yellow;">Now</span>!</h2>
 
+                    <form method="post" asp-controller="Home" asp-action="Index" id="generateForm" >
 
-                    </div>
-
-                    <form method="post" asp-controller="Home" asp-action="Index" id="generateForm">
-
-                        <label>Choose workout difficulty</label>
-                        <div class="2 form-group">
+                        <div class="form-group">
+                            <small>Choose workout difficulty</small>
                             <select asp-for="@Model.TrainerLevelType" class="form-control" asp-items="Enum.GetValues(typeof(TrainerLevelType)).Cast<TrainerLevelType>().ToSelectListItems(Model.TrainerLevelType)"></select>
                             <span asp-validation-for="@Model.TrainerLevelType" class="text-danger"></span>
 
                         </div>
-                        <label>How many days per week you wish to workout</label>
-
-                        <div class="2 form-group">
+                        <div class="form-group">
+                            <small>How many days per week you wish to workout</small>
                             <select asp-for="@Model.DaysType" class="form-control" asp-items="Enum.GetValues(typeof(DaysType)).Cast<DaysType>().ToSelectListItems(Model.DaysType)"></select>
                             <span asp-validation-for="@Model.DaysType" class="text-danger"></span>
                         </div>
-                        <label>Pick a template to generate workout</label>
-                        <div class="2 form-group">
+                        <div class="form-group">
+                        <small>Pick a template to generate workout</small>
                             <select asp-for="@Model.TemplateType" class="form-control" asp-items="Enum.GetValues(typeof(TemplateType)).Cast<TemplateType>().ToSelectListItems(null)">
                                 <option value="DecideForMe">Decide for me</option>
 
@@ -99,8 +90,17 @@
                             <span asp-validation-for="@Model.TemplateType" class="text-danger"></span>
                         </div>
 
-                        <div class="d-flex justify-content-center mt-5">
-                            <button type="submit" class="submit-hover bg-main btn p-4 px-5 shadow" style="color: white; border: solid 1px white;">Create Program</button>
+                        <div class="row d-flex justify-content-center mt-4">
+                            
+                            <button id="generateBtn" type="submit" class="col-10 col-lg-8 submit-hover bg-main btn p-4 px-5 shadow" style="color: white;">
+                                Generate Program
+                            </button>
+                            <button id="loadingBtn" class="col-10 col-lg-8 bg-main btn p-4 px-5 shadow" style="display: none;color: white; border: solid 1px white;">
+                                <div id="generateLoading">
+                                    <i class="fas fa-circle-notch fa-spin"></i>
+                                    Generating Program
+                                </div>
+                            </button>
                         </div>
 
                     </form>
@@ -115,6 +115,40 @@
 
 </div>
 
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12 col-lg-6  p-5">
+            <img class="card shadow img-fluid"src="images/workout.PNG"/>
+            <img  class="" style="width: 31%; height:50%;bottom: 10px; position: absolute;right: 47px; -webkit-box-shadow: 0px 0px 23px -7px rgba(82,82,82,1);-moz-box-shadow: 0px 0px 23px -7px rgba(82,82,82,1); box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1);" src="images/mobileProgram.PNG"/>
+        </div>
+        
+        <div class="col-12 col-lg-6 p-3 center-div v-align">
+            <div>
+                <h1 class="text-center" style="letter-spacing: 2px;">Modern <span style="border-bottom: 1px solid yellow;">Sport-Science </span>algorithm, Modern BodyBuilding programs.</h1>
+                <p class=" text-center mb-0 mt-3" style="font-size: 25px; letter-spacing: 1px; font-weight: 300;"> Our technology allows you to create powerful workouts in an instant. You will have a CLEAR line for success by following our <span style="border-bottom: 1px solid yellow;">Autopilot Mode</span>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="container py-5">
+    <div class="row">
+        <div class="col-12 col-lg-6  p-5">
+            <img class="c img-fluid"src="images/model.jpg"/>
+        </div>
+        
+        <div class="col-12 col-lg-6 p-3 center-div v-align">
+            <div>
+                <h1 class="text-center" style="letter-spacing: 2px;">Modern <span style="border-bottom: 1px solid yellow;">Sport-Science </span>algorithm, Modern BodyBuilding programs.</h1>
+                <p class=" text-center mb-0 mt-3" style="font-size: 25px; letter-spacing: 1px; font-weight: 300;"> Our technology allows you to create powerful workouts in an instant. You will have a CLEAR line for success by following our <span style="border-bottom: 1px solid yellow;">Autopilot Mode</span>.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@*
 <div class="container mt-5">
     <div class="d-flex vertical-align justify-content-center flex-column mb-5">
 
@@ -148,6 +182,7 @@
         <button id="scrollToTopBtn" class="btn bg-main text-white my-5">Scroll To Top</button>
     </div>
 </div>
+*@
 
 @section Scripts
 {
@@ -155,8 +190,8 @@
         $(function () {
             $("#generateForm").on("submit",
                 function() {
-                    $("#generateForm").hide(200);
-                    $("#loadingDiv").show(200);
+                    $("#generateBtn").hide();
+                    $("#loadingBtn").show();
                 });
         });
 
