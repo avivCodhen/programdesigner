@@ -7,23 +7,46 @@
 
 
 @section Head{
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
-
-        .svg-container {
-            display: inline-block;
-            position: relative;
-            width: 100%;
-            padding-bottom: 100%;
-            vertical-align: middle;
-            overflow: hidden;
+        .img-container {
+            background-image: url(images/mainWallpaper.PNG);
+            background-size: cover;
         }
 
-        svg {
-            display: inline-block;
-            position: absolute;
-            top: 0;
-            left: 0;
+        .buttongroup label {
+            border: 1px solid #fff;
+            padding: 6px 12px;
+            cursor: pointer;
+            color: #fff;
+            background-color: #40E0D0;
+            transition: all 0.2s;
         }
+
+            .buttongroup label:not(:first-of-type) {
+                border-left: 0;
+            }
+
+            .buttongroup label:hover {
+                background-color: #333;
+            }
+
+        /* Hide the radio button */
+        input[name='market'] {
+            display: none;
+        }
+
+            /* The checked buttons label style */
+            input[name='market']:checked + label {
+                background-color: #8781ff;
+            }
+
+
+
+
+
+
+
 
         .submit-hover:hover {
             background: white;
@@ -41,50 +64,72 @@
             height: 64px;
         }
 
-        .lds-dual-ring:after {
-            content: " ";
-            display: block;
-            width: 46px;
-            height: 46px;
-            margin: 1px;
-            border-radius: 50%;
-            border: 5px solid #fff;
-            border-color: #fff transparent #fff transparent;
-            animation: lds-dual-ring 1.2s linear infinite;
+            .lds-dual-ring:after {
+                content: " ";
+                display: block;
+                width: 46px;
+                height: 46px;
+                margin: 1px;
+                border-radius: 50%;
+                border: 5px solid #fff;
+                border-color: #fff transparent #fff transparent;
+                animation: lds-dual-ring 1.2s linear infinite;
+            }
+
+        .index-form .form-control {
+            border-width: 0.5px;
         }
 
-        .index-form .form-control { border-width: 0.5px; }
-
         @@keyframes lds-dual-ring {
-            0% { transform: rotate(0deg); }
+            0% {
+                transform: rotate(0deg);
+            }
 
-            100% { transform: rotate(360deg); }
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 }
 
-<div class="bg-main">
+<div class="img-container" style="">
 
 
     <div class="container py-5">
 
-        <div class="row">
+        <div class="row center-div">
 
-            <div class="col-12 col-lg-7 p-4 py-5">
-                <h1 class="text-white" style="letter-spacing: 2px;">Modern <span style="border-bottom: 1px solid yellow;">Sport-Science </span>algorithm, Modern BodyBuilding programs.</h1>
-                <p class="text-white mb-0 mt-3" style="font-size: 25px; letter-spacing: 1px; font-weight: 300;"> Our technology allows you to create powerful workouts in an instant. You will have a CLEAR line for success by following our <span style="border-bottom: 1px solid yellow;">Autopilot Mode</span>.</p>
+            <div class="col-12 col-lg-6 p-4 py-5" data-aos="fade" data-aos-duration="700">
+                <div class="">
+                    <h1 class="text-white" style="letter-spacing: 2px;">Modern <span style="border-bottom: 1px solid yellow;">Sport-Science </span>algorithm, Modern BodyBuilding programs.</h1>
+                    <p class="text-white mb-0 mt-3" style="font-size: 25px; letter-spacing: 1px; font-weight: 300;"> Our technology allows you to create powerful workouts in an instant. You will have a CLEAR line for success by following our <span style="border-bottom: 1px solid yellow;">Autopilot Mode</span>.</p>
+                </div>
+
             </div>
 
 
             <div class="col-12 col-lg-5 p-4 index-form">
 
 
-                <div class="card shadow p-4 justify-content-center flex-column">
-
-                    <h2 class="text-center mb-4" style="font-family: Ink Free;">Generate Program <span style="background: yellow;">Now</span>!</h2>
+                <div class="card shadow p-4 justify-content-center flex-column" data-aos="fade-up" data-aos-duration="700">
 
                     <form method="post" asp-controller="Home" asp-action="Index" id="generateForm">
-
+                        <div class="wrappert">
+                            <div class="buttongroup">
+                                <input id="all" type="radio" value="all" name="market" checked />
+                                <label for="all">
+                                    Novice
+                                </label>
+                                <input id="Netherlands" type="radio" value="Netherlands" name="market" />
+                                <label for="Netherlands">
+                                    Intermediate
+                                </label>
+                                <input id="Belgium" type="radio" value="Belgium" name="market" />
+                                <label for="Belgium">
+                                    Advanced
+                                </label>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <small>Choose workout difficulty</small>
                             <select asp-for="@Model.TrainerLevelType" class="form-control" asp-items="Enum.GetValues(typeof(TrainerLevelType)).Cast<TrainerLevelType>().ToSelectListItems(Model.TrainerLevelType)"></select>
@@ -131,15 +176,51 @@
 
 </div>
 
+
+<div class="container mt-5">
+    <div class="d-flex vertical-align justify-content-center flex-column mb-5">
+
+        <h1 style="letter-spacing: 1px; font-weight: 300;" class="text-center color-main">The Most Precise Program Generator Ever.</h1>
+        <h3 class="text-center color-main" style="letter-spacing: 1px; font-weight: 300">The fitness industry's technology is accelerating, and we're leading it.</h3>
+    </div>
+
+    <div class="row center-div">
+
+        <div class="col-12 col-lg-3 text-center">
+            <i class=" mb-3 text-center color-main fas fa-rocket fa-3x"></i>
+            <p class="mb-3 color-main text-center">Lightning Fast</p>
+            <p class="text-center">In less than 10 seconds, you'll have a professional program per your specification.</p>
+        </div>
+
+        <div class="col-12 col-lg-3 text-center ">
+            <i class="color-main mb-3 text-center color-main fab fa-magento fa-3x"></i>
+            <p class="mb-3 color-main  font-weight-bold text-center">Tailor-Made</p>
+            <p class="text-center">Our algorithm can receive data and generate programs accordingly. Else, he'll use his brains and creat a tailor-made program just for you, with little data.</p>
+        </div>
+
+        <div class="col-12 col-lg-3 text-center">
+            <i class=" mb-3 text-center fas fa-heart text-danger fa-3x"></i>
+            <p class="mb-3 color-main text-center">Our Algorithm Is Free</p>
+            <p class="text-center">We're charging nothing for our algorithm. So Enjoy and happy generating!</p>
+        </div>
+
+
+    </div>
+    <div class="d-flex justify-content-center">
+        <button id="scrollToTopBtn" class="btn bg-main text-white my-5">Scroll To Top</button>
+    </div>
+</div>
+
+
 <div class="container py-5">
 
     <div class="row">
-        <div class="col-12 col-lg-6 order-1 order-md-2 p-5">
-            <img class="card shadow img-fluid" src="images/workout.PNG"/>
-            <img class="" style="width: 31%; height: 50%; bottom: 10px; position: absolute; right: 47px; -webkit-box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1); -moz-box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1); box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1);" src="images/mobileProgram.PNG"/>
+        <div class="col-12 col-lg-6 order-1 order-md-2 p-5" data-aos="fade-left" >
+            <img class="card shadow img-fluid" src="images/workout.PNG" />
+            <img class="" style="width: 31%; height: 50%; bottom: 10px; position: absolute; right: 47px; -webkit-box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1); -moz-box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1); box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1);" src="images/mobileProgram.PNG" />
         </div>
 
-        <div class="col-12 col-lg-6 p-3 order-md-1 center-div v-align">
+        <div class="col-12 col-lg-6 p-3 order-md-1 center-div v-align" data-aos="fade" data-aos-duration="700">
             <div>
                 <h1 class="text-center" style="letter-spacing: 2px;">Modern <span style="border-bottom: 1px solid yellow;">Sport-Science </span>algorithm, Modern BodyBuilding programs.</h1>
                 <p class=" text-center mb-0 mt-3" style="font-size: 25px; letter-spacing: 1px; font-weight: 300;"> Our technology allows you to create powerful workouts in an instant. You will have a CLEAR line for success by following our <span style="border-bottom: 1px solid yellow;">Autopilot Mode</span>.</p>
@@ -153,13 +234,16 @@
     <div class="container">
         <div class="row">
             <div class="col-12 col-lg-6 order-2 order-md-1 p-5">
-                <img class=" img-fluid" src="images/model.png"/>
+                <img class=" img-fluid" src="images/model.png" data-aos="fade-right" />
             </div>
 
-            <div class="col-12 col-lg-6 p-3 order-md-2 center-div v-align">
+            <div class="col-12 col-lg-6 p-3 order-md-2 center-div v-align" data-aos="fade" data-aos-duration="700">
                 <div>
-                    <h1 class="text-white text-center" style="letter-spacing: 2px;">Modern <span style="border-bottom: 1px solid yellow;">Sport-Science </span>algorithm, Modern BodyBuilding programs.</h1>
-                    <p class="text-white  text-center mb-0 mt-3" style="font-size: 25px; letter-spacing: 1px; font-weight: 300;"> Our technology allows you to create powerful workouts in an instant. You will have a CLEAR line for success by following our <span style="border-bottom: 1px solid yellow;">Autopilot Mode</span>.</p>
+                    <h1 class="text-white text-center" style="letter-spacing: 2px;">Built Using <span style="border-bottom: 1px solid yellow;">Science</span>.</h1>
+                    <p class="text-white  text-center mb-0 mt-3" style="font-size: 25px; letter-spacing: 1px; font-weight: 300;">
+                        Based on moden sport science, we've implemented the 3 mechanisms of muscle-building into our programs.
+                        This allows you to get the benefits of every option and get a balanced,
+                        well designed program so that you can get ideal results without having to worry about it.
                 </div>
             </div>
         </div>
@@ -170,69 +254,40 @@
 <div class="container py-5">
 
     <div class="row">
-        <div class="col-12 col-lg-6 order-1 order-md-2 p-5">
-            <img class="card shadow img-fluid" src="images/workout.PNG"/>
-            <img class="" style="width: 31%; height: 50%; bottom: 10px; position: absolute; right: 47px; -webkit-box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1); -moz-box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1); box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1);" src="images/mobileProgram.PNG"/>
+        <div class="col-12 col-lg-6 order-1 order-md-2 p-5" data-aos="fade-left">
+            <img class="card shadow img-fluid" src="images/workout.PNG" />
+            <img class="" style="width: 31%; height: 50%; bottom: 10px; position: absolute; right: 47px; -webkit-box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1); -moz-box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1); box-shadow: 0px 0px 23px -7px rgba(82, 82, 82, 1);" src="images/mobileProgram.PNG" />
         </div>
 
-        <div class="col-12 col-lg-6 p-3 order-md-1 center-div v-align">
+        <div class="col-12 col-lg-6 p-3 order-md-1 center-div v-align" data-aos="fade" data-aos-duration="700">
             <div>
-                <h1 class="text-center" style="letter-spacing: 2px;">Modern <span style="border-bottom: 1px solid yellow;">Sport-Science </span>algorithm, Modern BodyBuilding programs.</h1>
-                <p class=" text-center mb-0 mt-3" style="font-size: 25px; letter-spacing: 1px; font-weight: 300;"> Our technology allows you to create powerful workouts in an instant. You will have a CLEAR line for success by following our <span style="border-bottom: 1px solid yellow;">Autopilot Mode</span>.</p>
+                <h1 class="text-center" style="letter-spacing: 2px;">Infinite <span style="border-bottom: 1px solid yellow;">Growth</span>.</h1>
+                <p class=" text-center mb-0 mt-3" style="font-size: 25px; letter-spacing: 1px; font-weight: 300;">
+
+                    Thanks to our Dynamic Progression Algorithm,
+                    we can incorporate progressions so that you always keep improving.
+                    We make sure that you get the best results possible
+                    so that you won't have to worry about leaving anything on the table.
             </div>
         </div>
     </div>
 </div>
 
-@*
-    <div class="container mt-5">
-        <div class="d-flex vertical-align justify-content-center flex-column mb-5">
-
-            <h1 style="letter-spacing: 1px; font-weight: 300;" class="text-center color-main">The Most Precise Program Generator Ever.</h1>
-            <h3 class="text-center color-main" style="letter-spacing: 1px; font-weight: 300">The fitness industry's technology is accelerating, and we're leading it.</h3>
-        </div>
-
-        <div class="row">
-
-            <div class="col-12 col-lg-4 text-center">
-                <i class=" mb-3 text-center color-main fas fa-rocket fa-3x"></i>
-                <p class="mb-3 color-main text-center">Lightning Fast</p>
-                <p class="text-center">In less than 10 seconds, you'll have a professional program per your specification.</p>
-            </div>
-
-            <div class="col-12 col-lg-4 text-center">
-                <i class=" mb-3 text-center color-main fab fa-magento fa-3x"></i>
-                <p class="mb-3 color-main text-center">Tailor-Made</p>
-                <p class="text-center">Our algorithm can receive data and generate programs accordingly. Else, he'll use his brains and creat a tailor-made program just for you, with little data.</p>
-            </div>
-
-            <div class="col-12 col-lg-4 text-center">
-                <i class=" mb-3 text-center color-main fas fa-dollar-sign fa-3x"></i>
-                <p class="mb-3 color-main text-center">Our Algorithm Is Free</p>
-                <p class="text-center">We're charging nothing for our algorithm. So Enjoy and happy generating!</p>
-            </div>
-
-
-        </div>
-        <div class="d-flex justify-content-center">
-            <button id="scrollToTopBtn" class="btn bg-main text-white my-5">Scroll To Top</button>
-        </div>
-    </div>
-*@
-
 @section Scripts
 {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" integrity="sha256-pQBbLkFHcP1cy0C8IhoSdxlm0CtcH5yJ2ki9jjgR03c=" crossorigin="anonymous"></script>
     <script>
-        $(function() {
+        $(function () {
+            AOS.init();
             $("#generateForm").on("submit",
-                function() {
+                function () {
                     $("#generateBtn").hide();
                     $("#loadingBtn").show();
                 });
         });
 
         $("#scrollToTopBtn").on('click',
-            function() {
+            function () {
                 $('html,body').animate({ scrollTop: 0 }, 'slow');
             });
     </script>
