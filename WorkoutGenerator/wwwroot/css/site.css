@@ -50,6 +50,10 @@ a.navbar-brand {
     background-image: linear-gradient(to right, #9e98fd, #9a94fe, #9690fe, #918bff, #8d87ff, #8b84ff, #8882fe, #867ffe, #857efd, #847dfd, #827cfc, #817bfb);
 }
 
+.bg-light-main {
+    background: #7e87f6;
+}
+
 .color-main { color: #8781FF; }
 
 .bg-main { background: #8781FF; }
